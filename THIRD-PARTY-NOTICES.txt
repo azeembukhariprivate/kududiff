@@ -1,0 +1,47 @@
+KUDUDIFF - third-party notices
+==============================
+
+KUDUDIFF is released under the MIT License (see LICENSE.txt).
+Its comparison engine (the Myers and patience methods, changed words and
+characters, moved code, patches and reports) is its own code.
+
+It includes the following third-party component:
+
+1. AvalonEdit 6.3.1
+-------------------
+The text editor component (AvalonEdit.dll, installed next to KUDUDIFF.exe).
+https://github.com/icsharpcode/AvalonEdit
+
+MIT License
+
+Copyright (c) AvalonEdit Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+The syntax colouring definitions for C#, C++, CSS, HTML, Java, JavaScript,
+JSON, Markdown, PHP, PowerShell, Python, SQL, VB and XML come with AvalonEdit.
+Those for YAML, INI, batch files and Bash are KUDUDIFF's own.
+
+It uses the following part of Windows, which is NOT included with KUDUDIFF:
+
+2. Microsoft .NET Framework 4.8
+-------------------------------
+KUDUDIFF runs on the .NET Framework 4.8, which is part of Windows 10 and 11
+and is not redistributed with KUDUDIFF.
+
+KUDUDIFF is not affiliated with, sponsored or endorsed by Microsoft.

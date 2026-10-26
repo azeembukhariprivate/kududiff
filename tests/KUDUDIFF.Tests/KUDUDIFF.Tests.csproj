@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Checks KUDUDIFF's comparison engine (both methods against a brute-force answer, ignore rules, changed words,
+       moved code), patches (applied with GNU patch when it's there), reports, encodings, saving and the copy-a-change
+       edits. Runs on any OS with: dotnet run, project tests/KUDUDIFF.Tests -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\KUDUDIFF\Core\*.cs" Exclude="..\..\src\KUDUDIFF\Core\ThemeManager.cs" LinkBase="Core" />
+  </ItemGroup>
+
+</Project>

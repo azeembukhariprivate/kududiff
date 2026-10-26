@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- INI / config file colouring for KUDUDIFF. -->
+<SyntaxDefinition name="INI" extensions=".ini;.cfg;.conf;.properties;.inf;.reg;.editorconfig;.gitconfig;.toml" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Comment" foreground="#008000" exampleText="; comment"/>
+  <Color name="Section" foreground="#0000FF" fontWeight="bold" exampleText="[section]"/>
+  <Color name="Key" foreground="#0451A5" exampleText="key="/>
+  <Color name="String" foreground="#A31515" exampleText="&quot;text&quot;"/>
+  <Color name="Number" foreground="#098658" exampleText="42"/>
+  <RuleSet ignoreCase="true">
+    <Span color="Comment" begin="^\s*[;\#]" />
+    <Rule color="Section">^\s*\[[^\]\r\n]*\]</Rule>
+    <Rule color="Key">^\s*[^=:\s\[;\#][^=:\r\n]*?(?=\s*[=:])</Rule>
+    <Span color="String"><Begin>"</Begin><End>"</End></Span>
+    <Rule color="Number">\b-?\d+(\.\d+)?\b</Rule>
+  </RuleSet>
+</SyntaxDefinition>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- YAML colouring for KUDUDIFF. -->
+<SyntaxDefinition name="YAML" extensions=".yml;.yaml" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Comment" foreground="#008000" exampleText="# comment"/>
+  <Color name="Key" foreground="#0451A5" exampleText="key:"/>
+  <Color name="String" foreground="#A31515" exampleText="'text'"/>
+  <Color name="Number" foreground="#098658" exampleText="42"/>
+  <Color name="Keyword" foreground="#0000FF" exampleText="true"/>
+  <Color name="Punctuation" foreground="#7F7F7F" exampleText="- ---"/>
+  <RuleSet ignoreCase="false">
+    <Span color="Comment" begin="(?&lt;=^|\s)\#" />
+    <Span color="String"><Begin>"</Begin><End>"</End><RuleSet><Span begin="\\" end="."/></RuleSet></Span>
+    <Span color="String"><Begin>'</Begin><End>'</End></Span>
+    <Rule color="Key">^\s*-?\s*[\w.\-/ ]+?(?=\s*:(\s|$))</Rule>
+    <Rule color="Punctuation">^(---|\.\.\.)\s*$|^\s*-(?=\s)|[|&gt;](?=\s*$)</Rule>
+    <Keywords color="Keyword"><Word>true</Word><Word>false</Word><Word>null</Word><Word>yes</Word><Word>no</Word><Word>on</Word><Word>off</Word><Word>~</Word></Keywords>
+    <Rule color="Number">\b-?\d+(\.\d+)?([eE][+-]?\d+)?\b</Rule>
+    <Rule color="Keyword">[&amp;*][\w\-]+|!!?\w+</Rule>
+  </RuleSet>
+</SyntaxDefinition>

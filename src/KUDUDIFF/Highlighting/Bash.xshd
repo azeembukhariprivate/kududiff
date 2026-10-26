@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- Bash / shell script colouring for KUDUDIFF. -->
+<SyntaxDefinition name="Bash" extensions=".sh;.bash;.zsh" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Comment" foreground="#008000" exampleText="# comment"/>
+  <Color name="Keyword" foreground="#0000FF" fontWeight="bold" exampleText="if"/>
+  <Color name="Builtin" foreground="#795E26" exampleText="echo"/>
+  <Color name="Variable" foreground="#AF00DB" exampleText="$HOME"/>
+  <Color name="String" foreground="#A31515" exampleText="&quot;text&quot;"/>
+  <RuleSet ignoreCase="false">
+    <Span color="Comment" begin="(?&lt;=^|\s)\#" />
+    <Span color="String"><Begin>"</Begin><End>"</End><RuleSet><Span begin="\\" end="."/><Rule color="Variable">\$\{[^}]*\}|\$\w+</Rule></RuleSet></Span>
+    <Span color="String"><Begin>'</Begin><End>'</End></Span>
+    <Rule color="Variable">\$\{[^}]*\}|\$\(|\$[\w@#?$!*\-]+</Rule>
+    <Keywords color="Keyword">
+      <Word>if</Word><Word>then</Word><Word>else</Word><Word>elif</Word><Word>fi</Word><Word>for</Word><Word>while</Word><Word>until</Word>
+      <Word>do</Word><Word>done</Word><Word>case</Word><Word>esac</Word><Word>in</Word><Word>function</Word><Word>return</Word><Word>select</Word>
+      <Word>local</Word><Word>export</Word><Word>readonly</Word><Word>declare</Word><Word>break</Word><Word>continue</Word>
+    </Keywords>
+    <Keywords color="Builtin">
+      <Word>echo</Word><Word>printf</Word><Word>read</Word><Word>cd</Word><Word>source</Word><Word>exit</Word><Word>set</Word><Word>unset</Word>
+      <Word>shift</Word><Word>test</Word><Word>trap</Word><Word>eval</Word><Word>exec</Word><Word>alias</Word><Word>true</Word><Word>false</Word>
+    </Keywords>
+  </RuleSet>
+</SyntaxDefinition>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!-- Windows batch file colouring for KUDUDIFF. -->
+<SyntaxDefinition name="Batch" extensions=".bat;.cmd" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Comment" foreground="#008000" exampleText="REM comment"/>
+  <Color name="Keyword" foreground="#0000FF" fontWeight="bold" exampleText="if"/>
+  <Color name="Command" foreground="#795E26" exampleText="echo"/>
+  <Color name="Variable" foreground="#AF00DB" exampleText="%PATH%"/>
+  <Color name="Label" foreground="#0451A5" fontWeight="bold" exampleText=":label"/>
+  <Color name="String" foreground="#A31515" exampleText="&quot;text&quot;"/>
+  <RuleSet ignoreCase="true">
+    <Span color="Comment" begin="^\s*@?(rem\b|::)" />
+    <Rule color="Label">^\s*:\w+</Rule>
+    <Span color="String"><Begin>"</Begin><End>"</End></Span>
+    <Rule color="Variable">%~?[\w\d]+%?|%%~?\w|![\w]+!</Rule>
+    <Keywords color="Keyword">
+      <Word>if</Word><Word>else</Word><Word>for</Word><Word>in</Word><Word>do</Word><Word>goto</Word><Word>call</Word><Word>exit</Word>
+      <Word>not</Word><Word>exist</Word><Word>defined</Word><Word>errorlevel</Word><Word>equ</Word><Word>neq</Word><Word>lss</Word>
+      <Word>leq</Word><Word>gtr</Word><Word>geq</Word><Word>setlocal</Word><Word>endlocal</Word><Word>shift</Word>
+    </Keywords>
+    <Keywords color="Command">
+      <Word>echo</Word><Word>set</Word><Word>cd</Word><Word>copy</Word><Word>xcopy</Word><Word>robocopy</Word><Word>del</Word><Word>erase</Word>
+      <Word>md</Word><Word>mkdir</Word><Word>rd</Word><Word>rmdir</Word><Word>move</Word><Word>ren</Word><Word>rename</Word><Word>pushd</Word>
+      <Word>popd</Word><Word>start</Word><Word>pause</Word><Word>cls</Word><Word>type</Word><Word>dir</Word><Word>title</Word><Word>choice</Word>
+    </Keywords>
+  </RuleSet>
+</SyntaxDefinition>
