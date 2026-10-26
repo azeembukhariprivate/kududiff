@@ -40,6 +40,7 @@ namespace Kududiff.Views
         private SidePanel _drivenSide;
         private DateTime _drivenUntil;
         private bool _reloading;
+        private bool _showFirst;
 
         public MainWindow()
         {
@@ -276,6 +277,7 @@ namespace Kududiff.Views
                 RefreshRecent();
             }
             _current = -1;
+            _showFirst = true;
             StartCompare();
             return true;
         }
@@ -487,6 +489,16 @@ namespace Kududiff.Views
             LeftSide.Redraw();
             RightSide.Redraw();
             UpdateState();
+            if (result != null && _showFirst)
+            {
+                // A new pair of files starts at its first change.
+                _showFirst = false;
+                if (_changes.Count > 0)
+                {
+                    GoTo(0);
+                    return;
+                }
+            }
             // Line up the other side with the one being worked in.
             if (result != null)
             {
@@ -639,6 +651,7 @@ namespace Kududiff.Views
         private void Scrolled(SidePanel side)
         {
             RedrawLinks();
+            if (!LeftSide.Ready || !RightSide.Ready) return;
             if (DateTime.UtcNow < _drivenUntil && (_drivenBoth || ReferenceEquals(side, _drivenSide))) return;
             Sync(side, side == LeftSide ? RightSide : LeftSide);
         }
@@ -646,12 +659,19 @@ namespace Kududiff.Views
         /// <summary>Scrolls one side so the line in the middle of the other lines up with it.</summary>
         private void Sync(SidePanel from, SidePanel to)
         {
-            if (Comparison == null || !from.HasFile || !to.HasFile) return;
+            if (Comparison == null || !from.HasFile || !to.HasFile || !from.Ready || !to.Ready) return;
+            Drive(to);
+            if (from.Editor.VerticalOffset < 0.5)
+            {
+                // At the top, both sides start at the top.
+                if (to.Editor.VerticalOffset > 0.5) to.Editor.ScrollToVerticalOffset(0);
+                if (Math.Abs(to.Editor.HorizontalOffset - from.Editor.HorizontalOffset) > 0.5) to.Editor.ScrollToHorizontalOffset(from.Editor.HorizontalOffset);
+                return;
+            }
             var half = from.Editor.ViewportHeight / 2;
             var line = from.LineAt(from.Editor.VerticalOffset + half);
             var other = Comparison.MapLine(line, from.Side == Side.Left);
             var target = Math.Max(0, to.OffsetOf(other) - half);
-            Drive(to);
             if (Math.Abs(to.Editor.VerticalOffset - target) > 0.5) to.Editor.ScrollToVerticalOffset(target);
             if (Math.Abs(to.Editor.HorizontalOffset - from.Editor.HorizontalOffset) > 0.5) to.Editor.ScrollToHorizontalOffset(from.Editor.HorizontalOffset);
         }

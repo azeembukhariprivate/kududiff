@@ -186,8 +186,7 @@ namespace Demo
 
             Step("Go through the changes", () =>
             {
-                main.Next();
-                Expect(main.CurrentIndex == 0, "first change");
+                Expect(main.CurrentIndex == 0, "the first change shown when the files open");
                 main.Next();
                 Expect(main.CurrentIndex == 1, "second change");
                 main.Previous();

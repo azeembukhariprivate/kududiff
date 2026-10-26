@@ -130,6 +130,9 @@ namespace Kududiff.Views
         }
 
         public bool HasFile => File != null;
+
+        /// <summary>True when the editor's view can answer questions about line positions.</summary>
+        public bool Ready => !Switching && View.Document != null && ReferenceEquals(View.Document, Editor.Document);
         public bool IsDirty => File != null && !Editor.Document.UndoStack.IsOriginalFile;
         public string Text => Editor.Document.Text;
         public string DisplayName => File?.Path != null ? Path.GetFileName(File.Path) : "(none)";
@@ -146,7 +149,19 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>True while the editor is being given another document (its view has none for a moment).</summary>
+        public bool Switching { get; private set; }
+
         public void Load(TextFile file)
+        {
+            Switching = true;
+            try { LoadDocument(file); }
+            finally { Switching = false; }
+            ApplySyntax();
+            UpdateHeader();
+        }
+
+        private void LoadDocument(TextFile file)
         {
             Editor.Document.Changed -= OnDocumentChanged;
             var doc = new TextDocument(file.Text);
@@ -156,12 +171,23 @@ namespace Kududiff.Views
             File = file;
             Editor.IsReadOnly = false;
             Editor.ScrollToHome();
-            ApplySyntax();
-            UpdateHeader();
         }
 
         /// <summary>Swaps files, text and undo history with the other side.</summary>
         public void SwapWith(SidePanel other)
+        {
+            Switching = other.Switching = true;
+            try { SwapDocuments(other); }
+            finally { Switching = other.Switching = false; }
+            foreach (var p in new[] { this, other })
+            {
+                p.Editor.IsReadOnly = p.File == null;
+                p.ApplySyntax();
+                p.UpdateHeader();
+            }
+        }
+
+        private void SwapDocuments(SidePanel other)
         {
             var (myDoc, myFile) = (Editor.Document, File);
             Editor.Document.Changed -= OnDocumentChanged;
@@ -172,12 +198,6 @@ namespace Kududiff.Views
             other.File = myFile;
             Editor.Document.Changed += OnDocumentChanged;
             other.Editor.Document.Changed += other.OnDocumentChanged;
-            foreach (var p in new[] { this, other })
-            {
-                p.Editor.IsReadOnly = p.File == null;
-                p.ApplySyntax();
-                p.UpdateHeader();
-            }
         }
 
         public void MarkSaved()
@@ -240,6 +260,7 @@ namespace Kududiff.Views
         /// <summary>The top of a line (counted from 0) in the editor, relative to its visible area. The line after the last is just below it.</summary>
         public double TopOf(int line)
         {
+            if (!Ready) return 0;
             var view = View;
             var doc = Editor.Document;
             var number = Math.Max(1, Math.Min(line + 1, doc.LineCount));
@@ -251,6 +272,7 @@ namespace Kududiff.Views
         /// <summary>The line (with a fraction) at a vertical position of the whole document.</summary>
         public double LineAt(double documentY)
         {
+            if (!Ready) return 0;
             var view = View;
             var doc = Editor.Document;
             if (doc.LineCount == 0) return 0;
@@ -265,6 +287,7 @@ namespace Kududiff.Views
         /// <summary>The vertical position (of the whole document) where a line, with a fraction, starts.</summary>
         public double OffsetOf(double line)
         {
+            if (!Ready) return 0;
             var view = View;
             var doc = Editor.Document;
             var whole = (int)Math.Floor(Math.Max(0, line));
