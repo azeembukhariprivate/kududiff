@@ -1,5 +1,5 @@
 # Shared code copied from https://github.com/azeembukhariprivate/kudu-common by its sync.py.
-commit 345d6d396bfe9fb7e7f4c674399f42fabb968761
+commit c213d3227f16b14af00753a6c2daf832bf45eb6e
 folder src/KUDUDIFF
 - Views/Dialogs.cs
 - Views/LangUi.cs

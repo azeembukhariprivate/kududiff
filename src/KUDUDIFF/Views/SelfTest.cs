@@ -355,7 +355,7 @@ namespace Demo
             foreach (var (code, settings, compare) in new[] { ("ml", "ക്രമീകരണങ്ങൾ", "താരതമ്യ ക്രമീകരണങ്ങൾ"), ("hi", "सेटिंग्स", "तुलना के विकल्प"), ("ar", "الإعدادات", "خيارات المقارنة") })
                 Step("In another language: " + code, () =>
                 {
-                    Lang.Use(code);
+                    LangUi.Use(code);
                     try
                     {
                         Expect(Lang.Current == code, "the language to be loaded from the app");
@@ -380,7 +380,7 @@ namespace Demo
                     }
                     finally
                     {
-                        Lang.Use("en");
+                        LangUi.Use("en");
                     }
                 });
             Step("Close", () =>

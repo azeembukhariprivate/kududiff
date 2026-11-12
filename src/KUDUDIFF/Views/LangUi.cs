@@ -90,6 +90,13 @@ namespace Kududiff.Views
             EventManager.RegisterClassHandler(typeof(Popup), FrameworkElement.LoadedEvent, new RoutedEventHandler((s, e) => Apply(s as DependencyObject)));
         }
 
+        /// <summary>Changes the language while the app runs (the self-test does), for windows opened from now on.</summary>
+        public static void Use(string code)
+        {
+            Start();
+            Lang.Use(code);
+        }
+
         private static void WindowLoaded(object sender, RoutedEventArgs e)
         {
             if (!(sender is Window window) || !ReferenceEquals(e.OriginalSource, sender) || Lang.IsEnglish) return;
