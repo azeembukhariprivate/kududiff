@@ -352,6 +352,37 @@ namespace Demo
             Step("Options window", () => Show(OptionsWindow.Build(main, main.CompareOptions, o => { })));
             Step("Settings window", () => Show(new SettingsWindow(main)));
             Step("About window", () => Show(About.Build(main)));
+            foreach (var (code, settings, compare) in new[] { ("ml", "ക്രമീകരണങ്ങൾ", "താരതമ്യ ക്രമീകരണങ്ങൾ"), ("hi", "सेटिंग्स", "तुलना के विकल्प"), ("ar", "الإعدادات", "خيارات المقارنة") })
+                Step("In another language: " + code, () =>
+                {
+                    Lang.Use(code);
+                    try
+                    {
+                        Expect(Lang.Current == code, "the language to be loaded from the app");
+                        var w = new SettingsWindow(main);
+                        OffScreen(w);
+                        w.Show();
+                        Pump();
+                        var texts = Texts(w);
+                        Expect(texts.Contains(settings), "the settings heading in the language: " + string.Join(" | ", texts.Take(8)));
+                        Expect(!texts.Contains("Settings") && !texts.Contains("Appearance"), "no English left on the settings window");
+                        Expect(w.FlowDirection == (code == "ar" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight), "Arabic windows mirrored, others not");
+                        Screenshots.One(w, "Settings in " + code);
+                        w.Close();
+                        var o = OptionsWindow.Build(main, main.CompareOptions, x => { });
+                        OffScreen(o);
+                        o.Show();
+                        Pump();
+                        Expect(Texts(o).Contains(compare), "the options window in the language");
+                        Screenshots.One(o, "Options in " + code);
+                        o.Close();
+                        Expect(main.Comparison == null || !main.Comparison.Summary().Contains("change") || code == "en", "the summary in the language");
+                    }
+                    finally
+                    {
+                        Lang.Use("en");
+                    }
+                });
             Step("Close", () =>
             {
                 main.SkipClosePrompt = true;
@@ -453,6 +484,21 @@ namespace Demo
             w.Top = -20000;
             w.ShowActivated = false;
             w.ShowInTaskbar = false;
+        }
+
+        /// <summary>Every text a window shows (its title too).</summary>
+        private static List<string> Texts(Window w)
+        {
+            var list = new List<string> { w.Title };
+            void Walk(DependencyObject o)
+            {
+                if (o is System.Windows.Controls.TextBlock t) list.Add(t.Text);
+                else if (o is System.Windows.Controls.ContentControl c && c.Content is string s) list.Add(s);
+                foreach (var child in LogicalTreeHelper.GetChildren(o))
+                    if (child is DependencyObject d) Walk(d);
+            }
+            Walk(w);
+            return list;
         }
 
         private static void Show(Window w)

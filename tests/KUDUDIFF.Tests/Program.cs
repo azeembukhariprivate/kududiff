@@ -47,6 +47,73 @@ namespace Kududiff.Tests
 
         // ================================================================== helpers
 
+        // ================================================================== other languages
+
+        private static string LangDir
+        {
+            get
+            {
+                var dir = AppContext.BaseDirectory;
+                while (dir != null && !Directory.Exists(Path.Combine(dir, "src", "KUDUDIFF", "Lang"))) dir = Path.GetDirectoryName(dir);
+                return Path.Combine(dir, "src", "KUDUDIFF", "Lang");
+            }
+        }
+
+        private static void UseLang(string code) =>
+            Lang.Load(code, code == "en" ? null : new[] { File.ReadAllText(Path.Combine(LangDir, code + ".txt")) });
+
+        private static void TestEveryLanguageFileIsWhole()
+        {
+            foreach (var (code, _) in Lang.All.Where(l => l.Code != "en"))
+            {
+                var lines = File.ReadAllLines(Path.Combine(LangDir, code + ".txt"));
+                Check(lines.Length > 200, code + ": has the app's texts");
+                foreach (var line in lines)
+                {
+                    var tab = line.IndexOf('\t');
+                    Check(tab > 0 && tab < line.Length - 1 && line.IndexOf('\t', tab + 1) < 0, code + ": one English text and one translation: " + line);
+                    var holes = new Func<string, string>(s => string.Join(",", System.Text.RegularExpressions.Regex.Matches(s, @"\{\d\}").Select(m => m.Value).Distinct().OrderBy(x => x)));
+                    Equal(holes(line.Substring(0, tab)), holes(line.Substring(tab + 1)), code + ": the same places to fill in: " + line);
+                }
+            }
+        }
+
+        private static void TestTextsInAnotherLanguage()
+        {
+            try
+            {
+                UseLang("ml");
+                Equal("ml", Lang.Current, "loaded");
+                Equal("സേവ് ചെയ്യുക", Lang.T("Save"), "a word");
+                Equal("ഇടത്തെ ഫയൽ ഇവിടെ ഇടുക", Lang.T("Drop the left file here"), "a sentence");
+                Equal("12 മാറ്റങ്ങൾ", Lang.T("12 changes"), "a number filled in");
+                Equal("\"notes.txt\" വായിക്കാൻ മാത്രമുള്ളതാണ്.", Lang.T("\"notes.txt\" is read-only."), "a name filled in");
+                Equal("മാറ്റം 3 / 7", Lang.T("Change 3 of 7"), "two numbers filled in");
+                Equal("Something nobody wrote down", Lang.T("Something nobody wrote down"), "unknown text stays as it is");
+                Equal("ഇപ്പോൾ: സാധാരണ താരതമ്യം", Lang.T("Now: {0}", Lang.T("standard comparison")), "pieces put together");
+                Equal("  ക്രമീകരണങ്ങൾ", Lang.T("  Settings"), "spaces around a known text are kept");
+                var cmp = Comparison.Run("a\nb\n", "a\nc\nd\n", new CompareOptions());
+                Equal("1 മാറ്റം · 2 ചേർത്തു, 1 നീക്കി", cmp.Summary(), "the summary line");
+                UseLang("ar");
+                Check(Lang.RightToLeft, "Arabic is right to left");
+                Equal("إلغاء", Lang.T("Cancel"), "Arabic word");
+            }
+            finally
+            {
+                UseLang("en");
+            }
+            Equal("en", Lang.Current, "back to English");
+            Equal("Save", Lang.T("Save"), "English unchanged");
+            Equal("1 change · 2 added, 1 removed", Comparison.Run("a\nb\n", "a\nc\nd\n", new CompareOptions()).Summary(), "English summary unchanged");
+        }
+
+        private static void TestTheLanguageIsChosenSensibly()
+        {
+            Equal("ml", Lang.Choose("ml"), "the person's choice");
+            Equal(Lang.Choose(""), Lang.Choose("xx"), "an unknown choice is like no choice");
+            Check(Lang.Has(Lang.Choose("")), "always a language on offer");
+        }
+
         private static void Check(bool condition, string what)
         {
             if (!condition) throw new Exception("Check failed: " + what);

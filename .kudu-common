@@ -1,12 +1,15 @@
 # Shared code copied from https://github.com/azeembukhariprivate/kudu-common by its sync.py.
-commit 19bc6f11045aaabb0740e6aa3134ea644c5be607
+commit 345d6d396bfe9fb7e7f4c674399f42fabb968761
 folder src/KUDUDIFF
 - Views/Dialogs.cs
+- Views/LangUi.cs
 - Views/SafetyNet.cs
 - Views/Screenshots.cs
 - Core/Admin.cs
 - Core/AppInfo.cs
 - Core/Args.cs
+- Core/Lang.cs
+- Core/LangCommon.cs
 - Core/ThemeManager.cs
 - Core/Unelevated.cs
 - Core/UpdateChecker.cs

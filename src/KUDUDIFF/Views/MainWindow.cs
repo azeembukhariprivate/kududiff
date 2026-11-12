@@ -535,9 +535,9 @@ namespace Kududiff.Views
             var text = on == 0 ? "Options" : $"Options ({on} on)";
             _options.Content = Ui.Label("IconSettings", text);
             System.Windows.Automation.AutomationProperties.SetName(_options, text);
-            _options.ToolTip = "What to ignore, how to compare, and how changes are shown\n\nNow: " + Export.OptionsText(o)
-                               + (o.Inline == InlineMode.Off ? ", changed lines only" : o.Inline == InlineMode.Words ? ", changed words shown" : ", changed characters shown")
-                               + (o.DetectMoves ? ", moved code found" : string.Empty);
+            var now = Export.OptionsText(o) + ", " + Lang.T(o.Inline == InlineMode.Off ? "changed lines only" : o.Inline == InlineMode.Words ? "changed words shown" : "changed characters shown")
+                      + (o.DetectMoves ? ", " + Lang.T("moved code found") : string.Empty);
+            _options.ToolTip = Lang.T("What to ignore, how to compare, and how changes are shown") + "\n\n" + Lang.T("Now: {0}", now);
         }
 
         private void ShowOptions()

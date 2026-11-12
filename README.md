@@ -38,6 +38,7 @@
 - **Export** the differences as a **patch** (a unified diff for `patch` or `git apply`) or a **web page report** with both files side by side and the changes coloured, to read in any browser or send to someone.
 - **Syntax colouring** for C#, C and C++, Java, JavaScript and TypeScript, Python, PowerShell, SQL, HTML, CSS, XML, JSON, YAML, Markdown, INI, PHP, batch files and Bash, in light and dark.
 - **Every kind of text file**: UTF-8 (with or without BOM), UTF-16, UTF-32 and Windows code pages are recognised, and files of up to 200 MB open quickly.
+- **In your language**: English, Malayalam (മലയാളം), Hindi (हिन्दी), Spanish, French and Arabic (with the windows mirrored for right-to-left). KUDUDIFF starts in the same language as Windows when it has it; choose another in Settings.
 - **Open files your way**: drop files on either side (or two at once), use Open, pick a recent comparison, or right-click in File Explorer → *Compare with KUDUDIFF* (optional, chosen when installing or in Settings). Select two files and right-click, or pick one now and the second one later.
 - Light and dark themes, following Windows. Text size, word wrap and showing spaces and tabs can be changed in Settings.
 

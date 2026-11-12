@@ -416,12 +416,13 @@ namespace Kududiff.Core
         public string Summary()
         {
             if (Identical) return Options.IgnoreCase || Options.Whitespace != WhitespaceMode.Compare || Options.IgnoreBlankLines || Options.IgnorePatterns.Count > 0
-                ? "No differences (with the ignore options on)"
-                : "The files are identical";
+                ? Lang.T("No differences (with the ignore options on)")
+                : Lang.T("The files are identical");
             var sb = new StringBuilder();
-            sb.Append(ChangeCount == 1 ? "1 change" : ChangeCount + " changes");
-            sb.Append($" · {LinesAdded} added, {LinesRemoved} removed");
-            if (Moves.Count > 0) sb.Append($" · {Moves.Count} moved block{(Moves.Count == 1 ? string.Empty : "s")}");
+            // Each piece in the language in use (the whole line can't be looked up as one text).
+            sb.Append(ChangeCount == 1 ? Lang.T("1 change") : Lang.T("{0} changes", ChangeCount));
+            sb.Append(" · ").Append(Lang.T("{0} added, {1} removed", LinesAdded, LinesRemoved));
+            if (Moves.Count > 0) sb.Append(" · ").Append(Moves.Count == 1 ? Lang.T("1 moved block") : Lang.T("{0} moved blocks", Moves.Count));
             return sb.ToString();
         }
     }

@@ -1,0 +1,230 @@
+Only the first two files are compared.	ആദ്യത്തെ രണ്ട് ഫയലുകൾ മാത്രമേ താരതമ്യം ചെയ്യൂ.
+{0} files were chosen; the first two are compared.	{0} ഫയലുകൾ തിരഞ്ഞെടുത്തു; ആദ്യത്തെ രണ്ടെണ്ണം താരതമ്യം ചെയ്യുന്നു.
+Now choose the second file: right-click it → Compare with KUDUDIFF, drop it on the right, or use Open.	ഇനി രണ്ടാമത്തെ ഫയൽ തിരഞ്ഞെടുക്കുക: അതിൽ റൈറ്റ്-ക്ലിക്ക് ചെയ്ത് → Compare with KUDUDIFF, അല്ലെങ്കിൽ വലതുവശത്ത് ഇടുക, അല്ലെങ്കിൽ തുറക്കുക ഉപയോഗിക്കുക.
+timeout	timeout
+Something went wrong:\n\n{0}	എന്തോ പിശക് സംഭവിച്ചു:\n\n{0}
+Azeem Bukhari	Azeem Bukhari
+less than a second	ഒരു സെക്കൻഡിൽ താഴെ
+{0} h {1} min	{0} മണിക്കൂർ {1} മിനിറ്റ്
+{0} min {1} s	{0} മിനിറ്റ് {1} സെക്കൻഡ്
+{0} L{1}+{2} R{3}+{4}	{0} L{1}+{2} R{3}+{4}
+Move L{0} -> R{1} ({2})	Move L{0} -> R{1} ({2})
+No differences (with the ignore options on)	വ്യത്യാസങ്ങളൊന്നുമില്ല (ഒഴിവാക്കൽ ക്രമീകരണങ്ങൾ ഓണാണ്)
+The files are identical	രണ്ട് ഫയലുകളും ഒരുപോലെയാണ്
+1 change	1 മാറ്റം
+{0} changes	{0} മാറ്റങ്ങൾ
+{0} added, {1} removed	{0} ചേർത്തു, {1} നീക്കി
+1 moved block	സ്ഥാനം മാറ്റിയ 1 ഭാഗം
+{0} moved blocks	സ്ഥാനം മാറ്റിയ {0} ഭാഗങ്ങൾ
+\\ No newline at end of file	\\ No newline at end of file
+chg l	chg l
+del	del
+chg r	chg r
+ins	ins
+mid	mid
+patience comparison	ക്ഷമയോടെയുള്ള താരതമ്യം
+standard comparison	സാധാരണ താരതമ്യം
+spaces at line ends ignored	വരികളുടെ അറ്റത്തെ സ്പേസുകൾ കണക്കാക്കുന്നില്ല
+amount of spaces ignored	സ്പേസുകളുടെ എണ്ണം കണക്കാക്കുന്നില്ല
+all spaces ignored	ഒരു സ്പേസും കണക്കാക്കുന്നില്ല
+case ignored	വലിയക്ഷരം/ചെറിയക്ഷരം കണക്കാക്കുന്നില്ല
+blank lines ignored	ഒഴിഞ്ഞ വരികൾ കണക്കാക്കുന്നില്ല
+line endings compared	വരിയുടെ അവസാനങ്ങളും താരതമ്യം ചെയ്യുന്നു
+1 ignore pattern	ഒഴിവാക്കാനുള്ള 1 മാതൃക
+{0} ignore patterns	ഒഴിവാക്കാനുള്ള {0} മാതൃകകൾ
+user	user
+KUDUDIFF hub	KUDUDIFF hub
+Theme	Theme
+Algorithm	Algorithm
+Whitespace	Whitespace
+Inline	Inline
+Recent	Recent
+Compare with KUDUDIFF	KUDUDIFF ഉപയോഗിച്ച് താരതമ്യം ചെയ്യുക
+Player	Player
+"{0}" --pick "%1"	"{0}" --pick "%1"
+UTF-8 with BOM	UTF-8 with BOM
+UTF-16 BE	UTF-16 BE
+UTF-16 LE	UTF-16 LE
+The file wasn't found: {0}	ഫയൽ കണ്ടെത്തിയില്ല: {0}
+"{0}" is too big to compare ({1} MB; the limit is {2} MB).	"{0}" താരതമ്യം ചെയ്യാൻ കഴിയാത്തത്ര വലുതാണ് ({1} MB; പരിധി {2} MB ആണ്).
+This looks like a binary file, not text. KUDUDIFF compares text and code files.	ഇത് ടെക്സ്റ്റ് ഫയലല്ല, ഒരു ബൈനറി ഫയൽ പോലെ തോന്നുന്നു. KUDUDIFF ടെക്സ്റ്റ്, കോഡ് ഫയലുകളാണ് താരതമ്യം ചെയ്യുന്നത്.
+The file has no name yet.	ഫയലിന് ഇതുവരെ പേരില്ല.
+{0}.bak	{0}.bak
+"{0}" is read-only.	"{0}" വായിക്കാൻ മാത്രമുള്ളതാണ്.
+Windows (CRLF)	Windows (CRLF)
+Unix (LF)	Unix (LF)
+Old Mac (CR)	Old Mac (CR)
+Mixed line endings	പലതരം വരി അവസാനങ്ങൾ
+One line	ഒരു വരി
+Missing theme resource {0}	Missing theme resource {0}
+Light	ഇളം നിറം
+Styles	Styles
+Dark	ഇരുണ്ട നിറം
+Application	Application
+Consolas, Cascadia Mono, Courier New	Consolas, Cascadia Mono, Courier New
+Left file	ഇടത്തെ ഫയൽ
+Right file	വലത്തെ ഫയൽ
+Open…	തുറക്കുക…
+Choose the left file	ഇടത്തെ ഫയൽ തിരഞ്ഞെടുക്കുക
+Choose the right file	വലത്തെ ഫയൽ തിരഞ്ഞെടുക്കുക
+Save	സേവ് ചെയ്യുക
+Save this file (Ctrl+S)	ഈ ഫയൽ സേവ് ചെയ്യുക (Ctrl+S)
+Open a file…	ഒരു ഫയൽ തുറക്കുക…
+Drop the left file here	ഇടത്തെ ഫയൽ ഇവിടെ ഇടുക
+Drop the right file here	വലത്തെ ഫയൽ ഇവിടെ ഇടുക
+or	അല്ലെങ്കിൽ
+(none)	(ഒന്നുമില്ല)
+Not chosen yet	ഇതുവരെ തിരഞ്ഞെടുത്തിട്ടില്ല
+Untitled	പേരില്ലാത്തത്
+Changed, not saved yet	മാറ്റി, ഇതുവരെ സേവ് ചെയ്തിട്ടില്ല
+Copy this change to the right (Alt+Right)	ഈ മാറ്റം വലത്തേക്ക് പകർത്തുക (Alt+Right)
+Copy this change to the left (Alt+Left)	ഈ മാറ്റം ഇടത്തേക്ക് പകർത്തുക (Alt+Left)
+All the changes. Click to go there.	എല്ലാ മാറ്റങ്ങളും. അവിടേക്ക് പോകാൻ ക്ലിക്ക് ചെയ്യുക.
+Error message shown: {0}	Error message shown: {0}
+All files	എല്ലാ ഫയലുകളും
+Cancel	റദ്ദാക്കുക
+Choose two files to compare	താരതമ്യം ചെയ്യാൻ രണ്ട് ഫയലുകൾ തിരഞ്ഞെടുക്കുക
+Settings	ക്രമീകരണങ്ങൾ
+About	വിവരം
+Previous	മുമ്പത്തേത്
+Go to the previous change (Alt+Up)	മുമ്പത്തെ മാറ്റത്തിലേക്ക് പോകുക (Alt+Up)
+Next	അടുത്തത്
+Go to the next change (Alt+Down)	അടുത്ത മാറ്റത്തിലേക്ക് പോകുക (Alt+Down)
+Copy to left	ഇടത്തേക്ക് പകർത്തുക
+Copy the current change from the right file to the left one (Alt+Left)	ഇപ്പോഴത്തെ മാറ്റം വലത്തെ ഫയലിൽ നിന്ന് ഇടത്തേതിലേക്ക് പകർത്തുക (Alt+Left)
+Copy to right	വലത്തേക്ക് പകർത്തുക
+Copy the current change from the left file to the right one (Alt+Right)	ഇപ്പോഴത്തെ മാറ്റം ഇടത്തെ ഫയലിൽ നിന്ന് വലത്തേതിലേക്ക് പകർത്തുക (Alt+Right)
+Undo (Ctrl+Z) in the file you last edited	അവസാനം മാറ്റം വരുത്തിയ ഫയലിൽ പഴയപടിയാക്കുക (Ctrl+Z)
+Redo (Ctrl+Y) in the file you last edited	അവസാനം മാറ്റം വരുത്തിയ ഫയലിൽ വീണ്ടും ചെയ്യുക (Ctrl+Y)
+Options	ക്രമീകരണങ്ങൾ
+What to ignore, how to compare, and how changes are shown	എന്ത് ഒഴിവാക്കണം, എങ്ങനെ താരതമ്യം ചെയ്യണം, മാറ്റങ്ങൾ എങ്ങനെ കാണിക്കണം
+Swap sides	വശങ്ങൾ മാറ്റുക
+Put the left file on the right and the right file on the left	ഇടത്തെ ഫയൽ വലത്തും വലത്തെ ഫയൽ ഇടത്തും ആക്കുക
+Reload	വീണ്ടും വായിക്കുക
+Read both files from disk again (F5)	രണ്ട് ഫയലുകളും ഡിസ്കിൽ നിന്ന് വീണ്ടും വായിക്കുക (F5)
+Export	എക്സ്പോർട്ട് ചെയ്യുക
+Save the differences as a patch file or a web page report	വ്യത്യാസങ്ങൾ ഒരു പാച്ച് ഫയലായോ വെബ് പേജ് റിപ്പോർട്ടായോ സേവ് ചെയ്യുക
+Added	ചേർത്തത്
+Removed	നീക്കിയത്
+Changed	മാറ്റിയത്
+Moved	സ്ഥാനം മാറ്റിയത്
+{0} {1} is available	{0} {1} ലഭ്യമാണ്
+"{0}" is a folder. {1} compares two files.	"{0}" ഒരു ഫോൾഡറാണ്. {1} രണ്ട് ഫയലുകളാണ് താരതമ്യം ചെയ്യുന്നത്.
+"{0}" has changes that aren't saved. Throw them away and open another file?	"{0}"-ൽ സേവ് ചെയ്യാത്ത മാറ്റങ്ങളുണ്ട്. അവ കളഞ്ഞ് മറ്റൊരു ഫയൽ തുറക്കണോ?
+"{0}" was changed by another program after it was opened here. Save over those changes?	"{0}" ഇവിടെ തുറന്നശേഷം മറ്റൊരു പ്രോഗ്രാം അതിൽ മാറ്റം വരുത്തി. ആ മാറ്റങ്ങൾക്ക് മുകളിൽ സേവ് ചെയ്യണോ?
+Some characters can't be saved in {0}, the encoding "{1}" uses. Save it as UTF-8 instead?	ചില അക്ഷരങ്ങൾ {0} ഉപയോഗിക്കുന്ന "{1}" എൻകോഡിങ്ങിൽ സേവ് ചെയ്യാനാവില്ല. പകരം UTF-8 ആയി സേവ് ചെയ്യണോ?
+Couldn't save "{0}".\n\n{1}	"{0}" സേവ് ചെയ്യാനായില്ല.\n\n{1}
+Saved {0} (the previous version is in {1}.bak)	{0} സേവ് ചെയ്തു (പഴയ പതിപ്പ് {1}.bak-ൽ ഉണ്ട്)
+Saved {0}	{0} സേവ് ചെയ്തു
+Save the changes to "{0}"?	"{0}"-ലെ മാറ്റങ്ങൾ സേവ് ചെയ്യണോ?
+Throw away the unsaved changes to "{0}" and read it from disk again?	"{0}"-ലെ സേവ് ചെയ്യാത്ത മാറ്റങ്ങൾ കളഞ്ഞ് ഡിസ്കിൽ നിന്ന് വീണ്ടും വായിക്കണോ?
+"{0}" was changed by another program and has been read again.	"{0}" മറ്റൊരു പ്രോഗ്രാം മാറ്റിയതിനാൽ വീണ്ടും വായിച്ചു.
+Couldn't compare: {0}	താരതമ്യം ചെയ്യാനായില്ല: {0}
+unknown error	അറിയാത്ത പിശക്
+Choose two files to compare, or drop them on the two sides	താരതമ്യം ചെയ്യാൻ രണ്ട് ഫയലുകൾ തിരഞ്ഞെടുക്കുക, അല്ലെങ്കിൽ ഇരുവശത്തും ഇടുക
+Now choose the right file	ഇനി വലത്തെ ഫയൽ തിരഞ്ഞെടുക്കുക
+Now choose the left file	ഇനി ഇടത്തെ ഫയൽ തിരഞ്ഞെടുക്കുക
+Comparing…	താരതമ്യം ചെയ്യുന്നു…
+Change {0} of {1}	മാറ്റം {0} / {1}
+{0} to go through	{0} എണ്ണം നോക്കാനുണ്ട്
+Options ({0} on)	ക്രമീകരണങ്ങൾ ({0} ഓൺ)
+changed lines only	മാറിയ വരികൾ മാത്രം
+changed words shown	മാറിയ വാക്കുകൾ കാണിക്കുന്നു
+changed characters shown	മാറിയ അക്ഷരങ്ങൾ കാണിക്കുന്നു
+moved code found	സ്ഥാനം മാറ്റിയ കോഡ് കണ്ടെത്തുന്നു
+Now: {0}	ഇപ്പോൾ: {0}
+The files changed since the comparison was shown. Look again, then copy.	താരതമ്യം കാണിച്ചതിനുശേഷം ഫയലുകൾ മാറി. വീണ്ടും നോക്കിയിട്ട് പകർത്തുക.
+Compared recently	അടുത്തിടെ താരതമ്യം ചെയ്തവ
+Nothing compared yet	ഇതുവരെ ഒന്നും താരതമ്യം ചെയ്തിട്ടില്ല
+Clear this list	ഈ പട്ടിക മായ്ക്കുക
+Save as a patch file…	പാച്ച് ഫയലായി സേവ് ചെയ്യുക…
+A unified diff that turns the left file into the right one (for patch or git apply)	ഇടത്തെ ഫയലിനെ വലത്തേതാക്കി മാറ്റുന്ന ഒരു unified diff (patch, git apply എന്നിവയ്ക്ക്)
+Save as a web page report…	വെബ് പേജ് റിപ്പോർട്ടായി സേവ് ചെയ്യുക…
+Both files side by side with the changes coloured, to read in a browser or send to someone	രണ്ട് ഫയലുകളും അടുത്തടുത്ത്, മാറ്റങ്ങൾ നിറത്തിൽ; ബ്രൗസറിൽ വായിക്കാനോ ആർക്കെങ്കിലും അയയ്ക്കാനോ
+Save the report	റിപ്പോർട്ട് സേവ് ചെയ്യുക
+Web page	വെബ് പേജ്
+The files are exactly the same, so there's nothing to put in a patch.	ഫയലുകൾ കൃത്യമായി ഒരുപോലെയാണ്, അതിനാൽ പാച്ചിൽ ചേർക്കാൻ ഒന്നുമില്ല.
+Save the patch	പാച്ച് സേവ് ചെയ്യുക
+{0}.patch	{0}.patch
+Patch file	പാച്ച് ഫയൽ
+Settings · KUDUDIFF	ക്രമീകരണങ്ങൾ · KUDUDIFF
+Appearance	രൂപം
+Same as Windows	വിൻഡോസിലേതു പോലെ
+Language	ഭാഷ
+Editor	എഡിറ്റർ
+Text size	അക്ഷരങ്ങളുടെ വലുപ്പം
+Wrap long lines	നീണ്ട വരികൾ മടക്കുക
+Show spaces, tabs and line ends	സ്പേസുകൾ, ടാബുകൾ, വരി അവസാനങ്ങൾ എന്നിവ കാണിക്കുക
+Colour code by language (C#, Python, JSON, HTML and more)	ഭാഷയനുസരിച്ച് കോഡിന് നിറം നൽകുക (C#, Python, JSON, HTML എന്നിവയും മറ്റും)
+Saving	സേവ് ചെയ്യൽ
+Keep the previous version as a .bak file when saving	സേവ് ചെയ്യുമ്പോൾ പഴയ പതിപ്പ് ഒരു .bak ഫയലായി സൂക്ഷിക്കുക
+Saving "app.cs" first copies the old one to "app.cs.bak" next to it, replacing an older .bak.	"app.cs" സേവ് ചെയ്യുമ്പോൾ ആദ്യം പഴയത് അതിനടുത്ത് "app.cs.bak" ആയി പകർത്തും; പഴയ .bak മാറ്റിയെഴുതും.
+File Explorer	ഫയൽ എക്സ്പ്ലോറർ
+Add "Compare with KUDUDIFF" to files' right-click menu	ഫയലുകളുടെ റൈറ്റ്-ക്ലിക്ക് മെനുവിൽ "Compare with KUDUDIFF" ചേർക്കുക
+Select two files and right-click, or pick one file now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	രണ്ട് ഫയലുകൾ തിരഞ്ഞെടുത്ത് റൈറ്റ്-ക്ലിക്ക് ചെയ്യുക, അല്ലെങ്കിൽ ഇപ്പോൾ ഒന്നും പിന്നീട് മറ്റേതും തിരഞ്ഞെടുക്കുക. നിങ്ങളുടെ വിൻഡോസ് അക്കൗണ്ടിന് മാത്രം; വിൻഡോസ് 11-ൽ ഇത് "Show more options"-ന് കീഴിലാണ്.
+Updates	അപ്ഡേറ്റുകൾ
+Check for a new KUDUDIFF version when it starts	തുറക്കുമ്പോൾ KUDUDIFF-ന്റെ പുതിയ പതിപ്പുണ്ടോ എന്ന് നോക്കുക
+Only asks GitHub for the latest version number. Nothing is downloaded without asking.	ഏറ്റവും പുതിയ പതിപ്പിന്റെ നമ്പർ മാത്രമേ GitHub-നോട് ചോദിക്കൂ. ചോദിക്കാതെ ഒന്നും ഡൗൺലോഡ് ചെയ്യില്ല.
+About KUDUDIFF	KUDUDIFF-നെക്കുറിച്ച്
+Close	അടയ്ക്കുക
+Comparison options	താരതമ്യ ക്രമീകരണങ്ങൾ
+These apply to the comparison on screen and the web page report, and are remembered for next time. A patch always compares exactly.	ഇവ സ്ക്രീനിലെ താരതമ്യത്തിനും വെബ് പേജ് റിപ്പോർട്ടിനും ബാധകമാണ്, അടുത്ത തവണത്തേക്കും ഓർത്തുവയ്ക്കും. പാച്ച് എപ്പോഴും കൃത്യമായി താരതമ്യം ചെയ്യുന്നു.
+Spaces	സ്പേസുകൾ
+Compare all spaces	എല്ലാ സ്പേസുകളും താരതമ്യം ചെയ്യുക
+Every space and tab counts	ഓരോ സ്പേസും ടാബും കണക്കാക്കും
+Ignore at line ends	വരിയുടെ അറ്റത്ത് ഒഴിവാക്കുക
+Spaces and tabs at the start and end of lines don't count	വരികളുടെ തുടക്കത്തിലും അവസാനത്തിലുമുള്ള സ്പേസുകളും ടാബുകളും കണക്കാക്കില്ല
+Ignore amount	എണ്ണം ഒഴിവാക്കുക
+"a  b" and "a b" are the same, and spaces at line ends don't count	"a  b"-ഉം "a b"-ഉം ഒന്നുതന്നെ; വരിയുടെ അറ്റത്തെ സ്പേസുകൾ കണക്കാക്കില്ല
+Ignore all	എല്ലാം ഒഴിവാക്കുക
+Spaces and tabs don't count at all: "a b" and "ab" are the same	സ്പേസുകളും ടാബുകളും ഒട്ടും കണക്കാക്കില്ല: "a b"-ഉം "ab"-ഉം ഒന്നുതന്നെ
+Also ignore	ഇവയും ഒഴിവാക്കുക
+Upper and lower case ("Name" and "name" are the same)	വലിയക്ഷരവും ചെറിയക്ഷരവും ("Name"-ഉം "name"-ഉം ഒന്നുതന്നെ)
+Blank lines (added or removed empty lines don't count)	ഒഴിഞ്ഞ വരികൾ (ചേർത്തതോ നീക്കിയതോ ആയ ഒഴിഞ്ഞ വരികൾ കണക്കാക്കില്ല)
+Line endings (Windows CRLF and Unix LF are the same)	വരി അവസാനങ്ങൾ (Windows CRLF-ഉം Unix LF-ഉം ഒന്നുതന്നെ)
+Text matching these patterns (regular expressions, one per line):	ഈ മാതൃകകളുമായി ചേരുന്ന ടെക്സ്റ്റ് (regular expressions, ഒരു വരിയിൽ ഒന്ന്):
+Ignore patterns	ഒഴിവാക്കാനുള്ള മാതൃകകൾ
+Changes inside lines	വരികൾക്കുള്ളിലെ മാറ്റങ്ങൾ
+Show changed words	മാറിയ വാക്കുകൾ കാണിക്കുക
+Within changed lines, the words that differ are marked	മാറിയ വരികളിൽ, വ്യത്യാസമുള്ള വാക്കുകൾ അടയാളപ്പെടുത്തും
+Show changed characters	മാറിയ അക്ഷരങ്ങൾ കാണിക്കുക
+Within changed lines, the exact characters that differ are marked	മാറിയ വരികളിൽ, വ്യത്യാസമുള്ള കൃത്യമായ അക്ഷരങ്ങൾ അടയാളപ്പെടുത്തും
+Lines only	വരികൾ മാത്രം
+Only whole lines are marked	മുഴുവൻ വരികൾ മാത്രം അടയാളപ്പെടുത്തും
+Find code that was moved (blocks of 3 or more lines that appear elsewhere)	സ്ഥാനം മാറ്റിയ കോഡ് കണ്ടെത്തുക (മറ്റെവിടെയെങ്കിലും വരുന്ന 3-ഓ അതിലധികമോ വരികളുള്ള ഭാഗങ്ങൾ)
+Method	രീതി
+Standard	സാധാരണ
+The smallest set of changes (the Myers method, as in diff and git)	ഏറ്റവും കുറഞ്ഞ മാറ്റങ്ങൾ (diff, git എന്നിവയിലെ പോലെ Myers രീതി)
+Patience	ക്ഷമയോടെ
+Lines up unique lines first, which keeps functions and blocks together in code (as git diff --patience)	ഒറ്റ വരികൾ ആദ്യം ചേർത്തുവയ്ക്കുന്നു; കോഡിലെ ഫംഗ്ഷനുകളും ഭാഗങ്ങളും ഒന്നിച്ചുനിൽക്കും (git diff --patience പോലെ)
+Reset	പുനഃസജ്ജമാക്കുക
+Back to the standard options	സാധാരണ ക്രമീകരണങ്ങളിലേക്ക് മടങ്ങുക
+Apply	പ്രയോഗിക്കുക
+Options · KUDUDIFF	ക്രമീകരണങ്ങൾ · KUDUDIFF
+These patterns aren't valid:\n{0}	ഈ മാതൃകകൾ ശരിയല്ല:\n{0}
+KUDUDIFF	KUDUDIFF
+Version {0} · Compare two files, see what changed	പതിപ്പ് {0} · രണ്ട് ഫയലുകൾ താരതമ്യം ചെയ്യുക, എന്ത് മാറിയെന്ന് കാണുക
+Azeem, with Claude and	Azeem, with Claude and
+Made by	Made by
+Licence	ലൈസൻസ്
+MIT · free and open source	MIT · സൗജന്യവും ഓപ്പൺ സോഴ്സും
+View	കാണുക
+Source code	സോഴ്സ് കോഡ്
+Comparing	താരതമ്യം
+Its own engine: the Myers and patience methods, word and character changes, moved code	സ്വന്തം സംവിധാനം: Myers, patience രീതികൾ, വാക്കിലെയും അക്ഷരത്തിലെയും മാറ്റങ്ങൾ, സ്ഥാനം മാറ്റിയ കോഡ്
+AvalonEdit (MIT licence)	AvalonEdit (MIT ലൈസൻസ്)
+Third-party	മറ്റുള്ളവരുടേത്
+Third-party notices	മറ്റുള്ളവരുടെ ഭാഗങ്ങളുടെ അറിയിപ്പുകൾ
+KUDUDIFF works on your computer only. Files are changed only when you save, and saving keeps the previous version as a .bak file unless you turn that off.	KUDUDIFF നിങ്ങളുടെ കമ്പ്യൂട്ടറിൽ മാത്രം പ്രവർത്തിക്കുന്നു. നിങ്ങൾ സേവ് ചെയ്യുമ്പോൾ മാത്രമേ ഫയലുകൾ മാറൂ; നിങ്ങൾ ഓഫാക്കിയില്ലെങ്കിൽ സേവ് ചെയ്യുമ്പോൾ പഴയ പതിപ്പ് .bak ഫയലായി സൂക്ഷിക്കും.
+Check for updates	അപ്ഡേറ്റുകൾ പരിശോധിക്കുക
+Couldn't find any published version yet.	പ്രസിദ്ധീകരിച്ച പതിപ്പൊന്നും ഇതുവരെ കണ്ടെത്തിയില്ല.
+KUDUDIFF {0} is available. Open the download page?	KUDUDIFF {0} ലഭ്യമാണ്. ഡൗൺലോഡ് പേജ് തുറക്കണോ?
+You have the latest version.	നിങ്ങളുടെ കയ്യിലുള്ളത് ഏറ്റവും പുതിയ പതിപ്പാണ്.
+Couldn't check for updates. Check your internet connection and try again.	അപ്ഡേറ്റുകൾ പരിശോധിക്കാനായില്ല. ഇന്റർനെറ്റ് കണക്ഷൻ നോക്കിയിട്ട് വീണ്ടും ശ്രമിക്കുക.
+{0} ran into a problem it couldn't get past, and has to close.	{0}-ന് മറികടക്കാൻ കഴിയാത്ത ഒരു പ്രശ്നം ഉണ്ടായി; അതിനാൽ അടയ്ക്കേണ്ടിവരുന്നു.
+Java	Java
+Json	Json
+Patch	Patch
+Python	Python
+Batch	Batch
+Bash	Bash

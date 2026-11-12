@@ -37,6 +37,9 @@ namespace Kududiff.Views
             }
             root.Children.Add(themes);
 
+            root.Children.Add(Ui.Heading("Language", 14).Margin(0, 16, 0, 6));
+            root.Children.Add(LangUi.Picker());
+
             root.Children.Add(Ui.Heading("Editor", 14).Margin(0, 16, 0, 6));
             var size = new ComboBox { Width = 90, HorizontalAlignment = HorizontalAlignment.Left };
             for (var i = 9; i <= 24; i++) size.Items.Add(i);

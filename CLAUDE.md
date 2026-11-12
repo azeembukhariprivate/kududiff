@@ -58,3 +58,7 @@ The build fails when a copy differs from kudu-common. App-specific details go in
 - The comparison engine (`Core/Lcs.cs`, `Core/Comparison.cs`, `Core/Export.cs`) is the app's own code and is tested
   against brute force; keep it that way.
 - Scope agreed for v1: two files only, text and code only, no folder compare, no 3-way merge, no Git features.
+- Other languages (1.1): the shared `Lang`/`LangUi` (kudu-common) put each window into the chosen language as it's shown;
+  the texts are in `src/KUDUDIFF/Lang/<code>.txt` (made and checked with kudu-common's `tools/lang.py`). Texts put
+  together from pieces (the summary line, the options tooltip) call `Lang.T` on each piece. When adding or changing a
+  text, add it to every language file (`tools/lang.py check ../kududiff` says what's missing).

@@ -1,0 +1,230 @@
+Only the first two files are compared.	Solo se comparan los dos primeros archivos.
+{0} files were chosen; the first two are compared.	Se eligieron {0} archivos; se comparan los dos primeros.
+Now choose the second file: right-click it → Compare with KUDUDIFF, drop it on the right, or use Open.	Ahora elige el segundo archivo: haz clic derecho sobre él → Compare with KUDUDIFF, suéltalo a la derecha o usa Abrir.
+timeout	timeout
+Something went wrong:\n\n{0}	Algo salió mal:\n\n{0}
+Azeem Bukhari	Azeem Bukhari
+less than a second	menos de un segundo
+{0} h {1} min	{0} h {1} min
+{0} min {1} s	{0} min {1} s
+{0} L{1}+{2} R{3}+{4}	{0} L{1}+{2} R{3}+{4}
+Move L{0} -> R{1} ({2})	Move L{0} -> R{1} ({2})
+No differences (with the ignore options on)	No hay diferencias (con las opciones de ignorar activadas)
+The files are identical	Los archivos son idénticos
+1 change	1 cambio
+{0} changes	{0} cambios
+{0} added, {1} removed	{0} añadidas, {1} quitadas
+1 moved block	1 bloque movido
+{0} moved blocks	{0} bloques movidos
+\\ No newline at end of file	\\ No newline at end of file
+chg l	chg l
+del	del
+chg r	chg r
+ins	ins
+mid	mid
+patience comparison	comparación paciente
+standard comparison	comparación estándar
+spaces at line ends ignored	espacios al final de línea ignorados
+amount of spaces ignored	cantidad de espacios ignorada
+all spaces ignored	todos los espacios ignorados
+case ignored	mayúsculas y minúsculas ignoradas
+blank lines ignored	líneas en blanco ignoradas
+line endings compared	finales de línea comparados
+1 ignore pattern	1 patrón ignorado
+{0} ignore patterns	{0} patrones ignorados
+user	user
+KUDUDIFF hub	KUDUDIFF hub
+Theme	Theme
+Algorithm	Algorithm
+Whitespace	Whitespace
+Inline	Inline
+Recent	Recent
+Compare with KUDUDIFF	Comparar con KUDUDIFF
+Player	Player
+"{0}" --pick "%1"	"{0}" --pick "%1"
+UTF-8 with BOM	UTF-8 with BOM
+UTF-16 BE	UTF-16 BE
+UTF-16 LE	UTF-16 LE
+The file wasn't found: {0}	No se encontró el archivo: {0}
+"{0}" is too big to compare ({1} MB; the limit is {2} MB).	"{0}" es demasiado grande para comparar ({1} MB; el límite es {2} MB).
+This looks like a binary file, not text. KUDUDIFF compares text and code files.	Parece un archivo binario, no de texto. KUDUDIFF compara archivos de texto y de código.
+The file has no name yet.	El archivo aún no tiene nombre.
+{0}.bak	{0}.bak
+"{0}" is read-only.	"{0}" es de solo lectura.
+Windows (CRLF)	Windows (CRLF)
+Unix (LF)	Unix (LF)
+Old Mac (CR)	Old Mac (CR)
+Mixed line endings	Finales de línea mezclados
+One line	Una línea
+Missing theme resource {0}	Missing theme resource {0}
+Light	Claro
+Styles	Styles
+Dark	Oscuro
+Application	Application
+Consolas, Cascadia Mono, Courier New	Consolas, Cascadia Mono, Courier New
+Left file	Archivo izquierdo
+Right file	Archivo derecho
+Open…	Abrir…
+Choose the left file	Elige el archivo izquierdo
+Choose the right file	Elige el archivo derecho
+Save	Guardar
+Save this file (Ctrl+S)	Guardar este archivo (Ctrl+S)
+Open a file…	Abrir un archivo…
+Drop the left file here	Suelta aquí el archivo izquierdo
+Drop the right file here	Suelta aquí el archivo derecho
+or	o
+(none)	(ninguno)
+Not chosen yet	Aún sin elegir
+Untitled	Sin título
+Changed, not saved yet	Cambiado, sin guardar
+Copy this change to the right (Alt+Right)	Copiar este cambio a la derecha (Alt+Derecha)
+Copy this change to the left (Alt+Left)	Copiar este cambio a la izquierda (Alt+Izquierda)
+All the changes. Click to go there.	Todos los cambios. Haz clic para ir allí.
+Error message shown: {0}	Error message shown: {0}
+All files	Todos los archivos
+Cancel	Cancelar
+Choose two files to compare	Elige dos archivos para comparar
+Settings	Ajustes
+About	Acerca de
+Previous	Anterior
+Go to the previous change (Alt+Up)	Ir al cambio anterior (Alt+Arriba)
+Next	Siguiente
+Go to the next change (Alt+Down)	Ir al cambio siguiente (Alt+Abajo)
+Copy to left	Copiar a la izquierda
+Copy the current change from the right file to the left one (Alt+Left)	Copiar el cambio actual del archivo derecho al izquierdo (Alt+Izquierda)
+Copy to right	Copiar a la derecha
+Copy the current change from the left file to the right one (Alt+Right)	Copiar el cambio actual del archivo izquierdo al derecho (Alt+Derecha)
+Undo (Ctrl+Z) in the file you last edited	Deshacer (Ctrl+Z) en el último archivo que editaste
+Redo (Ctrl+Y) in the file you last edited	Rehacer (Ctrl+Y) en el último archivo que editaste
+Options	Opciones
+What to ignore, how to compare, and how changes are shown	Qué ignorar, cómo comparar y cómo se muestran los cambios
+Swap sides	Intercambiar lados
+Put the left file on the right and the right file on the left	Poner el archivo izquierdo a la derecha y el derecho a la izquierda
+Reload	Volver a cargar
+Read both files from disk again (F5)	Leer de nuevo ambos archivos del disco (F5)
+Export	Exportar
+Save the differences as a patch file or a web page report	Guardar las diferencias como archivo de parche o informe en página web
+Added	Añadido
+Removed	Quitado
+Changed	Cambiado
+Moved	Movido
+{0} {1} is available	{0} {1} está disponible
+"{0}" is a folder. {1} compares two files.	"{0}" es una carpeta. {1} compara dos archivos.
+"{0}" has changes that aren't saved. Throw them away and open another file?	"{0}" tiene cambios sin guardar. ¿Descartarlos y abrir otro archivo?
+"{0}" was changed by another program after it was opened here. Save over those changes?	Otro programa cambió "{0}" después de abrirlo aquí. ¿Guardar encima de esos cambios?
+Some characters can't be saved in {0}, the encoding "{1}" uses. Save it as UTF-8 instead?	Algunos caracteres no se pueden guardar en {0}, con la codificación "{1}". ¿Guardarlo en UTF-8?
+Couldn't save "{0}".\n\n{1}	No se pudo guardar "{0}".\n\n{1}
+Saved {0} (the previous version is in {1}.bak)	Se guardó {0} (la versión anterior está en {1}.bak)
+Saved {0}	Se guardó {0}
+Save the changes to "{0}"?	¿Guardar los cambios en "{0}"?
+Throw away the unsaved changes to "{0}" and read it from disk again?	¿Descartar los cambios sin guardar de "{0}" y leerlo de nuevo del disco?
+"{0}" was changed by another program and has been read again.	Otro programa cambió "{0}" y se ha vuelto a leer.
+Couldn't compare: {0}	No se pudo comparar: {0}
+unknown error	error desconocido
+Choose two files to compare, or drop them on the two sides	Elige dos archivos para comparar, o suéltalos en los dos lados
+Now choose the right file	Ahora elige el archivo derecho
+Now choose the left file	Ahora elige el archivo izquierdo
+Comparing…	Comparando…
+Change {0} of {1}	Cambio {0} de {1}
+{0} to go through	{0} por revisar
+Options ({0} on)	Opciones ({0} activas)
+changed lines only	solo líneas cambiadas
+changed words shown	palabras cambiadas marcadas
+changed characters shown	caracteres cambiados marcados
+moved code found	se busca código movido
+Now: {0}	Ahora: {0}
+The files changed since the comparison was shown. Look again, then copy.	Los archivos cambiaron desde que se mostró la comparación. Vuelve a mirar y luego copia.
+Compared recently	Comparados recientemente
+Nothing compared yet	Aún no se ha comparado nada
+Clear this list	Borrar esta lista
+Save as a patch file…	Guardar como archivo de parche…
+A unified diff that turns the left file into the right one (for patch or git apply)	Un diff unificado que convierte el archivo izquierdo en el derecho (para patch o git apply)
+Save as a web page report…	Guardar como informe en página web…
+Both files side by side with the changes coloured, to read in a browser or send to someone	Ambos archivos lado a lado con los cambios en color, para leer en un navegador o enviar a alguien
+Save the report	Guardar el informe
+Web page	Página web
+The files are exactly the same, so there's nothing to put in a patch.	Los archivos son exactamente iguales, así que no hay nada que poner en un parche.
+Save the patch	Guardar el parche
+{0}.patch	{0}.patch
+Patch file	Archivo de parche
+Settings · KUDUDIFF	Ajustes · KUDUDIFF
+Appearance	Apariencia
+Same as Windows	Igual que Windows
+Language	Idioma
+Editor	Editor
+Text size	Tamaño del texto
+Wrap long lines	Ajustar líneas largas
+Show spaces, tabs and line ends	Mostrar espacios, tabulaciones y finales de línea
+Colour code by language (C#, Python, JSON, HTML and more)	Colorear el código según el lenguaje (C#, Python, JSON, HTML y más)
+Saving	Guardado
+Keep the previous version as a .bak file when saving	Conservar la versión anterior como archivo .bak al guardar
+Saving "app.cs" first copies the old one to "app.cs.bak" next to it, replacing an older .bak.	Al guardar "app.cs" primero se copia el anterior como "app.cs.bak" a su lado, reemplazando un .bak más antiguo.
+File Explorer	Explorador de archivos
+Add "Compare with KUDUDIFF" to files' right-click menu	Añadir "Compare with KUDUDIFF" al menú del clic derecho de los archivos
+Select two files and right-click, or pick one file now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	Selecciona dos archivos y haz clic derecho, o elige uno ahora y el otro después. Solo para tu cuenta de Windows; en Windows 11 está en "Mostrar más opciones".
+Updates	Actualizaciones
+Check for a new KUDUDIFF version when it starts	Buscar una nueva versión de KUDUDIFF al iniciar
+Only asks GitHub for the latest version number. Nothing is downloaded without asking.	Solo pregunta a GitHub el número de la última versión. No se descarga nada sin preguntar.
+About KUDUDIFF	Acerca de KUDUDIFF
+Close	Cerrar
+Comparison options	Opciones de comparación
+These apply to the comparison on screen and the web page report, and are remembered for next time. A patch always compares exactly.	Se aplican a la comparación en pantalla y al informe en página web, y se recuerdan para la próxima vez. Un parche siempre compara exactamente.
+Spaces	Espacios
+Compare all spaces	Comparar todos los espacios
+Every space and tab counts	Cuenta cada espacio y tabulación
+Ignore at line ends	Ignorar al final de línea
+Spaces and tabs at the start and end of lines don't count	No cuentan los espacios y tabulaciones al principio y al final de las líneas
+Ignore amount	Ignorar la cantidad
+"a  b" and "a b" are the same, and spaces at line ends don't count	"a  b" y "a b" son iguales, y no cuentan los espacios al final de línea
+Ignore all	Ignorar todos
+Spaces and tabs don't count at all: "a b" and "ab" are the same	Los espacios y tabulaciones no cuentan nada: "a b" y "ab" son iguales
+Also ignore	Ignorar también
+Upper and lower case ("Name" and "name" are the same)	Mayúsculas y minúsculas ("Name" y "name" son iguales)
+Blank lines (added or removed empty lines don't count)	Líneas en blanco (no cuentan las líneas vacías añadidas o quitadas)
+Line endings (Windows CRLF and Unix LF are the same)	Finales de línea (CRLF de Windows y LF de Unix son iguales)
+Text matching these patterns (regular expressions, one per line):	Texto que coincide con estos patrones (expresiones regulares, uno por línea):
+Ignore patterns	Patrones a ignorar
+Changes inside lines	Cambios dentro de las líneas
+Show changed words	Mostrar palabras cambiadas
+Within changed lines, the words that differ are marked	En las líneas cambiadas se marcan las palabras que difieren
+Show changed characters	Mostrar caracteres cambiados
+Within changed lines, the exact characters that differ are marked	En las líneas cambiadas se marcan exactamente los caracteres que difieren
+Lines only	Solo líneas
+Only whole lines are marked	Solo se marcan líneas completas
+Find code that was moved (blocks of 3 or more lines that appear elsewhere)	Encontrar código movido (bloques de 3 o más líneas que aparecen en otro sitio)
+Method	Método
+Standard	Estándar
+The smallest set of changes (the Myers method, as in diff and git)	El menor conjunto de cambios (el método de Myers, como en diff y git)
+Patience	Paciente
+Lines up unique lines first, which keeps functions and blocks together in code (as git diff --patience)	Alinea primero las líneas únicas, lo que mantiene juntas las funciones y bloques de código (como git diff --patience)
+Reset	Restablecer
+Back to the standard options	Volver a las opciones estándar
+Apply	Aplicar
+Options · KUDUDIFF	Opciones · KUDUDIFF
+These patterns aren't valid:\n{0}	Estos patrones no son válidos:\n{0}
+KUDUDIFF	KUDUDIFF
+Version {0} · Compare two files, see what changed	Versión {0} · Compara dos archivos, mira qué cambió
+Azeem, with Claude and	Azeem, with Claude and
+Made by	Made by
+Licence	Licencia
+MIT · free and open source	MIT · libre y de código abierto
+View	Ver
+Source code	Código fuente
+Comparing	Comparación
+Its own engine: the Myers and patience methods, word and character changes, moved code	Su propio motor: los métodos de Myers y paciente, cambios de palabras y caracteres, código movido
+AvalonEdit (MIT licence)	AvalonEdit (licencia MIT)
+Third-party	De terceros
+Third-party notices	Avisos de terceros
+KUDUDIFF works on your computer only. Files are changed only when you save, and saving keeps the previous version as a .bak file unless you turn that off.	KUDUDIFF funciona solo en tu ordenador. Los archivos solo cambian cuando guardas, y al guardar se conserva la versión anterior como archivo .bak salvo que lo desactives.
+Check for updates	Buscar actualizaciones
+Couldn't find any published version yet.	Aún no se ha encontrado ninguna versión publicada.
+KUDUDIFF {0} is available. Open the download page?	KUDUDIFF {0} está disponible. ¿Abrir la página de descarga?
+You have the latest version.	Tienes la última versión.
+Couldn't check for updates. Check your internet connection and try again.	No se pudieron buscar actualizaciones. Revisa tu conexión a internet e inténtalo de nuevo.
+{0} ran into a problem it couldn't get past, and has to close.	{0} ha encontrado un problema que no ha podido superar y tiene que cerrarse.
+Java	Java
+Json	Json
+Patch	Patch
+Python	Python
+Batch	Batch
+Bash	Bash

@@ -1,0 +1,230 @@
+Only the first two files are compared.	केवल पहली दो फ़ाइलों की तुलना की जाती है।
+{0} files were chosen; the first two are compared.	{0} फ़ाइलें चुनी गईं; पहली दो की तुलना की जा रही है।
+Now choose the second file: right-click it → Compare with KUDUDIFF, drop it on the right, or use Open.	अब दूसरी फ़ाइल चुनें: उस पर राइट-क्लिक करें → Compare with KUDUDIFF, या उसे दाईं ओर छोड़ें, या खोलें का उपयोग करें।
+timeout	timeout
+Something went wrong:\n\n{0}	कुछ गड़बड़ हो गई:\n\n{0}
+Azeem Bukhari	Azeem Bukhari
+less than a second	एक सेकंड से कम
+{0} h {1} min	{0} घंटे {1} मिनट
+{0} min {1} s	{0} मिनट {1} सेकंड
+{0} L{1}+{2} R{3}+{4}	{0} L{1}+{2} R{3}+{4}
+Move L{0} -> R{1} ({2})	Move L{0} -> R{1} ({2})
+No differences (with the ignore options on)	कोई अंतर नहीं (अनदेखा करने के विकल्प चालू हैं)
+The files are identical	दोनों फ़ाइलें एक जैसी हैं
+1 change	1 बदलाव
+{0} changes	{0} बदलाव
+{0} added, {1} removed	{0} जोड़े गए, {1} हटाए गए
+1 moved block	1 खिसकाया गया हिस्सा
+{0} moved blocks	{0} खिसकाए गए हिस्से
+\\ No newline at end of file	\\ No newline at end of file
+chg l	chg l
+del	del
+chg r	chg r
+ins	ins
+mid	mid
+patience comparison	धैर्य वाली तुलना
+standard comparison	सामान्य तुलना
+spaces at line ends ignored	पंक्तियों के अंत की खाली जगहें अनदेखी
+amount of spaces ignored	खाली जगहों की संख्या अनदेखी
+all spaces ignored	सभी खाली जगहें अनदेखी
+case ignored	बड़े-छोटे अक्षर अनदेखे
+blank lines ignored	खाली पंक्तियाँ अनदेखी
+line endings compared	पंक्ति के अंत की तुलना होती है
+1 ignore pattern	अनदेखा करने का 1 पैटर्न
+{0} ignore patterns	अनदेखा करने के {0} पैटर्न
+user	user
+KUDUDIFF hub	KUDUDIFF hub
+Theme	Theme
+Algorithm	Algorithm
+Whitespace	Whitespace
+Inline	Inline
+Recent	Recent
+Compare with KUDUDIFF	KUDUDIFF से तुलना करें
+Player	Player
+"{0}" --pick "%1"	"{0}" --pick "%1"
+UTF-8 with BOM	UTF-8 with BOM
+UTF-16 BE	UTF-16 BE
+UTF-16 LE	UTF-16 LE
+The file wasn't found: {0}	फ़ाइल नहीं मिली: {0}
+"{0}" is too big to compare ({1} MB; the limit is {2} MB).	"{0}" तुलना के लिए बहुत बड़ी है ({1} MB; सीमा {2} MB है)।
+This looks like a binary file, not text. KUDUDIFF compares text and code files.	यह टेक्स्ट नहीं, बाइनरी फ़ाइल लगती है। KUDUDIFF टेक्स्ट और कोड फ़ाइलों की तुलना करता है।
+The file has no name yet.	फ़ाइल का अभी कोई नाम नहीं है।
+{0}.bak	{0}.bak
+"{0}" is read-only.	"{0}" केवल पढ़ने के लिए है।
+Windows (CRLF)	Windows (CRLF)
+Unix (LF)	Unix (LF)
+Old Mac (CR)	Old Mac (CR)
+Mixed line endings	मिली-जुली पंक्ति-अंत
+One line	एक पंक्ति
+Missing theme resource {0}	Missing theme resource {0}
+Light	हल्का
+Styles	Styles
+Dark	गहरा
+Application	Application
+Consolas, Cascadia Mono, Courier New	Consolas, Cascadia Mono, Courier New
+Left file	बाईं फ़ाइल
+Right file	दाईं फ़ाइल
+Open…	खोलें…
+Choose the left file	बाईं फ़ाइल चुनें
+Choose the right file	दाईं फ़ाइल चुनें
+Save	सहेजें
+Save this file (Ctrl+S)	यह फ़ाइल सहेजें (Ctrl+S)
+Open a file…	फ़ाइल खोलें…
+Drop the left file here	बाईं फ़ाइल यहाँ छोड़ें
+Drop the right file here	दाईं फ़ाइल यहाँ छोड़ें
+or	या
+(none)	(कोई नहीं)
+Not chosen yet	अभी चुना नहीं गया
+Untitled	बिना नाम
+Changed, not saved yet	बदली गई, अभी सहेजी नहीं गई
+Copy this change to the right (Alt+Right)	यह बदलाव दाईं ओर कॉपी करें (Alt+Right)
+Copy this change to the left (Alt+Left)	यह बदलाव बाईं ओर कॉपी करें (Alt+Left)
+All the changes. Click to go there.	सभी बदलाव। वहाँ जाने के लिए क्लिक करें।
+Error message shown: {0}	Error message shown: {0}
+All files	सभी फ़ाइलें
+Cancel	रद्द करें
+Choose two files to compare	तुलना के लिए दो फ़ाइलें चुनें
+Settings	सेटिंग्स
+About	जानकारी
+Previous	पिछला
+Go to the previous change (Alt+Up)	पिछले बदलाव पर जाएँ (Alt+Up)
+Next	अगला
+Go to the next change (Alt+Down)	अगले बदलाव पर जाएँ (Alt+Down)
+Copy to left	बाईं ओर कॉपी करें
+Copy the current change from the right file to the left one (Alt+Left)	मौजूदा बदलाव दाईं फ़ाइल से बाईं में कॉपी करें (Alt+Left)
+Copy to right	दाईं ओर कॉपी करें
+Copy the current change from the left file to the right one (Alt+Right)	मौजूदा बदलाव बाईं फ़ाइल से दाईं में कॉपी करें (Alt+Right)
+Undo (Ctrl+Z) in the file you last edited	जिस फ़ाइल को आपने आखिरी बार बदला, उसमें पूर्ववत करें (Ctrl+Z)
+Redo (Ctrl+Y) in the file you last edited	जिस फ़ाइल को आपने आखिरी बार बदला, उसमें फिर से करें (Ctrl+Y)
+Options	विकल्प
+What to ignore, how to compare, and how changes are shown	क्या अनदेखा करें, कैसे तुलना करें, और बदलाव कैसे दिखें
+Swap sides	तरफ़ें बदलें
+Put the left file on the right and the right file on the left	बाईं फ़ाइल को दाईं ओर और दाईं फ़ाइल को बाईं ओर रखें
+Reload	फिर से पढ़ें
+Read both files from disk again (F5)	दोनों फ़ाइलें डिस्क से फिर से पढ़ें (F5)
+Export	निर्यात करें
+Save the differences as a patch file or a web page report	अंतरों को पैच फ़ाइल या वेब पेज रिपोर्ट के रूप में सहेजें
+Added	जोड़ा गया
+Removed	हटाया गया
+Changed	बदला गया
+Moved	खिसकाया गया
+{0} {1} is available	{0} {1} उपलब्ध है
+"{0}" is a folder. {1} compares two files.	"{0}" एक फ़ोल्डर है। {1} दो फ़ाइलों की तुलना करता है।
+"{0}" has changes that aren't saved. Throw them away and open another file?	"{0}" में ऐसे बदलाव हैं जो सहेजे नहीं गए। उन्हें छोड़कर दूसरी फ़ाइल खोलें?
+"{0}" was changed by another program after it was opened here. Save over those changes?	"{0}" को यहाँ खोलने के बाद किसी दूसरे प्रोग्राम ने बदला है। उन बदलावों के ऊपर सहेजें?
+Some characters can't be saved in {0}, the encoding "{1}" uses. Save it as UTF-8 instead?	कुछ अक्षर {0} की एन्कोडिंग "{1}" में सहेजे नहीं जा सकते। इसके बजाय UTF-8 में सहेजें?
+Couldn't save "{0}".\n\n{1}	"{0}" सहेजी नहीं जा सकी।\n\n{1}
+Saved {0} (the previous version is in {1}.bak)	{0} सहेजी गई (पिछला संस्करण {1}.bak में है)
+Saved {0}	{0} सहेजी गई
+Save the changes to "{0}"?	"{0}" के बदलाव सहेजें?
+Throw away the unsaved changes to "{0}" and read it from disk again?	"{0}" के बिना सहेजे बदलाव छोड़कर इसे डिस्क से फिर से पढ़ें?
+"{0}" was changed by another program and has been read again.	"{0}" को किसी दूसरे प्रोग्राम ने बदला, इसलिए इसे फिर से पढ़ा गया।
+Couldn't compare: {0}	तुलना नहीं हो सकी: {0}
+unknown error	अज्ञात त्रुटि
+Choose two files to compare, or drop them on the two sides	तुलना के लिए दो फ़ाइलें चुनें, या उन्हें दोनों तरफ़ छोड़ें
+Now choose the right file	अब दाईं फ़ाइल चुनें
+Now choose the left file	अब बाईं फ़ाइल चुनें
+Comparing…	तुलना हो रही है…
+Change {0} of {1}	बदलाव {0} / {1}
+{0} to go through	{0} देखने बाकी
+Options ({0} on)	विकल्प ({0} चालू)
+changed lines only	केवल बदली पंक्तियाँ
+changed words shown	बदले शब्द दिखाए जाते हैं
+changed characters shown	बदले अक्षर दिखाए जाते हैं
+moved code found	खिसकाया गया कोड ढूँढा जाता है
+Now: {0}	अभी: {0}
+The files changed since the comparison was shown. Look again, then copy.	तुलना दिखाने के बाद फ़ाइलें बदल गईं। फिर से देखें, फिर कॉपी करें।
+Compared recently	हाल में तुलना की गई
+Nothing compared yet	अभी तक कुछ तुलना नहीं की गई
+Clear this list	यह सूची साफ़ करें
+Save as a patch file…	पैच फ़ाइल के रूप में सहेजें…
+A unified diff that turns the left file into the right one (for patch or git apply)	एक unified diff जो बाईं फ़ाइल को दाईं में बदल देता है (patch या git apply के लिए)
+Save as a web page report…	वेब पेज रिपोर्ट के रूप में सहेजें…
+Both files side by side with the changes coloured, to read in a browser or send to someone	दोनों फ़ाइलें अगल-बगल, बदलाव रंगों में; ब्राउज़र में पढ़ने या किसी को भेजने के लिए
+Save the report	रिपोर्ट सहेजें
+Web page	वेब पेज
+The files are exactly the same, so there's nothing to put in a patch.	फ़ाइलें बिल्कुल एक जैसी हैं, इसलिए पैच में डालने को कुछ नहीं है।
+Save the patch	पैच सहेजें
+{0}.patch	{0}.patch
+Patch file	पैच फ़ाइल
+Settings · KUDUDIFF	सेटिंग्स · KUDUDIFF
+Appearance	रूप
+Same as Windows	Windows जैसा ही
+Language	भाषा
+Editor	संपादक
+Text size	अक्षरों का आकार
+Wrap long lines	लंबी पंक्तियाँ मोड़ें
+Show spaces, tabs and line ends	खाली जगहें, टैब और पंक्ति-अंत दिखाएँ
+Colour code by language (C#, Python, JSON, HTML and more)	भाषा के अनुसार कोड को रंग दें (C#, Python, JSON, HTML और अन्य)
+Saving	सहेजना
+Keep the previous version as a .bak file when saving	सहेजते समय पिछला संस्करण .bak फ़ाइल के रूप में रखें
+Saving "app.cs" first copies the old one to "app.cs.bak" next to it, replacing an older .bak.	"app.cs" सहेजने से पहले पुरानी फ़ाइल उसके पास "app.cs.bak" के रूप में कॉपी होती है, पुरानी .bak की जगह।
+File Explorer	फ़ाइल एक्सप्लोरर
+Add "Compare with KUDUDIFF" to files' right-click menu	फ़ाइलों के राइट-क्लिक मेनू में "Compare with KUDUDIFF" जोड़ें
+Select two files and right-click, or pick one file now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	दो फ़ाइलें चुनकर राइट-क्लिक करें, या एक फ़ाइल अभी और दूसरी बाद में चुनें। केवल आपके Windows खाते के लिए; Windows 11 में यह "Show more options" के अंदर है।
+Updates	अपडेट
+Check for a new KUDUDIFF version when it starts	शुरू होने पर KUDUDIFF का नया संस्करण जाँचें
+Only asks GitHub for the latest version number. Nothing is downloaded without asking.	GitHub से केवल नवीनतम संस्करण संख्या पूछी जाती है। बिना पूछे कुछ भी डाउनलोड नहीं होता।
+About KUDUDIFF	KUDUDIFF के बारे में
+Close	बंद करें
+Comparison options	तुलना के विकल्प
+These apply to the comparison on screen and the web page report, and are remembered for next time. A patch always compares exactly.	ये स्क्रीन पर तुलना और वेब पेज रिपोर्ट पर लागू होते हैं, और अगली बार के लिए याद रखे जाते हैं। पैच हमेशा बिल्कुल सटीक तुलना करता है।
+Spaces	खाली जगहें
+Compare all spaces	सभी खाली जगहों की तुलना करें
+Every space and tab counts	हर खाली जगह और टैब गिना जाता है
+Ignore at line ends	पंक्ति के अंत में अनदेखा करें
+Spaces and tabs at the start and end of lines don't count	पंक्तियों की शुरुआत और अंत की खाली जगहें और टैब नहीं गिने जाते
+Ignore amount	संख्या अनदेखी करें
+"a  b" and "a b" are the same, and spaces at line ends don't count	"a  b" और "a b" एक ही हैं, और पंक्ति के अंत की खाली जगहें नहीं गिनी जातीं
+Ignore all	सब अनदेखा करें
+Spaces and tabs don't count at all: "a b" and "ab" are the same	खाली जगहें और टैब बिल्कुल नहीं गिने जाते: "a b" और "ab" एक ही हैं
+Also ignore	ये भी अनदेखा करें
+Upper and lower case ("Name" and "name" are the same)	बड़े और छोटे अक्षर ("Name" और "name" एक ही हैं)
+Blank lines (added or removed empty lines don't count)	खाली पंक्तियाँ (जोड़ी या हटाई गई खाली पंक्तियाँ नहीं गिनी जातीं)
+Line endings (Windows CRLF and Unix LF are the same)	पंक्ति-अंत (Windows CRLF और Unix LF एक ही हैं)
+Text matching these patterns (regular expressions, one per line):	इन पैटर्न से मेल खाने वाला टेक्स्ट (regular expressions, हर पंक्ति में एक):
+Ignore patterns	अनदेखा करने के पैटर्न
+Changes inside lines	पंक्तियों के अंदर बदलाव
+Show changed words	बदले शब्द दिखाएँ
+Within changed lines, the words that differ are marked	बदली पंक्तियों में, अलग शब्दों पर निशान लगाया जाता है
+Show changed characters	बदले अक्षर दिखाएँ
+Within changed lines, the exact characters that differ are marked	बदली पंक्तियों में, ठीक वही अक्षर चिह्नित होते हैं जो अलग हैं
+Lines only	केवल पंक्तियाँ
+Only whole lines are marked	केवल पूरी पंक्तियाँ चिह्नित होती हैं
+Find code that was moved (blocks of 3 or more lines that appear elsewhere)	खिसकाया गया कोड ढूँढें (3 या अधिक पंक्तियों के हिस्से जो कहीं और आते हैं)
+Method	तरीका
+Standard	सामान्य
+The smallest set of changes (the Myers method, as in diff and git)	बदलावों का सबसे छोटा सेट (Myers तरीका, जैसा diff और git में)
+Patience	धैर्य वाला
+Lines up unique lines first, which keeps functions and blocks together in code (as git diff --patience)	पहले अनोखी पंक्तियाँ मिलाता है, जिससे कोड में फ़ंक्शन और हिस्से साथ रहते हैं (जैसे git diff --patience)
+Reset	रीसेट करें
+Back to the standard options	सामान्य विकल्पों पर वापस जाएँ
+Apply	लागू करें
+Options · KUDUDIFF	विकल्प · KUDUDIFF
+These patterns aren't valid:\n{0}	ये पैटर्न सही नहीं हैं:\n{0}
+KUDUDIFF	KUDUDIFF
+Version {0} · Compare two files, see what changed	संस्करण {0} · दो फ़ाइलों की तुलना करें, देखें क्या बदला
+Azeem, with Claude and	Azeem, with Claude and
+Made by	Made by
+Licence	लाइसेंस
+MIT · free and open source	MIT · मुफ़्त और ओपन सोर्स
+View	देखें
+Source code	सोर्स कोड
+Comparing	तुलना
+Its own engine: the Myers and patience methods, word and character changes, moved code	अपना इंजन: Myers और patience तरीके, शब्द और अक्षर के बदलाव, खिसकाया गया कोड
+AvalonEdit (MIT licence)	AvalonEdit (MIT लाइसेंस)
+Third-party	तीसरे पक्ष के
+Third-party notices	तीसरे पक्ष की सूचनाएँ
+KUDUDIFF works on your computer only. Files are changed only when you save, and saving keeps the previous version as a .bak file unless you turn that off.	KUDUDIFF केवल आपके कंप्यूटर पर काम करता है। फ़ाइलें तभी बदलती हैं जब आप सहेजते हैं, और जब तक आप इसे बंद न करें, सहेजते समय पिछला संस्करण .bak फ़ाइल में रखा जाता है।
+Check for updates	अपडेट जाँचें
+Couldn't find any published version yet.	अभी तक कोई प्रकाशित संस्करण नहीं मिला।
+KUDUDIFF {0} is available. Open the download page?	KUDUDIFF {0} उपलब्ध है। डाउनलोड पेज खोलें?
+You have the latest version.	आपके पास नवीनतम संस्करण है।
+Couldn't check for updates. Check your internet connection and try again.	अपडेट जाँचे नहीं जा सके। अपना इंटरनेट कनेक्शन जाँचें और फिर से कोशिश करें।
+{0} ran into a problem it couldn't get past, and has to close.	{0} में ऐसी समस्या आई जिससे वह आगे नहीं बढ़ सका, इसलिए इसे बंद होना पड़ेगा।
+Java	Java
+Json	Json
+Patch	Patch
+Python	Python
+Batch	Batch
+Bash	Bash

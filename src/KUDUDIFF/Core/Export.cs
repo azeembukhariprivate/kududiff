@@ -223,18 +223,18 @@ footer{padding:0 24px 20px;color:var(--sub);font-size:12px}
         /// <summary>The comparison settings in words, for the report.</summary>
         public static string OptionsText(CompareOptions o)
         {
-            var parts = new List<string> { o.Algorithm == DiffAlgorithm.Patience ? "patience comparison" : "standard comparison" };
+            var parts = new List<string> { Lang.T(o.Algorithm == DiffAlgorithm.Patience ? "patience comparison" : "standard comparison") };
             switch (o.Whitespace)
             {
-                case WhitespaceMode.Ends: parts.Add("spaces at line ends ignored"); break;
-                case WhitespaceMode.Amount: parts.Add("amount of spaces ignored"); break;
-                case WhitespaceMode.All: parts.Add("all spaces ignored"); break;
+                case WhitespaceMode.Ends: parts.Add(Lang.T("spaces at line ends ignored")); break;
+                case WhitespaceMode.Amount: parts.Add(Lang.T("amount of spaces ignored")); break;
+                case WhitespaceMode.All: parts.Add(Lang.T("all spaces ignored")); break;
             }
-            if (o.IgnoreCase) parts.Add("case ignored");
-            if (o.IgnoreBlankLines) parts.Add("blank lines ignored");
-            if (o.CompareLineEndings) parts.Add("line endings compared");
+            if (o.IgnoreCase) parts.Add(Lang.T("case ignored"));
+            if (o.IgnoreBlankLines) parts.Add(Lang.T("blank lines ignored"));
+            if (o.CompareLineEndings) parts.Add(Lang.T("line endings compared"));
             var patterns = o.IgnorePatterns.Count(p => !string.IsNullOrWhiteSpace(p));
-            if (patterns > 0) parts.Add(patterns == 1 ? "1 ignore pattern" : patterns + " ignore patterns");
+            if (patterns > 0) parts.Add(patterns == 1 ? Lang.T("1 ignore pattern") : Lang.T("{0} ignore patterns", patterns));
             return string.Join(", ", parts);
         }
     }

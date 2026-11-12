@@ -1,0 +1,230 @@
+Only the first two files are compared.	تتم مقارنة أول ملفين فقط.
+{0} files were chosen; the first two are compared.	تم اختيار {0} ملفات؛ تتم مقارنة أول ملفين.
+Now choose the second file: right-click it → Compare with KUDUDIFF, drop it on the right, or use Open.	اختر الآن الملف الثاني: انقر عليه بزر الفأرة الأيمن ← Compare with KUDUDIFF، أو أفلته على اليمين، أو استخدم فتح.
+timeout	timeout
+Something went wrong:\n\n{0}	حدث خطأ ما:\n\n{0}
+Azeem Bukhari	Azeem Bukhari
+less than a second	أقل من ثانية
+{0} h {1} min	{0} ساعة {1} دقيقة
+{0} min {1} s	{0} دقيقة {1} ثانية
+{0} L{1}+{2} R{3}+{4}	{0} L{1}+{2} R{3}+{4}
+Move L{0} -> R{1} ({2})	Move L{0} -> R{1} ({2})
+No differences (with the ignore options on)	لا توجد اختلافات (مع تشغيل خيارات التجاهل)
+The files are identical	الملفان متطابقان
+1 change	تغيير واحد
+{0} changes	{0} تغييرات
+{0} added, {1} removed	{0} مضافة، {1} محذوفة
+1 moved block	كتلة واحدة منقولة
+{0} moved blocks	{0} كتل منقولة
+\\ No newline at end of file	\\ No newline at end of file
+chg l	chg l
+del	del
+chg r	chg r
+ins	ins
+mid	mid
+patience comparison	مقارنة متأنية
+standard comparison	مقارنة عادية
+spaces at line ends ignored	تجاهل المسافات في نهاية الأسطر
+amount of spaces ignored	تجاهل عدد المسافات
+all spaces ignored	تجاهل كل المسافات
+case ignored	تجاهل حالة الأحرف
+blank lines ignored	تجاهل الأسطر الفارغة
+line endings compared	مقارنة نهايات الأسطر
+1 ignore pattern	نمط تجاهل واحد
+{0} ignore patterns	{0} أنماط تجاهل
+user	user
+KUDUDIFF hub	KUDUDIFF hub
+Theme	Theme
+Algorithm	Algorithm
+Whitespace	Whitespace
+Inline	Inline
+Recent	Recent
+Compare with KUDUDIFF	المقارنة باستخدام KUDUDIFF
+Player	Player
+"{0}" --pick "%1"	"{0}" --pick "%1"
+UTF-8 with BOM	UTF-8 with BOM
+UTF-16 BE	UTF-16 BE
+UTF-16 LE	UTF-16 LE
+The file wasn't found: {0}	لم يتم العثور على الملف: {0}
+"{0}" is too big to compare ({1} MB; the limit is {2} MB).	الملف "{0}" كبير جدًا للمقارنة ({1} ميغابايت؛ الحد {2} ميغابايت).
+This looks like a binary file, not text. KUDUDIFF compares text and code files.	يبدو هذا ملفًا ثنائيًا وليس نصًا. يقارن KUDUDIFF ملفات النص والشيفرة.
+The file has no name yet.	ليس للملف اسم بعد.
+{0}.bak	{0}.bak
+"{0}" is read-only.	الملف "{0}" للقراءة فقط.
+Windows (CRLF)	Windows (CRLF)
+Unix (LF)	Unix (LF)
+Old Mac (CR)	Old Mac (CR)
+Mixed line endings	نهايات أسطر مختلطة
+One line	سطر واحد
+Missing theme resource {0}	Missing theme resource {0}
+Light	فاتح
+Styles	Styles
+Dark	داكن
+Application	Application
+Consolas, Cascadia Mono, Courier New	Consolas, Cascadia Mono, Courier New
+Left file	الملف الأيسر
+Right file	الملف الأيمن
+Open…	فتح…
+Choose the left file	اختر الملف الأيسر
+Choose the right file	اختر الملف الأيمن
+Save	حفظ
+Save this file (Ctrl+S)	حفظ هذا الملف (Ctrl+S)
+Open a file…	فتح ملف…
+Drop the left file here	أفلت الملف الأيسر هنا
+Drop the right file here	أفلت الملف الأيمن هنا
+or	أو
+(none)	(لا شيء)
+Not chosen yet	لم يتم الاختيار بعد
+Untitled	بلا عنوان
+Changed, not saved yet	تم التغيير، ولم يُحفظ بعد
+Copy this change to the right (Alt+Right)	نسخ هذا التغيير إلى اليمين (Alt+Right)
+Copy this change to the left (Alt+Left)	نسخ هذا التغيير إلى اليسار (Alt+Left)
+All the changes. Click to go there.	كل التغييرات. انقر للانتقال إليها.
+Error message shown: {0}	Error message shown: {0}
+All files	كل الملفات
+Cancel	إلغاء
+Choose two files to compare	اختر ملفين للمقارنة
+Settings	الإعدادات
+About	حول
+Previous	السابق
+Go to the previous change (Alt+Up)	الانتقال إلى التغيير السابق (Alt+Up)
+Next	التالي
+Go to the next change (Alt+Down)	الانتقال إلى التغيير التالي (Alt+Down)
+Copy to left	نسخ إلى اليسار
+Copy the current change from the right file to the left one (Alt+Left)	نسخ التغيير الحالي من الملف الأيمن إلى الأيسر (Alt+Left)
+Copy to right	نسخ إلى اليمين
+Copy the current change from the left file to the right one (Alt+Right)	نسخ التغيير الحالي من الملف الأيسر إلى الأيمن (Alt+Right)
+Undo (Ctrl+Z) in the file you last edited	تراجع (Ctrl+Z) في آخر ملف عدّلته
+Redo (Ctrl+Y) in the file you last edited	إعادة (Ctrl+Y) في آخر ملف عدّلته
+Options	الخيارات
+What to ignore, how to compare, and how changes are shown	ما يتم تجاهله، وكيفية المقارنة، وكيف تظهر التغييرات
+Swap sides	تبديل الجانبين
+Put the left file on the right and the right file on the left	وضع الملف الأيسر على اليمين والأيمن على اليسار
+Reload	إعادة التحميل
+Read both files from disk again (F5)	قراءة الملفين من القرص مرة أخرى (F5)
+Export	تصدير
+Save the differences as a patch file or a web page report	حفظ الاختلافات كملف تصحيح أو كتقرير صفحة ويب
+Added	مضاف
+Removed	محذوف
+Changed	متغيّر
+Moved	منقول
+{0} {1} is available	{0} {1} متاح
+"{0}" is a folder. {1} compares two files.	"{0}" مجلد. يقارن {1} ملفين.
+"{0}" has changes that aren't saved. Throw them away and open another file?	في "{0}" تغييرات لم تُحفظ. هل تريد تجاهلها وفتح ملف آخر؟
+"{0}" was changed by another program after it was opened here. Save over those changes?	غيّر برنامج آخر الملف "{0}" بعد فتحه هنا. هل تريد الحفظ فوق تلك التغييرات؟
+Some characters can't be saved in {0}, the encoding "{1}" uses. Save it as UTF-8 instead?	بعض الأحرف لا يمكن حفظها في {0} بالترميز "{1}". هل تريد حفظه بترميز UTF-8 بدلًا من ذلك؟
+Couldn't save "{0}".\n\n{1}	تعذّر حفظ "{0}".\n\n{1}
+Saved {0} (the previous version is in {1}.bak)	تم حفظ {0} (الإصدار السابق في {1}.bak)
+Saved {0}	تم حفظ {0}
+Save the changes to "{0}"?	هل تريد حفظ التغييرات في "{0}"؟
+Throw away the unsaved changes to "{0}" and read it from disk again?	هل تريد تجاهل التغييرات غير المحفوظة في "{0}" وقراءته من القرص مرة أخرى؟
+"{0}" was changed by another program and has been read again.	غيّر برنامج آخر "{0}" فتمت قراءته مرة أخرى.
+Couldn't compare: {0}	تعذّرت المقارنة: {0}
+unknown error	خطأ غير معروف
+Choose two files to compare, or drop them on the two sides	اختر ملفين للمقارنة، أو أفلتهما على الجانبين
+Now choose the right file	اختر الآن الملف الأيمن
+Now choose the left file	اختر الآن الملف الأيسر
+Comparing…	جارٍ المقارنة…
+Change {0} of {1}	التغيير {0} من {1}
+{0} to go through	{0} للمراجعة
+Options ({0} on)	الخيارات ({0} مفعّلة)
+changed lines only	الأسطر المتغيّرة فقط
+changed words shown	إظهار الكلمات المتغيّرة
+changed characters shown	إظهار الأحرف المتغيّرة
+moved code found	البحث عن الشيفرة المنقولة
+Now: {0}	الآن: {0}
+The files changed since the comparison was shown. Look again, then copy.	تغيّر الملفان منذ عرض المقارنة. انظر مرة أخرى، ثم انسخ.
+Compared recently	تمت مقارنتها مؤخرًا
+Nothing compared yet	لم تتم مقارنة أي شيء بعد
+Clear this list	مسح هذه القائمة
+Save as a patch file…	الحفظ كملف تصحيح…
+A unified diff that turns the left file into the right one (for patch or git apply)	ملف diff موحّد يحوّل الملف الأيسر إلى الأيمن (لـ patch أو git apply)
+Save as a web page report…	الحفظ كتقرير صفحة ويب…
+Both files side by side with the changes coloured, to read in a browser or send to someone	الملفان جنبًا إلى جنب مع تلوين التغييرات، للقراءة في متصفح أو للإرسال إلى أحد
+Save the report	حفظ التقرير
+Web page	صفحة ويب
+The files are exactly the same, so there's nothing to put in a patch.	الملفان متطابقان تمامًا، فلا يوجد ما يوضع في ملف تصحيح.
+Save the patch	حفظ ملف التصحيح
+{0}.patch	{0}.patch
+Patch file	ملف تصحيح
+Settings · KUDUDIFF	الإعدادات · KUDUDIFF
+Appearance	المظهر
+Same as Windows	مثل Windows
+Language	اللغة
+Editor	المحرّر
+Text size	حجم النص
+Wrap long lines	التفاف الأسطر الطويلة
+Show spaces, tabs and line ends	إظهار المسافات وعلامات الجدولة ونهايات الأسطر
+Colour code by language (C#, Python, JSON, HTML and more)	تلوين الشيفرة حسب اللغة (C# وPython وJSON وHTML وغيرها)
+Saving	الحفظ
+Keep the previous version as a .bak file when saving	الاحتفاظ بالإصدار السابق كملف .bak عند الحفظ
+Saving "app.cs" first copies the old one to "app.cs.bak" next to it, replacing an older .bak.	حفظ "app.cs" ينسخ أولًا الملف القديم إلى "app.cs.bak" بجانبه، ويستبدل ملف .bak أقدم.
+File Explorer	مستكشف الملفات
+Add "Compare with KUDUDIFF" to files' right-click menu	إضافة "Compare with KUDUDIFF" إلى قائمة النقر الأيمن للملفات
+Select two files and right-click, or pick one file now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	حدّد ملفين وانقر بزر الفأرة الأيمن، أو اختر ملفًا الآن والآخر لاحقًا. لحسابك في Windows فقط؛ في Windows 11 تجده تحت "إظهار المزيد من الخيارات".
+Updates	التحديثات
+Check for a new KUDUDIFF version when it starts	البحث عن إصدار جديد من KUDUDIFF عند التشغيل
+Only asks GitHub for the latest version number. Nothing is downloaded without asking.	يسأل GitHub عن رقم أحدث إصدار فقط. لا يتم تنزيل أي شيء دون سؤالك.
+About KUDUDIFF	حول KUDUDIFF
+Close	إغلاق
+Comparison options	خيارات المقارنة
+These apply to the comparison on screen and the web page report, and are remembered for next time. A patch always compares exactly.	تنطبق على المقارنة المعروضة وتقرير صفحة الويب، وتُحفظ للمرة القادمة. ملف التصحيح يقارن دائمًا بدقة.
+Spaces	المسافات
+Compare all spaces	مقارنة كل المسافات
+Every space and tab counts	كل مسافة وعلامة جدولة تُحسب
+Ignore at line ends	التجاهل في نهاية الأسطر
+Spaces and tabs at the start and end of lines don't count	لا تُحسب المسافات وعلامات الجدولة في بداية الأسطر ونهايتها
+Ignore amount	تجاهل العدد
+"a  b" and "a b" are the same, and spaces at line ends don't count	"a  b" و"a b" متماثلان، ولا تُحسب المسافات في نهاية الأسطر
+Ignore all	تجاهل الكل
+Spaces and tabs don't count at all: "a b" and "ab" are the same	لا تُحسب المسافات وعلامات الجدولة إطلاقًا: "a b" و"ab" متماثلان
+Also ignore	تجاهل أيضًا
+Upper and lower case ("Name" and "name" are the same)	الأحرف الكبيرة والصغيرة ("Name" و"name" متماثلان)
+Blank lines (added or removed empty lines don't count)	الأسطر الفارغة (لا تُحسب الأسطر الفارغة المضافة أو المحذوفة)
+Line endings (Windows CRLF and Unix LF are the same)	نهايات الأسطر (CRLF في Windows وLF في Unix متماثلان)
+Text matching these patterns (regular expressions, one per line):	النص المطابق لهذه الأنماط (تعبيرات نمطية، واحد في كل سطر):
+Ignore patterns	أنماط التجاهل
+Changes inside lines	التغييرات داخل الأسطر
+Show changed words	إظهار الكلمات المتغيّرة
+Within changed lines, the words that differ are marked	في الأسطر المتغيّرة، تُعلَّم الكلمات المختلفة
+Show changed characters	إظهار الأحرف المتغيّرة
+Within changed lines, the exact characters that differ are marked	في الأسطر المتغيّرة، تُعلَّم الأحرف المختلفة بالضبط
+Lines only	الأسطر فقط
+Only whole lines are marked	تُعلَّم الأسطر الكاملة فقط
+Find code that was moved (blocks of 3 or more lines that appear elsewhere)	العثور على الشيفرة المنقولة (كتل من 3 أسطر أو أكثر تظهر في مكان آخر)
+Method	الطريقة
+Standard	عادية
+The smallest set of changes (the Myers method, as in diff and git)	أصغر مجموعة من التغييرات (طريقة Myers، كما في diff وgit)
+Patience	متأنية
+Lines up unique lines first, which keeps functions and blocks together in code (as git diff --patience)	تطابق الأسطر الفريدة أولًا، مما يبقي الدوال والكتل معًا في الشيفرة (مثل git diff --patience)
+Reset	إعادة الضبط
+Back to the standard options	العودة إلى الخيارات العادية
+Apply	تطبيق
+Options · KUDUDIFF	الخيارات · KUDUDIFF
+These patterns aren't valid:\n{0}	هذه الأنماط غير صالحة:\n{0}
+KUDUDIFF	KUDUDIFF
+Version {0} · Compare two files, see what changed	الإصدار {0} · قارن بين ملفين، وشاهد ما تغيّر
+Azeem, with Claude and	Azeem, with Claude and
+Made by	Made by
+Licence	الترخيص
+MIT · free and open source	MIT · مجاني ومفتوح المصدر
+View	عرض
+Source code	الشيفرة المصدرية
+Comparing	المقارنة
+Its own engine: the Myers and patience methods, word and character changes, moved code	محرّكه الخاص: طريقتا Myers والمتأنية، تغييرات الكلمات والأحرف، الشيفرة المنقولة
+AvalonEdit (MIT licence)	AvalonEdit (ترخيص MIT)
+Third-party	أطراف أخرى
+Third-party notices	إشعارات الأطراف الأخرى
+KUDUDIFF works on your computer only. Files are changed only when you save, and saving keeps the previous version as a .bak file unless you turn that off.	يعمل KUDUDIFF على حاسوبك فقط. لا تتغيّر الملفات إلا عند الحفظ، ويحتفظ الحفظ بالإصدار السابق كملف .bak ما لم توقف ذلك.
+Check for updates	البحث عن تحديثات
+Couldn't find any published version yet.	لم يتم العثور على أي إصدار منشور بعد.
+KUDUDIFF {0} is available. Open the download page?	KUDUDIFF {0} متاح. هل تريد فتح صفحة التنزيل؟
+You have the latest version.	لديك أحدث إصدار.
+Couldn't check for updates. Check your internet connection and try again.	تعذّر البحث عن تحديثات. تحقّق من اتصالك بالإنترنت وحاول مرة أخرى.
+{0} ran into a problem it couldn't get past, and has to close.	واجه {0} مشكلة لم يستطع تجاوزها، ولا بد من إغلاقه.
+Java	Java
+Json	Json
+Patch	Patch
+Python	Python
+Batch	Batch
+Bash	Bash
