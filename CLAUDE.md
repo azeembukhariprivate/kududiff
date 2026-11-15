@@ -1,6 +1,6 @@
 # KUDUDIFF
 
-Compare two text or code files side by side (Meld-like): changes, copy across, save with .bak, patch/HTML export.
+Compare two text or code files side by side (Meld-like): changes, copy across, save with .bak, patch/HTML export; and two folders.
 Part of the KUDU family of free, open-source (MIT) Windows apps by Azeem Bukhari.
 
 ## Working with Azeem (the owner)
@@ -58,6 +58,14 @@ The build fails when a copy differs from kudu-common. App-specific details go in
 - The comparison engine (`Core/Lcs.cs`, `Core/Comparison.cs`, `Core/Export.cs`) is the app's own code and is tested
   against brute force; keep it that way.
 - Scope agreed for v1: two files only, text and code only, no folder compare, no 3-way merge, no Git features.
+- Folders (1.2): `Core/FolderCompare.cs` (`FolderComparison.Run`: both trees matched by name, upper and lower case
+  ignored; files of the same size read byte by byte; links to folders not followed; the usual names in
+  `FolderOptions.UsualLeaveOut` left out unless `ShowLeftOut`; a folder and one inside it are refused) and `FolderCopy`
+  (`Plan`: only files that differ or are missing on the other side; `Run`: the old file kept as .bak when
+  `Settings.KeepBackup`, the new one written under a temporary name first; nothing is ever deleted). `Core/FolderReport.cs`
+  is the web page. `Views/FolderWindow.cs` is the window (rows from a template, `FolderRow`); `App.ShowFolderWindow` opens
+  it, and two folders on the command line, dropped on the file window or picked from the right-click menu (also on
+  folders, `Directory\shell`) go there.
 - Other languages (1.1): the shared `Lang`/`LangUi` (kudu-common) put each window into the chosen language as it's shown;
   the texts are in `src/KUDUDIFF/Lang/<code>.txt` (made and checked with kudu-common's `tools/lang.py`). Texts put
   together from pieces (the summary line, the options tooltip) call `Lang.T` on each piece. When adding or changing a

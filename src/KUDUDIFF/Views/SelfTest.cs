@@ -16,7 +16,7 @@ namespace Kududiff.Views
     /// drives them (going through changes, copying a change across and undoing it, saving with a .bak copy, the
     /// options, exporting a patch and a report, other encodings, a big file, swapping, reloading), the right-click
     /// menu, handing files from one start of the app to another, every language's colours, and the other windows in
-    /// both themes. Writes self-test.log next to the exe; exits with 0 when everything passed.
+    /// both themes; and the folder window (two folders compared, a file opened side by side, copying across, the report). Writes self-test.log next to the exe; exits with 0 when everything passed.
     /// </summary>
     public static class SelfTest
     {
@@ -119,15 +119,18 @@ namespace Demo
                        && Syntax.LanguageFor("d.sh") == "Bash" && Syntax.LanguageFor("e.ini") == "INI" && Syntax.LanguageFor("f.tsx") == "JavaScript", "file types");
             });
             UiRound();
+            FolderRound();
             Step("Right-click menu", () =>
             {
                 ShellIntegration.Register();
                 Expect(ShellIntegration.IsRegistered, "the menu is added");
+                Expect(ShellIntegration.FolderMenuRegistered, "the menu is added for folders too");
                 Expect((ShellIntegration.Command() ?? string.Empty).Contains("--pick \"%1\""), "menu command");
                 ShellIntegration.Remove();
-                Expect(!ShellIntegration.IsRegistered, "the menu is removed");
+                Expect(!ShellIntegration.IsRegistered && !ShellIntegration.FolderMenuRegistered, "the menu is removed");
             });
             Step("Files picked one by one open in one comparison", Handover);
+            Step("Folders picked one by one open in one comparison", FolderHandover);
 
             Settings.Options = _savedOptions;
             _log.AppendLine(Errors.Count == 0 ? "SELF-TEST PASSED" : $"SELF-TEST FAILED ({Errors.Count})");
@@ -390,6 +393,195 @@ namespace Demo
             });
         }
 
+        /// <summary>Two folders compared in the folder window: the tree, hiding what's the same, opening a file side by side,
+        /// copying a file and a folder across (with .bak, nothing deleted), the report, the left-out names, and the window in another language.</summary>
+        private static void FolderRound()
+        {
+            var left = MakeFolder("folder-left", ("same.txt", "the same\n"), ("changed.cs", LeftCode), ("only-left.txt", "only here\n"),
+                ("src/app.cs", "class App {}\n"), ("src/deep/notes.md", "notes\n"), ("pack/a.txt", "a\n"), ("pack/sub/b.txt", "b\n"), (".git/HEAD", "left\n"));
+            var right = MakeFolder("folder-right", ("same.txt", "the same\n"), ("changed.cs", RightCode), ("only-right.txt", "only there\n"),
+                ("src/app.cs", "class App {}\n"), ("src/deep/notes.md", "notes\n"), (".git/HEAD", "right\n"));
+            var saved = (Settings.FolderLeaveOut, Settings.FolderShowLeftOut, Settings.FolderHideSame, Settings.KeepBackup);
+            Settings.FolderLeaveOut = FolderOptions.UsualLeaveOut.ToList();
+            Settings.FolderShowLeftOut = false;
+            Settings.FolderHideSame = false;
+            Settings.KeepBackup = true;
+            FolderWindow w = null;
+            try
+            {
+                Step("Folder window", () =>
+                {
+                    w = new FolderWindow { SkipQuestions = true };
+                    OffScreen(w);
+                    w.Show();
+                    Pump();
+                    Expect(!w.HasBoth && w.Comparison == null, "no folders yet");
+                });
+                if (w == null) return;
+
+                Step("Compare two folders", () =>
+                {
+                    w.Open(left, right);
+                    IdleFolders(w);
+                    var c = w.Comparison;
+                    Expect(c != null, "a comparison");
+                    Note(c.Summary());
+                    Expect(c.Different == 1 && c.OnlyLeft == 3 && c.OnlyRight == 1 && c.Same == 3, $"1 different, 3 only left, 1 only right, 3 same (got {c.Different}, {c.OnlyLeft}, {c.OnlyRight}, {c.Same})");
+                    Expect(!w.Rows.Any(r => r.Item.Name == ".git"), ".git is left out");
+                    Expect(w.Rows.Any(r => r.Item.RelativePath == "pack") && w.Rows.Any(r => r.Name == "b.txt"), "a folder only on the left, open");
+                    Expect(!w.Rows.Any(r => r.Name == "notes.md"), "a folder that's the same starts closed");
+                    Expect(w.Title.Contains("folder-left") && w.Title.Contains("folder-right"), "the title names both folders");
+                });
+
+                Step("Hide what's the same", () =>
+                {
+                    w.HideSame = true;
+                    Pump();
+                    Expect(!w.Rows.Any(r => r.Item.State == FolderState.Same), "nothing that's the same is listed");
+                    Expect(w.Rows.Any(r => r.Name == "changed.cs"), "the differences still are");
+                    w.HideSame = false;
+                });
+
+                Step("Open a changed file side by side", () =>
+                {
+                    Expect(w.Choose("changed.cs"), "the changed file is listed");
+                    var main = w.OpenChosen();
+                    Expect(main != null, "a comparison window");
+                    Idle(main);
+                    Expect(main.HasBoth && main.Changes.Count >= 3, "the two copies compared line by line");
+                    Screenshots.One(main, "Changed file from a folder comparison");
+                    main.SkipClosePrompt = true;
+                    main.Close();
+                });
+
+                Step("Copy a file across keeps a .bak", () =>
+                {
+                    Expect(w.Choose("changed.cs"), "chosen");
+                    Wait(w.CopyChosen(true));
+                    IdleFolders(w);
+                    Expect(File.ReadAllText(Path.Combine(right, "changed.cs")) == LeftCode, "the right file has the left's text");
+                    Expect(File.ReadAllText(Path.Combine(right, "changed.cs.bak")) == RightCode, "the old one is kept as .bak");
+                    Expect(w.Comparison.Different == 0, "now the same");
+                });
+
+                Step("Copy a folder across", () =>
+                {
+                    Expect(w.Choose("pack"), "the folder only on the left is listed");
+                    Wait(w.CopyChosen(true));
+                    IdleFolders(w);
+                    Expect(File.Exists(Path.Combine(right, "pack", "sub", "b.txt")), "with what's inside it");
+                    Expect(File.Exists(Path.Combine(right, "only-right.txt")), "nothing is deleted");
+                    Expect(w.Comparison.Rows(FolderState.OnlyLeft).All(i => !i.RelativePath.StartsWith("pack")), "the folder is on both sides now");
+                });
+
+                Step("Save a folder report", () =>
+                {
+                    var path = w.SaveReport(Path.Combine(_temp, "folders.html"));
+                    Expect(path != null && File.ReadAllText(path).Contains("only-left.txt"), "the report lists the files");
+                });
+
+                Step("Show left-out files", () =>
+                {
+                    Settings.FolderShowLeftOut = true;
+                    w.Compare();
+                    IdleFolders(w);
+                    Expect(w.Rows.Any(r => r.Item.Name == ".git"), ".git is compared when asked");
+                    Settings.FolderShowLeftOut = false;
+                    w.Compare();
+                    IdleFolders(w);
+                });
+
+                Step("Folders that can't be compared", () =>
+                {
+                    w.Open(left, Path.Combine(left, "src"));
+                    IdleFolders(w);
+                    Expect(w.Comparison == null, "a folder and one inside it aren't compared");
+                    w.Open(left, right);
+                    IdleFolders(w);
+                });
+
+                Step("A folder dropped on the file window", () =>
+                {
+                    var main = new MainWindow();
+                    OffScreen(main);
+                    main.Show();
+                    Pump();
+                    main.Open(left, right);
+                    Pump();
+                    var f = Application.Current.Windows.OfType<FolderWindow>().FirstOrDefault(x => x != w && x.HasBoth);
+                    Expect(f != null, "two folders open a folder comparison");
+                    IdleFolders(f);
+                    f.Close();
+                    main.SkipClosePrompt = true;
+                    main.Close();
+                });
+
+                Step("Folder window, dark", () =>
+                {
+                    ThemeManager.Apply(ThemeMode.Dark);
+                    Pump();
+                    Screenshots.One(w, "Folder comparison (dark)");
+                    ThemeManager.Apply(ThemeMode.Light);
+                });
+
+                foreach (var (code, hide) in new[] { ("ml", "ഒരുപോലെയുള്ളവ മറയ്ക്കുക"), ("ar", "إخفاء المتطابق") })
+                    Step("Folder window in another language: " + code, () =>
+                    {
+                        LangUi.Use(code);
+                        try
+                        {
+                            var f = new FolderWindow();
+                            OffScreen(f);
+                            f.Show();
+                            f.Open(left, right);
+                            IdleFolders(f);
+                            var texts = Texts(f);
+                            Expect(texts.Contains(hide), "the window in the language: " + string.Join(" | ", texts.Take(12)));
+                            Expect(!texts.Contains("Hide what's the same") && !texts.Contains("Copy to right"), "no English left on it");
+                            Expect(f.Rows.All(r => r.StateText != "Same" && r.StateText != "Different"), "the rows in the language");
+                            Screenshots.One(f, "Folder comparison in " + code);
+                            f.Close();
+                        }
+                        finally
+                        {
+                            LangUi.Use("en");
+                        }
+                    });
+            }
+            finally
+            {
+                if (w != null) w.Close();
+                (Settings.FolderLeaveOut, Settings.FolderShowLeftOut, Settings.FolderHideSame, Settings.KeepBackup) = saved;
+            }
+        }
+
+        /// <summary>Starts KUDUDIFF twice, each with one folder, as File Explorer does for two selected folders: they must end up in one comparison.</summary>
+        private static void FolderHandover()
+        {
+            var a = MakeFolder("pick-folder-a", ("x.txt", "1\n"), ("y.txt", "same\n"));
+            var b = MakeFolder("pick-folder-b", ("x.txt", "2\n"), ("y.txt", "same\n"));
+            var report = Path.Combine(_temp, "folder-handover.txt");
+            using (var first = Start($"--pick \"{a}\" --report \"{report}\""))
+            {
+                Thread.Sleep(400);
+                using (var second = Start($"--pick \"{b}\""))
+                {
+                    Expect(second.WaitForExit(20000), "the second start hands its folder over and exits");
+                    Expect(second.ExitCode == 0, "the second start exits cleanly");
+                }
+                if (!first.WaitForExit(45000))
+                {
+                    first.Kill();
+                    throw new Exception("the first start didn't open the folder comparison");
+                }
+            }
+            var lines = File.Exists(report) ? File.ReadAllLines(report) : new string[0];
+            Note("report: " + string.Join(" | ", lines));
+            Expect(lines.Length == 3, "a report");
+            Expect(string.Equals(lines[0], a, StringComparison.OrdinalIgnoreCase) && string.Equals(lines[1], b, StringComparison.OrdinalIgnoreCase), "both folders in one comparison, in the order picked");
+            Expect(lines[2] == "1", "one file differs");
+        }
+
         /// <summary>Starts KUDUDIFF twice, each with one file, as File Explorer does for two selected files: they must end up in one comparison.</summary>
         private static void Handover()
         {
@@ -466,6 +658,44 @@ namespace Demo
                 Thread.Sleep(30);
             }
             Pump();
+        }
+
+        private static string MakeFolder(string name, params (string Path, string Text)[] files)
+        {
+            var dir = Path.Combine(_temp, name);
+            Directory.CreateDirectory(dir);
+            foreach (var (path, text) in files)
+            {
+                var full = Path.Combine(dir, path.Replace('/', Path.DirectorySeparatorChar));
+                Directory.CreateDirectory(Path.GetDirectoryName(full));
+                File.WriteAllText(full, text, new UTF8Encoding(false));
+            }
+            return dir;
+        }
+
+        private static void IdleFolders(FolderWindow w, int seconds = 30)
+        {
+            var until = DateTime.UtcNow.AddSeconds(seconds);
+            Pump();
+            while (w.IsComparing)
+            {
+                if (DateTime.UtcNow > until) throw new Exception("timed out waiting for the folder comparison");
+                Pump();
+                Thread.Sleep(30);
+            }
+            Pump();
+        }
+
+        private static void Wait(System.Threading.Tasks.Task task, int seconds = 30)
+        {
+            var until = DateTime.UtcNow.AddSeconds(seconds);
+            while (!task.IsCompleted)
+            {
+                if (DateTime.UtcNow > until) throw new Exception("timed out");
+                Pump();
+                Thread.Sleep(20);
+            }
+            if (task.IsFaulted) throw task.Exception.InnerException;
         }
 
         private static void Pump()

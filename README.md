@@ -4,7 +4,7 @@
 
 <h1 align="center">KUDUDIFF</h1>
 
-<p align="center">Compare two text or code files on Windows: see exactly what changed, copy changes across, and save. Free and open source.</p>
+<p align="center">Compare two text or code files, or two folders, on Windows: see exactly what changed, copy changes across, and save. Free and open source.</p>
 
 <p align="center">
   <a href="https://github.com/azeembukhariprivate/kududiff/releases/latest/download/KUDUDIFF-setup.exe"><img src="https://img.shields.io/badge/Download-KUDUDIFF%20for%20Windows-7c3aed?style=for-the-badge" alt="Download KUDUDIFF for Windows"></a>
@@ -35,11 +35,12 @@
   - Windows (CRLF) or Unix (LF) line endings
   - your own patterns (regular expressions), such as dates, version numbers or comments
 - **Two ways to compare**: the standard method (Myers, as in diff and git) or **patience**, which keeps functions and blocks together in code.
+- **Compare two folders**: one list of every file and folder from both sides, each marked the same, different, or only on the left or right. Files with the same name are compared by what's inside them. Hide what's the same, go from one difference to the next, and double-click a changed file to see it side by side. Copy a file or a whole folder to the other side with the arrows: KUDUDIFF asks before replacing anything, keeps the old file as `name.bak`, and never deletes. `.git`, `node_modules`, `bin`, `obj`, `Thumbs.db` and `desktop.ini` are left out unless you ask (change the list in Settings), and the comparison can be saved as a web page report.
 - **Export** the differences as a **patch** (a unified diff for `patch` or `git apply`) or a **web page report** with both files side by side and the changes coloured, to read in any browser or send to someone.
 - **Syntax colouring** for C#, C and C++, Java, JavaScript and TypeScript, Python, PowerShell, SQL, HTML, CSS, XML, JSON, YAML, Markdown, INI, PHP, batch files and Bash, in light and dark.
 - **Every kind of text file**: UTF-8 (with or without BOM), UTF-16, UTF-32 and Windows code pages are recognised, and files of up to 200 MB open quickly.
 - **In your language**: English, Malayalam (മലയാളം), Hindi (हिन्दी), Spanish, French and Arabic (with the windows mirrored for right-to-left). KUDUDIFF starts in the same language as Windows when it has it; choose another in Settings.
-- **Open files your way**: drop files on either side (or two at once), use Open, pick a recent comparison, or right-click in File Explorer → *Compare with KUDUDIFF* (optional, chosen when installing or in Settings). Select two files and right-click, or pick one now and the second one later.
+- **Open files your way**: drop files on either side (or two at once), use Open, pick a recent comparison, or right-click in File Explorer → *Compare with KUDUDIFF* (optional, chosen when installing or in Settings). Select two files (or two folders) and right-click, or pick one now and the second one later.
 - Light and dark themes, following Windows. Text size, word wrap and showing spaces and tabs can be changed in Settings.
 
 ## Download

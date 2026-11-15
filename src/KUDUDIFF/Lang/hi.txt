@@ -1,6 +1,9 @@
+Only the first two folders are compared.	सिर्फ़ पहले दो फ़ोल्डरों की तुलना की जाती है।
 Only the first two files are compared.	केवल पहली दो फ़ाइलों की तुलना की जाती है।
 {0} files were chosen; the first two are compared.	{0} फ़ाइलें चुनी गईं; पहली दो की तुलना की जा रही है।
 Now choose the second file: right-click it → Compare with KUDUDIFF, drop it on the right, or use Open.	अब दूसरी फ़ाइल चुनें: उस पर राइट-क्लिक करें → Compare with KUDUDIFF, या उसे दाईं ओर छोड़ें, या खोलें का उपयोग करें।
+{0} folders were chosen; the first two are compared.	{0} फ़ोल्डर चुने गए; पहले दो की तुलना की जा रही है।
+Now choose the second folder: right-click it → Compare with KUDUDIFF, drop it here, or use Choose.	अब दूसरा फ़ोल्डर चुनें: उस पर राइट-क्लिक करें → Compare with KUDUDIFF, उसे यहाँ छोड़ें, या चुनें इस्तेमाल करें।
 timeout	timeout
 Something went wrong:\n\n{0}	कुछ गड़बड़ हो गई:\n\n{0}
 Azeem Bukhari	Azeem Bukhari
@@ -32,6 +35,36 @@ blank lines ignored	खाली पंक्तियाँ अनदेखी
 line endings compared	पंक्ति के अंत की तुलना होती है
 1 ignore pattern	अनदेखा करने का 1 पैटर्न
 {0} ignore patterns	अनदेखा करने के {0} पैटर्न
+The folder "{0}" isn't there.	फ़ोल्डर "{0}" वहाँ नहीं है।
+Both sides are the same folder.	दोनों तरफ़ एक ही फ़ोल्डर है।
+One folder is inside the other, so they can't be compared.	एक फ़ोल्डर दूसरे के अंदर है, इसलिए उनकी तुलना नहीं हो सकती।
+Both folders are empty	दोनों फ़ोल्डर खाली हैं
+The folders are the same: {0}	फ़ोल्डर एक जैसे हैं: {0}
+{0} different	{0} अलग
+{0} only on the left	{0} सिर्फ़ बाईं तरफ़
+{0} only on the right	{0} सिर्फ़ दाईं तरफ़
+{0} couldn't be read	{0} पढ़ी नहीं जा सकीं
+{0} the same	{0} एक जैसी
+Files: {0}	फ़ाइलें: {0}
+Same	एक जैसी
+Different	अलग
+Only on the left	सिर्फ़ बाईं तरफ़
+Only on the right	सिर्फ़ दाईं तरफ़
+Couldn't be read	पढ़ी नहीं जा सकी
+{0}.tmp	{0}.tmp
+{0}.old	{0}.old
+{0}.bak	{0}.bak
+{0} left out	{0} छोड़ी गईं
+files that are the same aren't listed	एक जैसी फ़ाइलें सूची में नहीं हैं
+Name	नाम
+What	क्या
+Left size	बाईं ओर आकार
+Left changed	बाईं ओर बदला गया
+Right size	दाईं ओर आकार
+Right changed	दाईं ओर बदला गया
+dir	dir
+px" title="	px" title="
+Made with {0} on {1}	{1} को {0} से बनाया गया
 user	user
 KUDUDIFF hub	KUDUDIFF hub
 Theme	Theme
@@ -49,7 +82,6 @@ The file wasn't found: {0}	फ़ाइल नहीं मिली: {0}
 "{0}" is too big to compare ({1} MB; the limit is {2} MB).	"{0}" तुलना के लिए बहुत बड़ी है ({1} MB; सीमा {2} MB है)।
 This looks like a binary file, not text. KUDUDIFF compares text and code files.	यह टेक्स्ट नहीं, बाइनरी फ़ाइल लगती है। KUDUDIFF टेक्स्ट और कोड फ़ाइलों की तुलना करता है।
 The file has no name yet.	फ़ाइल का अभी कोई नाम नहीं है।
-{0}.bak	{0}.bak
 "{0}" is read-only.	"{0}" केवल पढ़ने के लिए है।
 Windows (CRLF)	Windows (CRLF)
 Unix (LF)	Unix (LF)
@@ -73,6 +105,7 @@ Open a file…	फ़ाइल खोलें…
 Drop the left file here	बाईं फ़ाइल यहाँ छोड़ें
 Drop the right file here	दाईं फ़ाइल यहाँ छोड़ें
 or	या
+Compare two folders instead	इसकी जगह दो फ़ोल्डरों की तुलना करें
 (none)	(कोई नहीं)
 Not chosen yet	अभी चुना नहीं गया
 Untitled	बिना नाम
@@ -83,22 +116,85 @@ All the changes. Click to go there.	सभी बदलाव। वहाँ �
 Error message shown: {0}	Error message shown: {0}
 All files	सभी फ़ाइलें
 Cancel	रद्द करें
-Choose two files to compare	तुलना के लिए दो फ़ाइलें चुनें
+Compare folders	फ़ोल्डरों की तुलना करें
+Compare files	फ़ाइलों की तुलना करें
+Compare two files side by side	दो फ़ाइलों की आमने-सामने तुलना करें
 Settings	सेटिंग्स
 About	जानकारी
-Previous	पिछला
-Go to the previous change (Alt+Up)	पिछले बदलाव पर जाएँ (Alt+Up)
-Next	अगला
-Go to the next change (Alt+Down)	अगले बदलाव पर जाएँ (Alt+Down)
+Open side by side	आमने-सामने खोलें
+Compare the chosen file's two copies line by line (Enter, or double-click)	चुनी हुई फ़ाइल की दोनों प्रतियों की पंक्ति-दर-पंक्ति तुलना करें (Enter, या डबल-क्लिक)
 Copy to left	बाईं ओर कॉपी करें
-Copy the current change from the right file to the left one (Alt+Left)	मौजूदा बदलाव दाईं फ़ाइल से बाईं में कॉपी करें (Alt+Left)
+Copy the chosen file or folder from the right to the left (Alt+Left)	चुनी हुई फ़ाइल या फ़ोल्डर को दाईं से बाईं ओर कॉपी करें (Alt+Left)
 Copy to right	दाईं ओर कॉपी करें
+Copy the chosen file or folder from the left to the right (Alt+Right)	चुनी हुई फ़ाइल या फ़ोल्डर को बाईं से दाईं ओर कॉपी करें (Alt+Right)
+Previous	पिछला
+Go to the previous difference (Alt+Up)	पिछले अंतर पर जाएँ (Alt+Up)
+Next	अगला
+Go to the next difference (Alt+Down)	अगले अंतर पर जाएँ (Alt+Down)
+Swap sides	तरफ़ें बदलें
+Put the left folder on the right and the right folder on the left	बाएँ फ़ोल्डर को दाईं ओर और दाएँ फ़ोल्डर को बाईं ओर रखें
+Compare again	फिर से तुलना करें
+Look at both folders again (F5)	दोनों फ़ोल्डरों को फिर से देखें (F5)
+Save report	रिपोर्ट सहेजें
+Save the comparison as a web page, to read in a browser or send to someone	तुलना को वेब पेज के रूप में सहेजें, ब्राउज़र में पढ़ने या किसी को भेजने के लिए
+Hide what's the same	एक जैसी चीज़ें छिपाएँ
+Show left-out files	छोड़ी गई फ़ाइलें दिखाएँ
+Also compare the files and folders that are usually left out (.git, node_modules, bin, obj… change the list in Settings)	आम तौर पर छोड़ी जाने वाली फ़ाइलों और फ़ोल्डरों की भी तुलना करें (.git, node_modules, bin, obj… सूची सेटिंग्स में बदलें)
+Files and folders	फ़ाइलें और फ़ोल्डर
+Drop two folders here	दो फ़ोल्डर यहाँ छोड़ें
+or choose them one at a time	या उन्हें एक-एक करके चुनें
+Choose the left folder…	बायाँ फ़ोल्डर चुनें…
+Choose the right folder…	दायाँ फ़ोल्डर चुनें…
+Files with the same name are compared by what's inside them. Nothing is changed unless you copy something across.	एक ही नाम की फ़ाइलों की तुलना उनके अंदर की सामग्री से की जाती है। जब तक आप कुछ कॉपी न करें, कुछ नहीं बदलता।
+Stop	रोकें
+Choose…	चुनें…
+Choose the left folder	बायाँ फ़ोल्डर चुनें
+Choose the right folder	दायाँ फ़ोल्डर चुनें
+Drop folders here. To compare two files, use Compare files.	फ़ोल्डर यहाँ छोड़ें। दो फ़ाइलों की तुलना के लिए फ़ाइलों की तुलना करें इस्तेमाल करें।
+Comparing… {0}	तुलना की जा रही है… {0}
+Stopped. Use Compare again to look at the folders again.	रोक दिया गया। फ़ोल्डरों को फिर से देखने के लिए फिर से तुलना करें इस्तेमाल करें।
+Couldn't compare the folders.\n\n{0}	फ़ोल्डरों की तुलना नहीं हो सकी।\n\n{0}
+Choose two folders to compare, or drop them here	तुलना के लिए दो फ़ोल्डर चुनें, या उन्हें यहाँ छोड़ें
+Now choose the left folder	अब बायाँ फ़ोल्डर चुनें
+Now choose the right folder	अब दायाँ फ़ोल्डर चुनें
+Comparing…	तुलना हो रही है…
+No more differences below.	नीचे और कोई अंतर नहीं है।
+No more differences above.	ऊपर और कोई अंतर नहीं है।
+"{0}" is only on one side. Copy it across, or open it from its folder.	"{0}" सिर्फ़ एक तरफ़ है। उसे दूसरी तरफ़ कॉपी करें, या उसके फ़ोल्डर से खोलें।
+Nothing to copy: it's the same on the right already, or isn't on the left.	कॉपी करने को कुछ नहीं: दाईं ओर पहले से एक जैसा है, या बाईं ओर नहीं है।
+Nothing to copy: it's the same on the left already, or isn't on the right.	कॉपी करने को कुछ नहीं: बाईं ओर पहले से एक जैसा है, या दाईं ओर नहीं है।
+Nothing to copy.	कॉपी करने को कुछ नहीं।
+the right	दाईं ओर
+the left	बाईं ओर
+Copy "{0}" to {1}?	"{0}" को {1} कॉपी करें?
+Copy {0} files to {1}?	{0} फ़ाइलें {1} कॉपी करें?
+1 file there will be replaced.	वहाँ की 1 फ़ाइल बदल दी जाएगी।
+{0} files there will be replaced.	वहाँ की {0} फ़ाइलें बदल दी जाएँगी।
+The old ones are kept as .bak files next to them.	पुरानी फ़ाइलें उनके पास .bak फ़ाइलों के रूप में रखी जाती हैं।
+The old ones won't be kept (keeping .bak files is turned off in Settings).	पुरानी फ़ाइलें नहीं रखी जाएँगी (.bak फ़ाइलें रखना सेटिंग्स में बंद है)।
+Nothing is deleted on either side.	किसी भी तरफ़ कुछ नहीं हटाया जाता।
+…and {0} more	…और {0} अन्य
+Some files couldn't be copied:\n\n{0}	कुछ फ़ाइलें कॉपी नहीं हो सकीं:\n\n{0}
+Copied "{0}" to {1}.	"{0}" को {1} कॉपी किया गया।
+Copied {0} files to {1}.	{0} फ़ाइलें {1} कॉपी की गईं।
+Save the report	रिपोर्ट सहेजें
+{0} vs {1}.html	{0} vs {1}.html
+Web page	वेब पेज
+Saved {0}	{0} सहेजी गई
+Couldn't save "{0}".\n\n{1}	"{0}" सहेजी नहीं जा सकी।\n\n{1}
+Count	Count
+file that differs	अलग फ़ाइल
+files that differ	अलग फ़ाइलें
+Choose two files to compare	तुलना के लिए दो फ़ाइलें चुनें
+Compare two folders: which files are the same, different, or on one side only	दो फ़ोल्डरों की तुलना करें: कौन-सी फ़ाइलें एक जैसी, अलग, या सिर्फ़ एक तरफ़ हैं
+Go to the previous change (Alt+Up)	पिछले बदलाव पर जाएँ (Alt+Up)
+Go to the next change (Alt+Down)	अगले बदलाव पर जाएँ (Alt+Down)
+Copy the current change from the right file to the left one (Alt+Left)	मौजूदा बदलाव दाईं फ़ाइल से बाईं में कॉपी करें (Alt+Left)
 Copy the current change from the left file to the right one (Alt+Right)	मौजूदा बदलाव बाईं फ़ाइल से दाईं में कॉपी करें (Alt+Right)
 Undo (Ctrl+Z) in the file you last edited	जिस फ़ाइल को आपने आखिरी बार बदला, उसमें पूर्ववत करें (Ctrl+Z)
 Redo (Ctrl+Y) in the file you last edited	जिस फ़ाइल को आपने आखिरी बार बदला, उसमें फिर से करें (Ctrl+Y)
 Options	विकल्प
 What to ignore, how to compare, and how changes are shown	क्या अनदेखा करें, कैसे तुलना करें, और बदलाव कैसे दिखें
-Swap sides	तरफ़ें बदलें
 Put the left file on the right and the right file on the left	बाईं फ़ाइल को दाईं ओर और दाईं फ़ाइल को बाईं ओर रखें
 Reload	फिर से पढ़ें
 Read both files from disk again (F5)	दोनों फ़ाइलें डिस्क से फिर से पढ़ें (F5)
@@ -109,13 +205,10 @@ Removed	हटाया गया
 Changed	बदला गया
 Moved	खिसकाया गया
 {0} {1} is available	{0} {1} उपलब्ध है
-"{0}" is a folder. {1} compares two files.	"{0}" एक फ़ोल्डर है। {1} दो फ़ाइलों की तुलना करता है।
 "{0}" has changes that aren't saved. Throw them away and open another file?	"{0}" में ऐसे बदलाव हैं जो सहेजे नहीं गए। उन्हें छोड़कर दूसरी फ़ाइल खोलें?
 "{0}" was changed by another program after it was opened here. Save over those changes?	"{0}" को यहाँ खोलने के बाद किसी दूसरे प्रोग्राम ने बदला है। उन बदलावों के ऊपर सहेजें?
 Some characters can't be saved in {0}, the encoding "{1}" uses. Save it as UTF-8 instead?	कुछ अक्षर {0} की एन्कोडिंग "{1}" में सहेजे नहीं जा सकते। इसके बजाय UTF-8 में सहेजें?
-Couldn't save "{0}".\n\n{1}	"{0}" सहेजी नहीं जा सकी।\n\n{1}
 Saved {0} (the previous version is in {1}.bak)	{0} सहेजी गई (पिछला संस्करण {1}.bak में है)
-Saved {0}	{0} सहेजी गई
 Save the changes to "{0}"?	"{0}" के बदलाव सहेजें?
 Throw away the unsaved changes to "{0}" and read it from disk again?	"{0}" के बिना सहेजे बदलाव छोड़कर इसे डिस्क से फिर से पढ़ें?
 "{0}" was changed by another program and has been read again.	"{0}" को किसी दूसरे प्रोग्राम ने बदला, इसलिए इसे फिर से पढ़ा गया।
@@ -124,7 +217,6 @@ unknown error	अज्ञात त्रुटि
 Choose two files to compare, or drop them on the two sides	तुलना के लिए दो फ़ाइलें चुनें, या उन्हें दोनों तरफ़ छोड़ें
 Now choose the right file	अब दाईं फ़ाइल चुनें
 Now choose the left file	अब बाईं फ़ाइल चुनें
-Comparing…	तुलना हो रही है…
 Change {0} of {1}	बदलाव {0} / {1}
 {0} to go through	{0} देखने बाकी
 Options ({0} on)	विकल्प ({0} चालू)
@@ -141,8 +233,6 @@ Save as a patch file…	पैच फ़ाइल के रूप में स
 A unified diff that turns the left file into the right one (for patch or git apply)	एक unified diff जो बाईं फ़ाइल को दाईं में बदल देता है (patch या git apply के लिए)
 Save as a web page report…	वेब पेज रिपोर्ट के रूप में सहेजें…
 Both files side by side with the changes coloured, to read in a browser or send to someone	दोनों फ़ाइलें अगल-बगल, बदलाव रंगों में; ब्राउज़र में पढ़ने या किसी को भेजने के लिए
-Save the report	रिपोर्ट सहेजें
-Web page	वेब पेज
 The files are exactly the same, so there's nothing to put in a patch.	फ़ाइलें बिल्कुल एक जैसी हैं, इसलिए पैच में डालने को कुछ नहीं है।
 Save the patch	पैच सहेजें
 {0}.patch	{0}.patch
@@ -159,9 +249,14 @@ Colour code by language (C#, Python, JSON, HTML and more)	भाषा के �
 Saving	सहेजना
 Keep the previous version as a .bak file when saving	सहेजते समय पिछला संस्करण .bak फ़ाइल के रूप में रखें
 Saving "app.cs" first copies the old one to "app.cs.bak" next to it, replacing an older .bak.	"app.cs" सहेजने से पहले पुरानी फ़ाइल उसके पास "app.cs.bak" के रूप में कॉपी होती है, पुरानी .bak की जगह।
+Comparing folders	फ़ोल्डरों की तुलना
+Files and folders with these names are left out (* stands for any letters, as in *.log). "Show left-out files" in the folder comparison shows them all.	इन नामों वाली फ़ाइलें और फ़ोल्डर छोड़ दिए जाते हैं (* कोई भी अक्षर, जैसे *.log)। फ़ोल्डर तुलना में "छोड़ी गई फ़ाइलें दिखाएँ" सब दिखाता है।
+Names to leave out	छोड़ने वाले नाम
+Back to the usual list	आम सूची पर वापस जाएँ
+Copying a file across keeps the one it replaces as a .bak file, as saving does, when that's turned on above.	किसी फ़ाइल को दूसरी तरफ़ कॉपी करते समय, अगर ऊपर यह चालू है, तो सहेजने की तरह बदली जाने वाली फ़ाइल .bak के रूप में रखी जाती है।
 File Explorer	फ़ाइल एक्सप्लोरर
-Add "Compare with KUDUDIFF" to files' right-click menu	फ़ाइलों के राइट-क्लिक मेनू में "Compare with KUDUDIFF" जोड़ें
-Select two files and right-click, or pick one file now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	दो फ़ाइलें चुनकर राइट-क्लिक करें, या एक फ़ाइल अभी और दूसरी बाद में चुनें। केवल आपके Windows खाते के लिए; Windows 11 में यह "Show more options" के अंदर है।
+Add "Compare with KUDUDIFF" to the right-click menu of files and folders	फ़ाइलों और फ़ोल्डरों के राइट-क्लिक मेनू में "Compare with KUDUDIFF" जोड़ें
+Select two files (or two folders) and right-click, or pick one now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	दो फ़ाइलें (या दो फ़ोल्डर) चुनकर राइट-क्लिक करें, या एक अभी और दूसरी बाद में चुनें। सिर्फ़ आपके Windows खाते के लिए; Windows 11 में यह "Show more options" में है।
 Updates	अपडेट
 Check for a new KUDUDIFF version when it starts	शुरू होने पर KUDUDIFF का नया संस्करण जाँचें
 Only asks GitHub for the latest version number. Nothing is downloaded without asking.	GitHub से केवल नवीनतम संस्करण संख्या पूछी जाती है। बिना पूछे कुछ भी डाउनलोड नहीं होता।
@@ -228,3 +323,7 @@ Patch	Patch
 Python	Python
 Batch	Batch
 Bash	Bash
+{0} file	{0} फ़ाइल
+{0} files	{0} फ़ाइलें
+{0} file that differs	{0} अलग फ़ाइल
+{0} files that differ	{0} अलग फ़ाइलें

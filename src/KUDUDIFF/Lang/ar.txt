@@ -1,6 +1,9 @@
+Only the first two folders are compared.	تتم مقارنة أول مجلدين فقط.
 Only the first two files are compared.	تتم مقارنة أول ملفين فقط.
 {0} files were chosen; the first two are compared.	تم اختيار {0} ملفات؛ تتم مقارنة أول ملفين.
 Now choose the second file: right-click it → Compare with KUDUDIFF, drop it on the right, or use Open.	اختر الآن الملف الثاني: انقر عليه بزر الفأرة الأيمن ← Compare with KUDUDIFF، أو أفلته على اليمين، أو استخدم فتح.
+{0} folders were chosen; the first two are compared.	تم اختيار {0} مجلدات؛ تتم مقارنة أول اثنين.
+Now choose the second folder: right-click it → Compare with KUDUDIFF, drop it here, or use Choose.	اختر الآن المجلد الثاني: انقر عليه بزر الماوس الأيمن ← Compare with KUDUDIFF، أو أفلته هنا، أو استخدم اختيار.
 timeout	timeout
 Something went wrong:\n\n{0}	حدث خطأ ما:\n\n{0}
 Azeem Bukhari	Azeem Bukhari
@@ -32,6 +35,36 @@ blank lines ignored	تجاهل الأسطر الفارغة
 line endings compared	مقارنة نهايات الأسطر
 1 ignore pattern	نمط تجاهل واحد
 {0} ignore patterns	{0} أنماط تجاهل
+The folder "{0}" isn't there.	المجلد "{0}" غير موجود.
+Both sides are the same folder.	الجانبان هما المجلد نفسه.
+One folder is inside the other, so they can't be compared.	أحد المجلدين داخل الآخر، لذلك لا يمكن مقارنتهما.
+Both folders are empty	المجلدان فارغان
+The folders are the same: {0}	المجلدان متطابقان: {0}
+{0} different	{0} مختلفة
+{0} only on the left	{0} في اليسار فقط
+{0} only on the right	{0} في اليمين فقط
+{0} couldn't be read	تعذّرت قراءة {0}
+{0} the same	{0} متطابقة
+Files: {0}	الملفات: {0}
+Same	متطابق
+Different	مختلف
+Only on the left	في اليسار فقط
+Only on the right	في اليمين فقط
+Couldn't be read	تعذّرت القراءة
+{0}.tmp	{0}.tmp
+{0}.old	{0}.old
+{0}.bak	{0}.bak
+{0} left out	تم استبعاد {0}
+files that are the same aren't listed	الملفات المتطابقة غير مدرجة
+Name	الاسم
+What	الحالة
+Left size	الحجم يسارًا
+Left changed	التعديل يسارًا
+Right size	الحجم يمينًا
+Right changed	التعديل يمينًا
+dir	dir
+px" title="	px" title="
+Made with {0} on {1}	صُنع باستخدام {0} في {1}
 user	user
 KUDUDIFF hub	KUDUDIFF hub
 Theme	Theme
@@ -49,7 +82,6 @@ The file wasn't found: {0}	لم يتم العثور على الملف: {0}
 "{0}" is too big to compare ({1} MB; the limit is {2} MB).	الملف "{0}" كبير جدًا للمقارنة ({1} ميغابايت؛ الحد {2} ميغابايت).
 This looks like a binary file, not text. KUDUDIFF compares text and code files.	يبدو هذا ملفًا ثنائيًا وليس نصًا. يقارن KUDUDIFF ملفات النص والشيفرة.
 The file has no name yet.	ليس للملف اسم بعد.
-{0}.bak	{0}.bak
 "{0}" is read-only.	الملف "{0}" للقراءة فقط.
 Windows (CRLF)	Windows (CRLF)
 Unix (LF)	Unix (LF)
@@ -73,6 +105,7 @@ Open a file…	فتح ملف…
 Drop the left file here	أفلت الملف الأيسر هنا
 Drop the right file here	أفلت الملف الأيمن هنا
 or	أو
+Compare two folders instead	قارن مجلدين بدلًا من ذلك
 (none)	(لا شيء)
 Not chosen yet	لم يتم الاختيار بعد
 Untitled	بلا عنوان
@@ -83,22 +116,85 @@ All the changes. Click to go there.	كل التغييرات. انقر للانت
 Error message shown: {0}	Error message shown: {0}
 All files	كل الملفات
 Cancel	إلغاء
-Choose two files to compare	اختر ملفين للمقارنة
+Compare folders	مقارنة المجلدات
+Compare files	مقارنة الملفات
+Compare two files side by side	مقارنة ملفين جنبًا إلى جنب
 Settings	الإعدادات
 About	حول
-Previous	السابق
-Go to the previous change (Alt+Up)	الانتقال إلى التغيير السابق (Alt+Up)
-Next	التالي
-Go to the next change (Alt+Down)	الانتقال إلى التغيير التالي (Alt+Down)
+Open side by side	فتح جنبًا إلى جنب
+Compare the chosen file's two copies line by line (Enter, or double-click)	مقارنة نسختي الملف المحدد سطرًا بسطر (Enter، أو النقر المزدوج)
 Copy to left	نسخ إلى اليسار
-Copy the current change from the right file to the left one (Alt+Left)	نسخ التغيير الحالي من الملف الأيمن إلى الأيسر (Alt+Left)
+Copy the chosen file or folder from the right to the left (Alt+Left)	نسخ الملف أو المجلد المحدد من اليمين إلى اليسار (Alt+Left)
 Copy to right	نسخ إلى اليمين
+Copy the chosen file or folder from the left to the right (Alt+Right)	نسخ الملف أو المجلد المحدد من اليسار إلى اليمين (Alt+Right)
+Previous	السابق
+Go to the previous difference (Alt+Up)	الانتقال إلى الاختلاف السابق (Alt+Up)
+Next	التالي
+Go to the next difference (Alt+Down)	الانتقال إلى الاختلاف التالي (Alt+Down)
+Swap sides	تبديل الجانبين
+Put the left folder on the right and the right folder on the left	وضع المجلد الأيسر على اليمين والأيمن على اليسار
+Compare again	المقارنة من جديد
+Look at both folders again (F5)	النظر في المجلدين من جديد (F5)
+Save report	حفظ التقرير
+Save the comparison as a web page, to read in a browser or send to someone	حفظ المقارنة كصفحة ويب، لقراءتها في متصفح أو إرسالها إلى شخص ما
+Hide what's the same	إخفاء المتطابق
+Show left-out files	إظهار المستبعد
+Also compare the files and folders that are usually left out (.git, node_modules, bin, obj… change the list in Settings)	مقارنة الملفات والمجلدات التي تُستبعد عادةً أيضًا (.git و node_modules و bin و obj… غيّر القائمة في الإعدادات)
+Files and folders	الملفات والمجلدات
+Drop two folders here	أفلت مجلدين هنا
+or choose them one at a time	أو اخترهما واحدًا تلو الآخر
+Choose the left folder…	اختيار المجلد الأيسر…
+Choose the right folder…	اختيار المجلد الأيمن…
+Files with the same name are compared by what's inside them. Nothing is changed unless you copy something across.	تُقارن الملفات ذات الاسم نفسه بما في داخلها. لا يتغير شيء ما لم تنسخ شيئًا إلى الجانب الآخر.
+Stop	إيقاف
+Choose…	اختيار…
+Choose the left folder	اختيار المجلد الأيسر
+Choose the right folder	اختيار المجلد الأيمن
+Drop folders here. To compare two files, use Compare files.	أفلت المجلدات هنا. لمقارنة ملفين، استخدم مقارنة الملفات.
+Comparing… {0}	جارٍ المقارنة… {0}
+Stopped. Use Compare again to look at the folders again.	تم الإيقاف. استخدم المقارنة من جديد للنظر في المجلدين مرة أخرى.
+Couldn't compare the folders.\n\n{0}	تعذّرت مقارنة المجلدين.\n\n{0}
+Choose two folders to compare, or drop them here	اختر مجلدين للمقارنة، أو أفلتهما هنا
+Now choose the left folder	اختر الآن المجلد الأيسر
+Now choose the right folder	اختر الآن المجلد الأيمن
+Comparing…	جارٍ المقارنة…
+No more differences below.	لا توجد اختلافات أخرى في الأسفل.
+No more differences above.	لا توجد اختلافات أخرى في الأعلى.
+"{0}" is only on one side. Copy it across, or open it from its folder.	"{0}" موجود في جانب واحد فقط. انسخه إلى الجانب الآخر، أو افتحه من مجلده.
+Nothing to copy: it's the same on the right already, or isn't on the left.	لا شيء للنسخ: إنه متطابق في اليمين بالفعل، أو غير موجود في اليسار.
+Nothing to copy: it's the same on the left already, or isn't on the right.	لا شيء للنسخ: إنه متطابق في اليسار بالفعل، أو غير موجود في اليمين.
+Nothing to copy.	لا شيء للنسخ.
+the right	اليمين
+the left	اليسار
+Copy "{0}" to {1}?	نسخ "{0}" إلى {1}؟
+Copy {0} files to {1}?	نسخ {0} ملفات إلى {1}؟
+1 file there will be replaced.	سيُستبدل ملف واحد هناك.
+{0} files there will be replaced.	ستُستبدل {0} ملفات هناك.
+The old ones are kept as .bak files next to them.	تُحفظ القديمة كملفات .bak بجانبها.
+The old ones won't be kept (keeping .bak files is turned off in Settings).	لن تُحفظ القديمة (حفظ ملفات .bak متوقف في الإعدادات).
+Nothing is deleted on either side.	لا يُحذف شيء في أي من الجانبين.
+…and {0} more	…و{0} غيرها
+Some files couldn't be copied:\n\n{0}	تعذّر نسخ بعض الملفات:\n\n{0}
+Copied "{0}" to {1}.	تم نسخ "{0}" إلى {1}.
+Copied {0} files to {1}.	تم نسخ {0} ملفات إلى {1}.
+Save the report	حفظ التقرير
+{0} vs {1}.html	{0} vs {1}.html
+Web page	صفحة ويب
+Saved {0}	تم حفظ {0}
+Couldn't save "{0}".\n\n{1}	تعذّر حفظ "{0}".\n\n{1}
+Count	Count
+file that differs	ملف مختلف
+files that differ	ملفات مختلفة
+Choose two files to compare	اختر ملفين للمقارنة
+Compare two folders: which files are the same, different, or on one side only	مقارنة مجلدين: أي الملفات متطابقة، أو مختلفة، أو في جانب واحد فقط
+Go to the previous change (Alt+Up)	الانتقال إلى التغيير السابق (Alt+Up)
+Go to the next change (Alt+Down)	الانتقال إلى التغيير التالي (Alt+Down)
+Copy the current change from the right file to the left one (Alt+Left)	نسخ التغيير الحالي من الملف الأيمن إلى الأيسر (Alt+Left)
 Copy the current change from the left file to the right one (Alt+Right)	نسخ التغيير الحالي من الملف الأيسر إلى الأيمن (Alt+Right)
 Undo (Ctrl+Z) in the file you last edited	تراجع (Ctrl+Z) في آخر ملف عدّلته
 Redo (Ctrl+Y) in the file you last edited	إعادة (Ctrl+Y) في آخر ملف عدّلته
 Options	الخيارات
 What to ignore, how to compare, and how changes are shown	ما يتم تجاهله، وكيفية المقارنة، وكيف تظهر التغييرات
-Swap sides	تبديل الجانبين
 Put the left file on the right and the right file on the left	وضع الملف الأيسر على اليمين والأيمن على اليسار
 Reload	إعادة التحميل
 Read both files from disk again (F5)	قراءة الملفين من القرص مرة أخرى (F5)
@@ -109,13 +205,10 @@ Removed	محذوف
 Changed	متغيّر
 Moved	منقول
 {0} {1} is available	{0} {1} متاح
-"{0}" is a folder. {1} compares two files.	"{0}" مجلد. يقارن {1} ملفين.
 "{0}" has changes that aren't saved. Throw them away and open another file?	في "{0}" تغييرات لم تُحفظ. هل تريد تجاهلها وفتح ملف آخر؟
 "{0}" was changed by another program after it was opened here. Save over those changes?	غيّر برنامج آخر الملف "{0}" بعد فتحه هنا. هل تريد الحفظ فوق تلك التغييرات؟
 Some characters can't be saved in {0}, the encoding "{1}" uses. Save it as UTF-8 instead?	بعض الأحرف لا يمكن حفظها في {0} بالترميز "{1}". هل تريد حفظه بترميز UTF-8 بدلًا من ذلك؟
-Couldn't save "{0}".\n\n{1}	تعذّر حفظ "{0}".\n\n{1}
 Saved {0} (the previous version is in {1}.bak)	تم حفظ {0} (الإصدار السابق في {1}.bak)
-Saved {0}	تم حفظ {0}
 Save the changes to "{0}"?	هل تريد حفظ التغييرات في "{0}"؟
 Throw away the unsaved changes to "{0}" and read it from disk again?	هل تريد تجاهل التغييرات غير المحفوظة في "{0}" وقراءته من القرص مرة أخرى؟
 "{0}" was changed by another program and has been read again.	غيّر برنامج آخر "{0}" فتمت قراءته مرة أخرى.
@@ -124,7 +217,6 @@ unknown error	خطأ غير معروف
 Choose two files to compare, or drop them on the two sides	اختر ملفين للمقارنة، أو أفلتهما على الجانبين
 Now choose the right file	اختر الآن الملف الأيمن
 Now choose the left file	اختر الآن الملف الأيسر
-Comparing…	جارٍ المقارنة…
 Change {0} of {1}	التغيير {0} من {1}
 {0} to go through	{0} للمراجعة
 Options ({0} on)	الخيارات ({0} مفعّلة)
@@ -141,8 +233,6 @@ Save as a patch file…	الحفظ كملف تصحيح…
 A unified diff that turns the left file into the right one (for patch or git apply)	ملف diff موحّد يحوّل الملف الأيسر إلى الأيمن (لـ patch أو git apply)
 Save as a web page report…	الحفظ كتقرير صفحة ويب…
 Both files side by side with the changes coloured, to read in a browser or send to someone	الملفان جنبًا إلى جنب مع تلوين التغييرات، للقراءة في متصفح أو للإرسال إلى أحد
-Save the report	حفظ التقرير
-Web page	صفحة ويب
 The files are exactly the same, so there's nothing to put in a patch.	الملفان متطابقان تمامًا، فلا يوجد ما يوضع في ملف تصحيح.
 Save the patch	حفظ ملف التصحيح
 {0}.patch	{0}.patch
@@ -159,9 +249,14 @@ Colour code by language (C#, Python, JSON, HTML and more)	تلوين الشيف�
 Saving	الحفظ
 Keep the previous version as a .bak file when saving	الاحتفاظ بالإصدار السابق كملف .bak عند الحفظ
 Saving "app.cs" first copies the old one to "app.cs.bak" next to it, replacing an older .bak.	حفظ "app.cs" ينسخ أولًا الملف القديم إلى "app.cs.bak" بجانبه، ويستبدل ملف .bak أقدم.
+Comparing folders	مقارنة المجلدات
+Files and folders with these names are left out (* stands for any letters, as in *.log). "Show left-out files" in the folder comparison shows them all.	تُستبعد الملفات والمجلدات بهذه الأسماء (* تعني أي أحرف، كما في *.log). "إظهار المستبعد" في مقارنة المجلدات يُظهرها كلها.
+Names to leave out	الأسماء المستبعدة
+Back to the usual list	العودة إلى القائمة المعتادة
+Copying a file across keeps the one it replaces as a .bak file, as saving does, when that's turned on above.	عند نسخ ملف إلى الجانب الآخر يُحفظ الملف الذي يستبدله كملف .bak، كما عند الحفظ، إذا كان ذلك مفعّلًا في الأعلى.
 File Explorer	مستكشف الملفات
-Add "Compare with KUDUDIFF" to files' right-click menu	إضافة "Compare with KUDUDIFF" إلى قائمة النقر الأيمن للملفات
-Select two files and right-click, or pick one file now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	حدّد ملفين وانقر بزر الفأرة الأيمن، أو اختر ملفًا الآن والآخر لاحقًا. لحسابك في Windows فقط؛ في Windows 11 تجده تحت "إظهار المزيد من الخيارات".
+Add "Compare with KUDUDIFF" to the right-click menu of files and folders	إضافة "Compare with KUDUDIFF" إلى قائمة النقر بزر الماوس الأيمن للملفات والمجلدات
+Select two files (or two folders) and right-click, or pick one now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	حدد ملفين (أو مجلدين) وانقر بزر الماوس الأيمن، أو اختر أحدهما الآن والآخر لاحقًا. لحساب Windows الخاص بك فقط؛ في Windows 11 تجده تحت "Show more options".
 Updates	التحديثات
 Check for a new KUDUDIFF version when it starts	البحث عن إصدار جديد من KUDUDIFF عند التشغيل
 Only asks GitHub for the latest version number. Nothing is downloaded without asking.	يسأل GitHub عن رقم أحدث إصدار فقط. لا يتم تنزيل أي شيء دون سؤالك.
@@ -228,3 +323,7 @@ Patch	Patch
 Python	Python
 Batch	Batch
 Bash	Bash
+{0} file	{0} ملف
+{0} files	{0} ملفات
+{0} file that differs	{0} ملف مختلف
+{0} files that differ	{0} ملفات مختلفة

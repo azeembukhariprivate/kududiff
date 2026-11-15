@@ -140,7 +140,32 @@ namespace Kududiff.Core
             }
         }
 
-        /// <summary>Recently compared pairs of files, newest first.</summary>
+        /// <summary>Names of files and folders a folder comparison leaves out (the usual list until it's changed).</summary>
+        public static List<string> FolderLeaveOut
+        {
+            get
+            {
+                var saved = Get("FolderLeaveOut", null);
+                return saved == null ? FolderOptions.UsualLeaveOut.ToList() : FolderOptions.Split(saved);
+            }
+            set => Set("FolderLeaveOut", FolderOptions.Join(value ?? new List<string>()));
+        }
+
+        /// <summary>A folder comparison compares the left-out names too.</summary>
+        public static bool FolderShowLeftOut
+        {
+            get => GetBool("FolderShowLeftOut", false);
+            set => SetBool("FolderShowLeftOut", value);
+        }
+
+        /// <summary>A folder comparison hides the files and folders that are the same on both sides.</summary>
+        public static bool FolderHideSame
+        {
+            get => GetBool("FolderHideSame", false);
+            set => SetBool("FolderHideSame", value);
+        }
+
+        /// <summary>Recently compared pairs of files (or folders), newest first.</summary>
         public static List<(string Left, string Right)> Recent
         {
             get => Get("Recent", string.Empty).Split('\n')

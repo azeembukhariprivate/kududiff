@@ -2,7 +2,7 @@
 ; Installs for the current Windows user only, so installing never asks for administrator rights.
 
 #ifndef MyAppVersion
-  #define MyAppVersion "1.1.0"
+  #define MyAppVersion "1.2.0"
 #endif
 #ifndef SourceDir
   #define SourceDir "..\out\KUDUDIFF"
@@ -42,7 +42,7 @@ VersionInfoDescription={#MyAppName} Setup
 
 [Tasks]
 Name: "desktopicon"; Description: "Create a desktop shortcut"; Flags: unchecked
-Name: "contextmenu"; Description: "Add ""Compare with KUDUDIFF"" to files' right-click menu"
+Name: "contextmenu"; Description: "Add ""Compare with KUDUDIFF"" to the right-click menu of files and folders"
 
 [Files]
 Source: "{#SourceDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "self-test.log,screenshots\*"

@@ -62,15 +62,33 @@ namespace Kududiff.Views
             root.Children.Add(Check("Keep the previous version as a .bak file when saving", () => Settings.KeepBackup, v => Settings.KeepBackup = v));
             root.Children.Add(Ui.Subtle("Saving \"app.cs\" first copies the old one to \"app.cs.bak\" next to it, replacing an older .bak.", 12).Margin(27, 0, 0, 0));
 
+            root.Children.Add(Ui.Heading("Comparing folders", 14).Margin(0, 16, 0, 4));
+            root.Children.Add(Ui.Subtle("Files and folders with these names are left out (* stands for any letters, as in *.log). \"Show left-out files\" in the folder comparison shows them all.", 12)
+                .Margin(0, 0, 0, 6));
+            var leaveOut = new TextBox { Text = FolderOptions.Join(Settings.FolderLeaveOut), AcceptsReturn = false };
+            System.Windows.Automation.AutomationProperties.SetName(leaveOut, "Names to leave out");
+            leaveOut.LostFocus += (s, e) => Settings.FolderLeaveOut = FolderOptions.Split(leaveOut.Text);
+            Closing += (s, e) => Settings.FolderLeaveOut = FolderOptions.Split(leaveOut.Text);
+            root.Children.Add(leaveOut);
+            var usual = Ui.Link("Back to the usual list", (s, e) =>
+            {
+                leaveOut.Text = FolderOptions.Join(FolderOptions.UsualLeaveOut);
+                Settings.FolderLeaveOut = FolderOptions.UsualLeaveOut.ToList();
+            });
+            usual.Margin = new Thickness(0, 4, 0, 0);
+            usual.HorizontalAlignment = HorizontalAlignment.Left;
+            root.Children.Add(usual);
+            root.Children.Add(Ui.Subtle("Copying a file across keeps the one it replaces as a .bak file, as saving does, when that's turned on above.", 12).Margin(0, 4, 0, 0));
+
             root.Children.Add(Ui.Heading("File Explorer", 14).Margin(0, 16, 0, 4));
-            var menu = new CheckBox { Content = "Add \"Compare with KUDUDIFF\" to files' right-click menu", IsChecked = Settings.ShellMenu };
+            var menu = new CheckBox { Content = "Add \"Compare with KUDUDIFF\" to the right-click menu of files and folders", IsChecked = Settings.ShellMenu };
             menu.Click += (s, e) =>
             {
                 Settings.ShellMenu = menu.IsChecked == true;
                 ShellIntegration.Refresh();
             };
             root.Children.Add(menu);
-            root.Children.Add(Ui.Subtle("Select two files and right-click, or pick one file now and the other later. For your Windows account only; on Windows 11 it's under \"Show more options\".", 12)
+            root.Children.Add(Ui.Subtle("Select two files (or two folders) and right-click, or pick one now and the other later. For your Windows account only; on Windows 11 it's under \"Show more options\".", 12)
                 .Margin(27, 0, 0, 0));
 
             root.Children.Add(Ui.Heading("Updates", 14).Margin(0, 16, 0, 4));
@@ -87,7 +105,8 @@ namespace Kududiff.Views
             close.Click += (s, e) => Close();
             bottom.Children.Add(close.At(0, 1));
             root.Children.Add(bottom.Margin(0, 14, 0, 0));
-            Content = root;
+            // On a small screen the window keeps to the screen, so its settings scroll.
+            Content = new ScrollViewer { Content = root, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
         }
 
         private static CheckBox Check(string text, Func<bool> get, Action<bool> set)

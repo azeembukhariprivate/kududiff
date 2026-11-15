@@ -15,6 +15,7 @@ namespace Kududiff
         /// <summary>
         /// KUDUDIFF.exe                       open
         /// KUDUDIFF.exe left.txt right.txt    compare two files
+        /// KUDUDIFF.exe left-folder right-folder   compare two folders
         /// KUDUDIFF.exe --pick file           the right-click menu: Windows starts one copy per selected file, and the
         ///                                    files picked together (or one now and one later) open in one comparison
         /// KUDUDIFF.exe --register-shell | --unregister   used by the installer
@@ -133,7 +134,13 @@ namespace Kududiff
                 else if (!a.StartsWith("--")) opens.Add(a);
             }
 
-            if (opens.Count >= 2)
+            if (opens.Count >= 2 && Directory.Exists(opens[0]) && Directory.Exists(opens[1]))
+            {
+                var f = ShowFolderWindow();
+                f.Open(opens[0], opens[1]);
+                if (opens.Count > 2) f.ShowMessage(Lang.T("Only the first two folders are compared."));
+            }
+            else if (opens.Count >= 2)
             {
                 var w = NewWindow();
                 w.Open(opens[0], opens[1]);
@@ -159,8 +166,11 @@ namespace Kududiff
 
         private void FlushPicks()
         {
-            var files = _picks.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+            var all = _picks.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
             _picks.Clear();
+            var folders = all.Where(Directory.Exists).ToList();
+            var files = all.Where(p => !Directory.Exists(p)).ToList();
+            if (folders.Count > 0) FlushFolders(folders);
             if (files.Count == 0) return;
             if (files.Count >= 2)
             {
@@ -181,6 +191,53 @@ namespace Kududiff
             if (window.LoadSide(window.LeftSide, files[0])) window.ShowMessage("Now choose the second file: right-click it → Compare with KUDUDIFF, drop it on the right, or use Open.");
         }
 
+        /// <summary>Folders picked from the right-click menu: two are compared; one waits on the left for the second.</summary>
+        private void FlushFolders(List<string> folders)
+        {
+            if (folders.Count >= 2)
+            {
+                var f = ShowFolderWindow();
+                f.Open(folders[0], folders[1]);
+                if (folders.Count > 2) f.ShowMessage(Lang.T("{0} folders were chosen; the first two are compared.", folders.Count));
+                return;
+            }
+            var waiting = Windows.OfType<FolderWindow>().FirstOrDefault(w => w.LeftFolder != null && w.RightFolder == null);
+            if (waiting != null)
+            {
+                waiting.SetSide(false, folders[0]);
+                Bring(waiting);
+                return;
+            }
+            var window = ShowFolderWindow();
+            window.SetSide(true, folders[0]);
+            window.ShowMessage(Lang.T("Now choose the second folder: right-click it → Compare with KUDUDIFF, drop it here, or use Choose."));
+        }
+
+        /// <summary>A window for comparing two files (an empty one if there is one), shown and in front.</summary>
+        public static MainWindow ShowFileWindow() => ((App)Current).NewWindow();
+
+        /// <summary>A window for comparing two folders (reusing one that has no folders yet), shown and in front.</summary>
+        public static FolderWindow ShowFolderWindow()
+        {
+            var app = (App)Current;
+            var window = app.Windows.OfType<FolderWindow>().FirstOrDefault(w => w.LeftFolder == null && w.RightFolder == null);
+            if (window == null)
+            {
+                window = new FolderWindow();
+                var last = app.Windows.OfType<Window>().LastOrDefault(w => w != window && w.IsVisible && w.WindowState == WindowState.Normal && (w is MainWindow || w is FolderWindow));
+                if (last != null)
+                {
+                    window.WindowStartupLocation = WindowStartupLocation.Manual;
+                    window.Left = last.Left + 28;
+                    window.Top = last.Top + 28;
+                }
+                if (app.MainWindow == null) app.MainWindow = window;
+                window.Show();
+            }
+            Bring(window);
+            return window;
+        }
+
         /// <summary>An empty comparison window (reusing one that has no files yet), shown and in front.</summary>
         private MainWindow NewWindow()
         {
@@ -188,7 +245,7 @@ namespace Kududiff
             if (window == null)
             {
                 window = new MainWindow();
-                var last = Windows.OfType<MainWindow>().LastOrDefault(w => w != window && w.IsVisible && w.WindowState == WindowState.Normal);
+                var last = Windows.OfType<Window>().LastOrDefault(w => w != window && w.IsVisible && w.WindowState == WindowState.Normal && (w is MainWindow || w is FolderWindow));
                 if (last != null)
                 {
                     window.WindowStartupLocation = WindowStartupLocation.Manual;
@@ -216,13 +273,15 @@ namespace Kududiff
             timer.Tick += (s, e) =>
             {
                 var w = Windows.OfType<MainWindow>().FirstOrDefault(x => x.HasBoth && !x.IsComparing && x.Comparison != null);
-                if (w == null && DateTime.UtcNow < until) return;
+                var f = Windows.OfType<FolderWindow>().FirstOrDefault(x => x.HasBoth && !x.IsComparing && x.Comparison != null);
+                if (w == null && f == null && DateTime.UtcNow < until) return;
                 timer.Stop();
-                var text = w == null ? "timeout" : $"{w.LeftSide.File.Path}\n{w.RightSide.File.Path}\n{w.Changes.Count}";
+                var text = w != null ? $"{w.LeftSide.File.Path}\n{w.RightSide.File.Path}\n{w.Changes.Count}"
+                    : f != null ? $"{f.LeftFolder}\n{f.RightFolder}\n{f.Comparison.Different + f.Comparison.OnlyLeft + f.Comparison.OnlyRight}" : "timeout";
                 try { File.WriteAllText(_report, text); }
                 catch (IOException) { }
                 foreach (var x in Windows.OfType<MainWindow>()) x.SkipClosePrompt = true;
-                Shutdown(w == null ? 1 : 0);
+                Shutdown(w == null && f == null ? 1 : 0);
             };
             timer.Start();
         }

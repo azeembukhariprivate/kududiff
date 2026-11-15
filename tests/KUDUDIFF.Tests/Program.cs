@@ -45,6 +45,177 @@ namespace Kududiff.Tests
             return _failed == 0 ? 0 : 1;
         }
 
+        // ================================================================== comparing folders
+
+        /// <summary>Makes a folder with the given files ("sub/name.txt" = contents; a name ending in / is an empty folder).</summary>
+        private static string MakeFolder(string name, params (string Path, string Text)[] files)
+        {
+            var dir = Path.Combine(_root, name + "-" + Guid.NewGuid().ToString("N").Substring(0, 6));
+            Directory.CreateDirectory(dir);
+            foreach (var (path, text) in files)
+            {
+                var full = Path.Combine(dir, path.Replace('/', Path.DirectorySeparatorChar));
+                if (path.EndsWith("/")) { Directory.CreateDirectory(full); continue; }
+                Directory.CreateDirectory(Path.GetDirectoryName(full));
+                File.WriteAllText(full, text);
+            }
+            return dir;
+        }
+
+        private static FolderItem Find(FolderComparison cmp, string relative) =>
+            cmp.Root.Below().FirstOrDefault(i => i.RelativePath == relative.Replace('/', Path.DirectorySeparatorChar));
+
+        private static void TestFoldersAreComparedFileByFile()
+        {
+            var left = MakeFolder("left", ("same.txt", "hello"), ("changed.txt", "one"), ("longer.txt", "short"), ("only-left.txt", "x"),
+                ("src/app.cs", "class A {}"), ("src/deep/notes.md", "same"), ("gone/old.txt", "old"), ("empty/", null));
+            var right = MakeFolder("right", ("same.txt", "hello"), ("changed.txt", "two"), ("longer.txt", "much longer"), ("only-right.txt", "y"),
+                ("src/app.cs", "class A {}"), ("src/deep/notes.md", "same"), ("new/fresh.txt", "new"), ("empty/", null));
+            var cmp = FolderComparison.Run(left, right, new FolderOptions());
+            Equal(FolderState.Same, Find(cmp, "same.txt").State, "same contents");
+            Equal(FolderState.Different, Find(cmp, "changed.txt").State, "same size, different bytes");
+            Equal(FolderState.Different, Find(cmp, "longer.txt").State, "different sizes");
+            Equal(FolderState.OnlyLeft, Find(cmp, "only-left.txt").State, "only on the left");
+            Equal(FolderState.OnlyRight, Find(cmp, "only-right.txt").State, "only on the right");
+            Equal(FolderState.Same, Find(cmp, "src").State, "a folder whose files are all the same");
+            Equal(FolderState.Same, Find(cmp, "empty").State, "two empty folders");
+            Equal(FolderState.OnlyLeft, Find(cmp, "gone").State, "a folder only on the left");
+            Equal(FolderState.OnlyLeft, Find(cmp, "gone/old.txt").State, "and what's in it");
+            Equal(FolderState.OnlyRight, Find(cmp, "new").State, "a folder only on the right");
+            Equal(FolderState.Different, cmp.Root.State, "the folders differ");
+            Equal(3, cmp.Same, "same files: same.txt, app.cs and notes.md");
+            Equal(2, cmp.Different, "different files");
+            Equal(2, cmp.OnlyLeft, "files only on the left");
+            Equal(2, cmp.OnlyRight, "files only on the right");
+            Check(!cmp.Identical, "not identical");
+            Check(cmp.Summary().Contains("2 different") && cmp.Summary().Contains("2 only on the left"), cmp.Summary());
+            // Folders first, then files, by name.
+            Equal("empty,gone,new,src,changed.txt", string.Join(",", cmp.Root.Children.Take(5).Select(c => c.Name)), "the order");
+
+            var twin = MakeFolder("twin", ("same.txt", "hello"), ("src/app.cs", "class A {}"));
+            var twin2 = MakeFolder("twin2", ("same.txt", "hello"), ("src/app.cs", "class A {}"));
+            var same = FolderComparison.Run(twin, twin2, new FolderOptions());
+            Check(same.Identical && same.Root.State == FolderState.Same, "two copies are the same");
+            Check(same.Summary().Contains("2 files"), same.Summary());
+        }
+
+        private static void TestFoldersSameSizeAreReadToTheEnd()
+        {
+            var a = new byte[200_000];
+            new Random(5).NextBytes(a);
+            var b = (byte[])a.Clone();
+            b[b.Length - 1] ^= 1; // only the very last byte differs, after several reads
+            var left = MakeFolder("big-left");
+            var right = MakeFolder("big-right");
+            File.WriteAllBytes(Path.Combine(left, "data.bin"), a);
+            File.WriteAllBytes(Path.Combine(right, "data.bin"), b);
+            File.WriteAllBytes(Path.Combine(left, "copy.bin"), a);
+            File.WriteAllBytes(Path.Combine(right, "copy.bin"), a);
+            var cmp = FolderComparison.Run(left, right, new FolderOptions());
+            Equal(FolderState.Different, Find(cmp, "data.bin").State, "the last byte counts");
+            Equal(FolderState.Same, Find(cmp, "copy.bin").State, "a true copy is the same");
+        }
+
+        private static void TestFoldersLeaveOutTheUsualNames()
+        {
+            var left = MakeFolder("lo-left", ("app.cs", "a"), (".git/HEAD", "ref"), ("bin/app.exe", "1"), ("obj/x.o", "1"), ("node_modules/p/index.js", "1"),
+                ("Thumbs.db", "t"), ("logs/today.log", "l"), ("keep/bin.txt", "a file named like a folder on the list is kept"));
+            var right = MakeFolder("lo-right", ("app.cs", "a"), (".git/HEAD", "other"), ("bin/app.exe", "2"), ("desktop.ini", "d"), ("logs/today.log", "m"),
+                ("keep/bin.txt", "a file named like a folder on the list is kept"));
+            var options = new FolderOptions();
+            var cmp = FolderComparison.Run(left, right, options);
+            Check(Find(cmp, ".git") == null && Find(cmp, "bin") == null && Find(cmp, "obj") == null && Find(cmp, "node_modules") == null, "folders on the list are left out");
+            Check(Find(cmp, "Thumbs.db") == null && Find(cmp, "desktop.ini") == null, "files on the list are left out");
+            Check(Find(cmp, "keep/bin.txt") != null, "only whole names match: bin.txt isn't bin");
+            Equal(FolderState.Different, Find(cmp, "logs/today.log").State, "other files are compared");
+            Check(cmp.LeftOut >= 7, "the left-out ones are counted: " + cmp.LeftOut);
+
+            options.LeaveOut.Add("*.log");
+            Check(Find(FolderComparison.Run(left, right, options), "logs/today.log") == null, "* stands for any letters");
+            Check(options.LeavesOut("TODAY.LOG") && options.LeavesOut("BIN") && !options.LeavesOut("bin2"), "upper and lower case don't matter");
+
+            var all = FolderComparison.Run(left, right, new FolderOptions { ShowLeftOut = true });
+            Equal(FolderState.Different, Find(all, ".git/HEAD").State, "with everything shown, .git is compared");
+            Equal(0, all.LeftOut, "nothing left out");
+
+            Equal("bin|*.log|obj", string.Join("|", FolderOptions.Split(" bin, *.log;obj,, BIN ")), "the list as typed in Settings");
+            Equal("bin, *.log", FolderOptions.Join(new[] { "bin", "*.log" }), "and as shown");
+        }
+
+        private static void TestFoldersThatCantBeCompared()
+        {
+            var outer = MakeFolder("outer", ("inner/a.txt", "a"));
+            void Refused(string a, string b, string what)
+            {
+                try
+                {
+                    FolderComparison.Run(a, b, new FolderOptions());
+                    Check(false, what);
+                }
+                catch (ArgumentException) { }
+            }
+            Refused(outer, outer, "the same folder on both sides");
+            Refused(outer, Path.Combine(outer, "inner"), "a folder and one inside it");
+            Refused(Path.Combine(outer, "inner"), outer + Path.DirectorySeparatorChar, "the other way round");
+            Refused(outer, Path.Combine(_root, "no-such-folder"), "a folder that isn't there");
+            Check(!FolderComparison.Inside(outer + "2", outer), "a folder with a longer name isn't inside");
+            var sibling = MakeFolder("outer2", ("inner/a.txt", "a"));
+            Check(FolderComparison.Run(outer, sibling, new FolderOptions()).Identical, "two folders side by side can be compared");
+        }
+
+        private static void TestFolderCopyNeverDeletesAndKeepsBak()
+        {
+            var left = MakeFolder("cp-left", ("changed.txt", "new text"), ("same.txt", "s"), ("only-left.txt", "l"), ("pack/a.txt", "a"), ("pack/sub/b.txt", "b"), ("pack/empty/", null));
+            var right = MakeFolder("cp-right", ("changed.txt", "old text"), ("same.txt", "s"), ("only-right.txt", "r"));
+            var cmp = FolderComparison.Run(left, right, new FolderOptions());
+
+            var one = FolderCopy.Plan(cmp, Find(cmp, "changed.txt"), true);
+            Equal(1, one.Count, "one file to copy");
+            Check(one[0].Replaces, "it replaces the one on the right");
+            Check(FolderCopy.Run(one, true).Count == 0, "copied");
+            Equal("new text", File.ReadAllText(Path.Combine(right, "changed.txt")), "the right file has the left's contents");
+            Equal("old text", File.ReadAllText(Path.Combine(right, "changed.txt.bak")), "the old one is kept as .bak");
+            Equal("new text", File.ReadAllText(Path.Combine(left, "changed.txt")), "the left file is untouched");
+
+            var folder = FolderCopy.Plan(cmp, Find(cmp, "pack"), true);
+            Check(folder.All(s => !s.Replaces), "a folder only on the left replaces nothing");
+            Check(FolderCopy.Run(folder, true).Count == 0, "the folder copied");
+            Equal("b", File.ReadAllText(Path.Combine(right, "pack", "sub", "b.txt")), "with its subfolders");
+            Check(Directory.Exists(Path.Combine(right, "pack", "empty")), "and its empty folder");
+
+            var all = FolderCopy.Plan(cmp, cmp.Root, false); // everything from the right to the left
+            Check(all.All(s => s.From == null || !s.From.EndsWith("same.txt")), "files that are the same aren't copied");
+            FolderCopy.Run(all, false);
+            Check(File.Exists(Path.Combine(left, "only-left.txt")), "nothing is deleted from the side copied to");
+            Check(File.Exists(Path.Combine(left, "only-right.txt")), "what was only on the right is now on the left too");
+            Check(!File.Exists(Path.Combine(left, "changed.txt.bak")), "no .bak when it's turned off");
+            Check(!Directory.EnumerateFiles(left, "*.tmp", SearchOption.AllDirectories).Any() && !Directory.EnumerateFiles(right, "*.old", SearchOption.AllDirectories).Any(), "no temporary files left behind");
+
+            // A read-only file can still be replaced, and the copy keeps the original's time.
+            var ro = Path.Combine(right, "same.txt");
+            File.WriteAllText(Path.Combine(left, "same.txt"), "changed on the left");
+            File.SetLastWriteTime(Path.Combine(left, "same.txt"), new DateTime(2020, 5, 6, 7, 8, 9));
+            File.SetAttributes(ro, FileAttributes.ReadOnly);
+            var again = FolderComparison.Run(left, right, new FolderOptions());
+            Check(FolderCopy.Run(FolderCopy.Plan(again, Find(again, "same.txt"), true), true).Count == 0, "read-only replaced");
+            Equal("changed on the left", File.ReadAllText(ro), "the new contents");
+            Equal(new DateTime(2020, 5, 6, 7, 8, 9), File.GetLastWriteTime(ro), "the time of the file copied");
+        }
+
+        private static void TestFolderReport()
+        {
+            var left = MakeFolder("rep-left", ("a.txt", "1"), ("b <x>.txt", "2"), ("same.txt", "s"));
+            var right = MakeFolder("rep-right", ("a.txt", "3"), ("same.txt", "s"));
+            var cmp = FolderComparison.Run(left, right, new FolderOptions());
+            var html = FolderReport.Html(cmp, false, new DateTime(2026, 11, 15, 10, 0, 0));
+            Check(html.StartsWith("<!DOCTYPE html>") && html.Contains("a.txt") && html.Contains("same.txt"), "every file is listed");
+            Check(html.Contains("b &lt;x&gt;.txt") && !html.Contains("b <x>.txt"), "names are written safely");
+            Check(html.Contains("Only on the left") && html.Contains("Different"), "what each is like");
+            Check(html.Contains("15 November 2026"), "when it was made");
+            var hidden = FolderReport.Html(cmp, true, DateTime.Now);
+            Check(!hidden.Contains(">same.txt<") && hidden.Contains("a.txt"), "files that are the same can be left out of it");
+        }
+
         // ================================================================== helpers
 
         // ================================================================== other languages

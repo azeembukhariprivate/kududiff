@@ -68,7 +68,11 @@ namespace Kududiff.Views
             header.Margin = new Thickness(16, 10, 12, 10);
             header.Children.Add(Ui.Row(LogoTile.Create(26), Ui.Text(AppInfo.Name, 15, bold: true).Margin(10, 0, 0, 0)).At(0, 0));
             _update.Visibility = Visibility.Collapsed;
-            header.Children.Add(_update.Margin(0, 0, 14, 0).At(0, 2));
+            _update.HorizontalAlignment = HorizontalAlignment.Right;
+            header.Children.Add(_update.Margin(0, 0, 14, 0).At(0, 1));
+            var folders = Ui.Button("Compare folders", "IconFolder", "GhostButton", (s, e) => App.ShowFolderWindow());
+            folders.ToolTip = "Compare two folders: which files are the same, different, or on one side only";
+            header.Children.Add(folders.At(0, 2));
             Button recent = null;
             recent = Ui.Button("Recent", "IconHistory", "GhostButton", (s, e) => ShowRecentMenu(recent));
             header.Children.Add(recent.At(0, 3));
@@ -254,7 +258,9 @@ namespace Kududiff.Views
         {
             if (Directory.Exists(path))
             {
-                Dialogs.Error(this, $"\"{path}\" is a folder. {AppInfo.Name} compares two files.");
+                // A folder goes to a folder comparison (waiting there for its second folder).
+                var window = App.ShowFolderWindow();
+                window.SetSide(window.LeftFolder == null, path);
                 return false;
             }
             if (side.IsDirty && !Dialogs.Confirm(this, $"\"{side.DisplayName}\" has changes that aren't saved. Throw them away and open another file?"))
@@ -284,6 +290,11 @@ namespace Kududiff.Views
 
         public void Open(string left, string right)
         {
+            if (Directory.Exists(left) && Directory.Exists(right))
+            {
+                App.ShowFolderWindow().Open(left, right);
+                return;
+            }
             if (LoadSide(LeftSide, left)) LoadSide(RightSide, right);
         }
 

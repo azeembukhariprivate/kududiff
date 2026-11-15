@@ -1,6 +1,9 @@
+Only the first two folders are compared.	Seuls les deux premiers dossiers sont comparés.
 Only the first two files are compared.	Seuls les deux premiers fichiers sont comparés.
 {0} files were chosen; the first two are compared.	{0} fichiers ont été choisis ; les deux premiers sont comparés.
 Now choose the second file: right-click it → Compare with KUDUDIFF, drop it on the right, or use Open.	Choisissez maintenant le second fichier : clic droit dessus → Compare with KUDUDIFF, déposez-le à droite, ou utilisez Ouvrir.
+{0} folders were chosen; the first two are compared.	{0} dossiers ont été choisis ; les deux premiers sont comparés.
+Now choose the second folder: right-click it → Compare with KUDUDIFF, drop it here, or use Choose.	Choisissez maintenant le deuxième dossier : clic droit dessus → Compare with KUDUDIFF, déposez-le ici, ou utilisez Choisir.
 timeout	timeout
 Something went wrong:\n\n{0}	Un problème est survenu :\n\n{0}
 Azeem Bukhari	Azeem Bukhari
@@ -32,6 +35,36 @@ blank lines ignored	lignes vides ignorées
 line endings compared	fins de ligne comparées
 1 ignore pattern	1 motif ignoré
 {0} ignore patterns	{0} motifs ignorés
+The folder "{0}" isn't there.	Le dossier « {0} » n'existe pas.
+Both sides are the same folder.	Les deux côtés sont le même dossier.
+One folder is inside the other, so they can't be compared.	Un dossier est à l'intérieur de l'autre : ils ne peuvent pas être comparés.
+Both folders are empty	Les deux dossiers sont vides
+The folders are the same: {0}	Les dossiers sont identiques : {0}
+{0} different	{0} différents
+{0} only on the left	{0} seulement à gauche
+{0} only on the right	{0} seulement à droite
+{0} couldn't be read	{0} illisibles
+{0} the same	{0} identiques
+Files: {0}	Fichiers : {0}
+Same	Identique
+Different	Différent
+Only on the left	Seulement à gauche
+Only on the right	Seulement à droite
+Couldn't be read	Illisible
+{0}.tmp	{0}.tmp
+{0}.old	{0}.old
+{0}.bak	{0}.bak
+{0} left out	{0} laissés de côté
+files that are the same aren't listed	les fichiers identiques ne sont pas listés
+Name	Nom
+What	Quoi
+Left size	Taille gauche
+Left changed	Modifié gauche
+Right size	Taille droite
+Right changed	Modifié droite
+dir	dir
+px" title="	px" title="
+Made with {0} on {1}	Fait avec {0} le {1}
 user	user
 KUDUDIFF hub	KUDUDIFF hub
 Theme	Theme
@@ -49,7 +82,6 @@ The file wasn't found: {0}	Fichier introuvable : {0}
 "{0}" is too big to compare ({1} MB; the limit is {2} MB).	« {0} » est trop gros pour être comparé ({1} Mo ; la limite est de {2} Mo).
 This looks like a binary file, not text. KUDUDIFF compares text and code files.	Cela ressemble à un fichier binaire, pas à du texte. KUDUDIFF compare des fichiers texte et de code.
 The file has no name yet.	Le fichier n'a pas encore de nom.
-{0}.bak	{0}.bak
 "{0}" is read-only.	« {0} » est en lecture seule.
 Windows (CRLF)	Windows (CRLF)
 Unix (LF)	Unix (LF)
@@ -73,6 +105,7 @@ Open a file…	Ouvrir un fichier…
 Drop the left file here	Déposez le fichier de gauche ici
 Drop the right file here	Déposez le fichier de droite ici
 or	ou
+Compare two folders instead	Comparer plutôt deux dossiers
 (none)	(aucun)
 Not chosen yet	Pas encore choisi
 Untitled	Sans titre
@@ -83,22 +116,85 @@ All the changes. Click to go there.	Toutes les modifications. Cliquez pour y all
 Error message shown: {0}	Error message shown: {0}
 All files	Tous les fichiers
 Cancel	Annuler
-Choose two files to compare	Choisissez deux fichiers à comparer
+Compare folders	Comparer des dossiers
+Compare files	Comparer des fichiers
+Compare two files side by side	Comparer deux fichiers côte à côte
 Settings	Paramètres
 About	À propos
-Previous	Précédente
-Go to the previous change (Alt+Up)	Aller à la modification précédente (Alt+Haut)
-Next	Suivante
-Go to the next change (Alt+Down)	Aller à la modification suivante (Alt+Bas)
+Open side by side	Ouvrir côte à côte
+Compare the chosen file's two copies line by line (Enter, or double-click)	Comparer les deux copies du fichier choisi ligne par ligne (Entrée, ou double-clic)
 Copy to left	Copier à gauche
-Copy the current change from the right file to the left one (Alt+Left)	Copier la modification actuelle du fichier de droite vers celui de gauche (Alt+Gauche)
+Copy the chosen file or folder from the right to the left (Alt+Left)	Copier le fichier ou dossier choisi de la droite vers la gauche (Alt+Gauche)
 Copy to right	Copier à droite
+Copy the chosen file or folder from the left to the right (Alt+Right)	Copier le fichier ou dossier choisi de la gauche vers la droite (Alt+Droite)
+Previous	Précédente
+Go to the previous difference (Alt+Up)	Aller à la différence précédente (Alt+Haut)
+Next	Suivante
+Go to the next difference (Alt+Down)	Aller à la différence suivante (Alt+Bas)
+Swap sides	Inverser les côtés
+Put the left folder on the right and the right folder on the left	Mettre le dossier de gauche à droite et celui de droite à gauche
+Compare again	Comparer à nouveau
+Look at both folders again (F5)	Regarder à nouveau les deux dossiers (F5)
+Save report	Enregistrer le rapport
+Save the comparison as a web page, to read in a browser or send to someone	Enregistrer la comparaison comme page web, à lire dans un navigateur ou à envoyer
+Hide what's the same	Masquer ce qui est identique
+Show left-out files	Afficher ce qui est laissé de côté
+Also compare the files and folders that are usually left out (.git, node_modules, bin, obj… change the list in Settings)	Comparer aussi les fichiers et dossiers habituellement laissés de côté (.git, node_modules, bin, obj… la liste se change dans Paramètres)
+Files and folders	Fichiers et dossiers
+Drop two folders here	Déposez deux dossiers ici
+or choose them one at a time	ou choisissez-les un par un
+Choose the left folder…	Choisir le dossier de gauche…
+Choose the right folder…	Choisir le dossier de droite…
+Files with the same name are compared by what's inside them. Nothing is changed unless you copy something across.	Les fichiers de même nom sont comparés d'après leur contenu. Rien n'est modifié tant que vous ne copiez rien d'un côté à l'autre.
+Stop	Arrêter
+Choose…	Choisir…
+Choose the left folder	Choisir le dossier de gauche
+Choose the right folder	Choisir le dossier de droite
+Drop folders here. To compare two files, use Compare files.	Déposez des dossiers ici. Pour comparer deux fichiers, utilisez Comparer des fichiers.
+Comparing… {0}	Comparaison… {0}
+Stopped. Use Compare again to look at the folders again.	Arrêté. Utilisez Comparer à nouveau pour regarder à nouveau les dossiers.
+Couldn't compare the folders.\n\n{0}	Les dossiers n'ont pas pu être comparés.\n\n{0}
+Choose two folders to compare, or drop them here	Choisissez deux dossiers à comparer, ou déposez-les ici
+Now choose the left folder	Choisissez maintenant le dossier de gauche
+Now choose the right folder	Choisissez maintenant le dossier de droite
+Comparing…	Comparaison…
+No more differences below.	Plus aucune différence plus bas.
+No more differences above.	Plus aucune différence plus haut.
+"{0}" is only on one side. Copy it across, or open it from its folder.	« {0} » n'est que d'un côté. Copiez-le de l'autre côté, ou ouvrez-le depuis son dossier.
+Nothing to copy: it's the same on the right already, or isn't on the left.	Rien à copier : c'est déjà identique à droite, ou ce n'est pas à gauche.
+Nothing to copy: it's the same on the left already, or isn't on the right.	Rien à copier : c'est déjà identique à gauche, ou ce n'est pas à droite.
+Nothing to copy.	Rien à copier.
+the right	la droite
+the left	la gauche
+Copy "{0}" to {1}?	Copier « {0} » vers {1} ?
+Copy {0} files to {1}?	Copier {0} fichiers vers {1} ?
+1 file there will be replaced.	1 fichier y sera remplacé.
+{0} files there will be replaced.	{0} fichiers y seront remplacés.
+The old ones are kept as .bak files next to them.	Les anciens sont gardés en fichiers .bak à côté.
+The old ones won't be kept (keeping .bak files is turned off in Settings).	Les anciens ne seront pas gardés (garder des fichiers .bak est désactivé dans Paramètres).
+Nothing is deleted on either side.	Rien n'est supprimé d'aucun côté.
+…and {0} more	…et {0} de plus
+Some files couldn't be copied:\n\n{0}	Certains fichiers n'ont pas pu être copiés :\n\n{0}
+Copied "{0}" to {1}.	« {0} » copié vers {1}.
+Copied {0} files to {1}.	{0} fichiers copiés vers {1}.
+Save the report	Enregistrer le rapport
+{0} vs {1}.html	{0} vs {1}.html
+Web page	Page web
+Saved {0}	{0} enregistré
+Couldn't save "{0}".\n\n{1}	Impossible d'enregistrer « {0} ».\n\n{1}
+Count	Count
+file that differs	fichier différent
+files that differ	fichiers différents
+Choose two files to compare	Choisissez deux fichiers à comparer
+Compare two folders: which files are the same, different, or on one side only	Comparer deux dossiers : quels fichiers sont identiques, différents, ou d'un seul côté
+Go to the previous change (Alt+Up)	Aller à la modification précédente (Alt+Haut)
+Go to the next change (Alt+Down)	Aller à la modification suivante (Alt+Bas)
+Copy the current change from the right file to the left one (Alt+Left)	Copier la modification actuelle du fichier de droite vers celui de gauche (Alt+Gauche)
 Copy the current change from the left file to the right one (Alt+Right)	Copier la modification actuelle du fichier de gauche vers celui de droite (Alt+Droite)
 Undo (Ctrl+Z) in the file you last edited	Annuler (Ctrl+Z) dans le dernier fichier modifié
 Redo (Ctrl+Y) in the file you last edited	Rétablir (Ctrl+Y) dans le dernier fichier modifié
 Options	Options
 What to ignore, how to compare, and how changes are shown	Quoi ignorer, comment comparer et comment afficher les modifications
-Swap sides	Inverser les côtés
 Put the left file on the right and the right file on the left	Mettre le fichier de gauche à droite et celui de droite à gauche
 Reload	Recharger
 Read both files from disk again (F5)	Relire les deux fichiers depuis le disque (F5)
@@ -109,13 +205,10 @@ Removed	Supprimé
 Changed	Modifié
 Moved	Déplacé
 {0} {1} is available	{0} {1} est disponible
-"{0}" is a folder. {1} compares two files.	« {0} » est un dossier. {1} compare deux fichiers.
 "{0}" has changes that aren't saved. Throw them away and open another file?	« {0} » a des modifications non enregistrées. Les abandonner et ouvrir un autre fichier ?
 "{0}" was changed by another program after it was opened here. Save over those changes?	« {0} » a été modifié par un autre programme après son ouverture ici. Enregistrer par-dessus ces modifications ?
 Some characters can't be saved in {0}, the encoding "{1}" uses. Save it as UTF-8 instead?	Certains caractères ne peuvent pas être enregistrés dans {0}, avec l'encodage « {1} ». L'enregistrer plutôt en UTF-8 ?
-Couldn't save "{0}".\n\n{1}	Impossible d'enregistrer « {0} ».\n\n{1}
 Saved {0} (the previous version is in {1}.bak)	{0} enregistré (la version précédente est dans {1}.bak)
-Saved {0}	{0} enregistré
 Save the changes to "{0}"?	Enregistrer les modifications de « {0} » ?
 Throw away the unsaved changes to "{0}" and read it from disk again?	Abandonner les modifications non enregistrées de « {0} » et le relire depuis le disque ?
 "{0}" was changed by another program and has been read again.	« {0} » a été modifié par un autre programme et a été relu.
@@ -124,7 +217,6 @@ unknown error	erreur inconnue
 Choose two files to compare, or drop them on the two sides	Choisissez deux fichiers à comparer, ou déposez-les des deux côtés
 Now choose the right file	Choisissez maintenant le fichier de droite
 Now choose the left file	Choisissez maintenant le fichier de gauche
-Comparing…	Comparaison…
 Change {0} of {1}	Modification {0} sur {1}
 {0} to go through	{0} à parcourir
 Options ({0} on)	Options ({0} actives)
@@ -141,8 +233,6 @@ Save as a patch file…	Enregistrer comme fichier de patch…
 A unified diff that turns the left file into the right one (for patch or git apply)	Un diff unifié qui transforme le fichier de gauche en celui de droite (pour patch ou git apply)
 Save as a web page report…	Enregistrer comme rapport en page web…
 Both files side by side with the changes coloured, to read in a browser or send to someone	Les deux fichiers côte à côte avec les modifications en couleur, à lire dans un navigateur ou à envoyer à quelqu'un
-Save the report	Enregistrer le rapport
-Web page	Page web
 The files are exactly the same, so there's nothing to put in a patch.	Les fichiers sont exactement identiques : il n'y a rien à mettre dans un patch.
 Save the patch	Enregistrer le patch
 {0}.patch	{0}.patch
@@ -159,9 +249,14 @@ Colour code by language (C#, Python, JSON, HTML and more)	Colorer le code selon 
 Saving	Enregistrement
 Keep the previous version as a .bak file when saving	Garder la version précédente dans un fichier .bak lors de l'enregistrement
 Saving "app.cs" first copies the old one to "app.cs.bak" next to it, replacing an older .bak.	Enregistrer « app.cs » copie d'abord l'ancien en « app.cs.bak » à côté, en remplaçant un .bak plus ancien.
+Comparing folders	Comparer des dossiers
+Files and folders with these names are left out (* stands for any letters, as in *.log). "Show left-out files" in the folder comparison shows them all.	Les fichiers et dossiers de ces noms sont laissés de côté (* remplace n'importe quelles lettres, comme dans *.log). « Afficher ce qui est laissé de côté » dans la comparaison de dossiers les montre tous.
+Names to leave out	Noms à laisser de côté
+Back to the usual list	Revenir à la liste habituelle
+Copying a file across keeps the one it replaces as a .bak file, as saving does, when that's turned on above.	Copier un fichier de l'autre côté garde celui qu'il remplace en fichier .bak, comme à l'enregistrement, si c'est activé plus haut.
 File Explorer	Explorateur de fichiers
-Add "Compare with KUDUDIFF" to files' right-click menu	Ajouter « Compare with KUDUDIFF » au menu du clic droit des fichiers
-Select two files and right-click, or pick one file now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	Sélectionnez deux fichiers et faites un clic droit, ou choisissez un fichier maintenant et l'autre plus tard. Pour votre compte Windows uniquement ; sous Windows 11, c'est dans « Afficher d'autres options ».
+Add "Compare with KUDUDIFF" to the right-click menu of files and folders	Ajouter « Compare with KUDUDIFF » au menu du clic droit des fichiers et dossiers
+Select two files (or two folders) and right-click, or pick one now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	Sélectionnez deux fichiers (ou deux dossiers) et faites un clic droit, ou choisissez-en un maintenant et l'autre plus tard. Pour votre compte Windows seulement ; sous Windows 11, c'est dans « Afficher d'autres options ».
 Updates	Mises à jour
 Check for a new KUDUDIFF version when it starts	Rechercher une nouvelle version de KUDUDIFF au démarrage
 Only asks GitHub for the latest version number. Nothing is downloaded without asking.	Demande seulement à GitHub le numéro de la dernière version. Rien n'est téléchargé sans vous le demander.
@@ -228,3 +323,7 @@ Patch	Patch
 Python	Python
 Batch	Batch
 Bash	Bash
+{0} file	{0} fichier
+{0} files	{0} fichiers
+{0} file that differs	{0} fichier différent
+{0} files that differ	{0} fichiers différents

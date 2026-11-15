@@ -1,6 +1,9 @@
+Only the first two folders are compared.	ആദ്യത്തെ രണ്ട് ഫോൾഡറുകൾ മാത്രമേ താരതമ്യം ചെയ്യുന്നുള്ളൂ.
 Only the first two files are compared.	ആദ്യത്തെ രണ്ട് ഫയലുകൾ മാത്രമേ താരതമ്യം ചെയ്യൂ.
 {0} files were chosen; the first two are compared.	{0} ഫയലുകൾ തിരഞ്ഞെടുത്തു; ആദ്യത്തെ രണ്ടെണ്ണം താരതമ്യം ചെയ്യുന്നു.
 Now choose the second file: right-click it → Compare with KUDUDIFF, drop it on the right, or use Open.	ഇനി രണ്ടാമത്തെ ഫയൽ തിരഞ്ഞെടുക്കുക: അതിൽ റൈറ്റ്-ക്ലിക്ക് ചെയ്ത് → Compare with KUDUDIFF, അല്ലെങ്കിൽ വലതുവശത്ത് ഇടുക, അല്ലെങ്കിൽ തുറക്കുക ഉപയോഗിക്കുക.
+{0} folders were chosen; the first two are compared.	{0} ഫോൾഡറുകൾ തിരഞ്ഞെടുത്തു; ആദ്യത്തെ രണ്ടെണ്ണം താരതമ്യം ചെയ്യുന്നു.
+Now choose the second folder: right-click it → Compare with KUDUDIFF, drop it here, or use Choose.	ഇനി രണ്ടാമത്തെ ഫോൾഡർ തിരഞ്ഞെടുക്കുക: അതിൽ റൈറ്റ്-ക്ലിക്ക് ചെയ്ത് → Compare with KUDUDIFF, ഇവിടെ ഇടുക, അല്ലെങ്കിൽ തിരഞ്ഞെടുക്കുക ഉപയോഗിക്കുക.
 timeout	timeout
 Something went wrong:\n\n{0}	എന്തോ പിശക് സംഭവിച്ചു:\n\n{0}
 Azeem Bukhari	Azeem Bukhari
@@ -32,6 +35,36 @@ blank lines ignored	ഒഴിഞ്ഞ വരികൾ കണക്കാക്�
 line endings compared	വരിയുടെ അവസാനങ്ങളും താരതമ്യം ചെയ്യുന്നു
 1 ignore pattern	ഒഴിവാക്കാനുള്ള 1 മാതൃക
 {0} ignore patterns	ഒഴിവാക്കാനുള്ള {0} മാതൃകകൾ
+The folder "{0}" isn't there.	"{0}" എന്ന ഫോൾഡർ അവിടെയില്ല.
+Both sides are the same folder.	രണ്ടു വശത്തും ഒരേ ഫോൾഡറാണ്.
+One folder is inside the other, so they can't be compared.	ഒരു ഫോൾഡർ മറ്റേതിന്റെ ഉള്ളിലാണ്, അതിനാൽ അവ താരതമ്യം ചെയ്യാനാകില്ല.
+Both folders are empty	രണ്ട് ഫോൾഡറുകളും ശൂന്യമാണ്
+The folders are the same: {0}	ഫോൾഡറുകൾ ഒരുപോലെയാണ്: {0}
+{0} different	{0} വ്യത്യസ്തം
+{0} only on the left	{0} ഇടതുവശത്ത് മാത്രം
+{0} only on the right	{0} വലതുവശത്ത് മാത്രം
+{0} couldn't be read	{0} വായിക്കാനായില്ല
+{0} the same	{0} ഒരുപോലെ
+Files: {0}	ഫയലുകൾ: {0}
+Same	ഒരുപോലെ
+Different	വ്യത്യസ്തം
+Only on the left	ഇടതുവശത്ത് മാത്രം
+Only on the right	വലതുവശത്ത് മാത്രം
+Couldn't be read	വായിക്കാനായില്ല
+{0}.tmp	{0}.tmp
+{0}.old	{0}.old
+{0}.bak	{0}.bak
+{0} left out	{0} ഒഴിവാക്കി
+files that are the same aren't listed	ഒരുപോലെയുള്ള ഫയലുകൾ പട്ടികയിലില്ല
+Name	പേര്
+What	എന്ത്
+Left size	ഇടത് വലിപ്പം
+Left changed	ഇടത് മാറ്റിയത്
+Right size	വലത് വലിപ്പം
+Right changed	വലത് മാറ്റിയത്
+dir	dir
+px" title="	px" title="
+Made with {0} on {1}	{1}-ന് {0} ഉപയോഗിച്ച് ഉണ്ടാക്കിയത്
 user	user
 KUDUDIFF hub	KUDUDIFF hub
 Theme	Theme
@@ -49,7 +82,6 @@ The file wasn't found: {0}	ഫയൽ കണ്ടെത്തിയില്ല:
 "{0}" is too big to compare ({1} MB; the limit is {2} MB).	"{0}" താരതമ്യം ചെയ്യാൻ കഴിയാത്തത്ര വലുതാണ് ({1} MB; പരിധി {2} MB ആണ്).
 This looks like a binary file, not text. KUDUDIFF compares text and code files.	ഇത് ടെക്സ്റ്റ് ഫയലല്ല, ഒരു ബൈനറി ഫയൽ പോലെ തോന്നുന്നു. KUDUDIFF ടെക്സ്റ്റ്, കോഡ് ഫയലുകളാണ് താരതമ്യം ചെയ്യുന്നത്.
 The file has no name yet.	ഫയലിന് ഇതുവരെ പേരില്ല.
-{0}.bak	{0}.bak
 "{0}" is read-only.	"{0}" വായിക്കാൻ മാത്രമുള്ളതാണ്.
 Windows (CRLF)	Windows (CRLF)
 Unix (LF)	Unix (LF)
@@ -73,6 +105,7 @@ Open a file…	ഒരു ഫയൽ തുറക്കുക…
 Drop the left file here	ഇടത്തെ ഫയൽ ഇവിടെ ഇടുക
 Drop the right file here	വലത്തെ ഫയൽ ഇവിടെ ഇടുക
 or	അല്ലെങ്കിൽ
+Compare two folders instead	പകരം രണ്ട് ഫോൾഡറുകൾ താരതമ്യം ചെയ്യുക
 (none)	(ഒന്നുമില്ല)
 Not chosen yet	ഇതുവരെ തിരഞ്ഞെടുത്തിട്ടില്ല
 Untitled	പേരില്ലാത്തത്
@@ -83,22 +116,85 @@ All the changes. Click to go there.	എല്ലാ മാറ്റങ്ങള�
 Error message shown: {0}	Error message shown: {0}
 All files	എല്ലാ ഫയലുകളും
 Cancel	റദ്ദാക്കുക
-Choose two files to compare	താരതമ്യം ചെയ്യാൻ രണ്ട് ഫയലുകൾ തിരഞ്ഞെടുക്കുക
+Compare folders	ഫോൾഡറുകൾ താരതമ്യം ചെയ്യുക
+Compare files	ഫയലുകൾ താരതമ്യം ചെയ്യുക
+Compare two files side by side	രണ്ട് ഫയലുകൾ അടുത്തടുത്ത് താരതമ്യം ചെയ്യുക
 Settings	ക്രമീകരണങ്ങൾ
 About	വിവരം
-Previous	മുമ്പത്തേത്
-Go to the previous change (Alt+Up)	മുമ്പത്തെ മാറ്റത്തിലേക്ക് പോകുക (Alt+Up)
-Next	അടുത്തത്
-Go to the next change (Alt+Down)	അടുത്ത മാറ്റത്തിലേക്ക് പോകുക (Alt+Down)
+Open side by side	അടുത്തടുത്ത് തുറക്കുക
+Compare the chosen file's two copies line by line (Enter, or double-click)	തിരഞ്ഞെടുത്ത ഫയലിന്റെ രണ്ട് പകർപ്പുകൾ വരിവരിയായി താരതമ്യം ചെയ്യുക (Enter, അല്ലെങ്കിൽ ഇരട്ട-ക്ലിക്ക്)
 Copy to left	ഇടത്തേക്ക് പകർത്തുക
-Copy the current change from the right file to the left one (Alt+Left)	ഇപ്പോഴത്തെ മാറ്റം വലത്തെ ഫയലിൽ നിന്ന് ഇടത്തേതിലേക്ക് പകർത്തുക (Alt+Left)
+Copy the chosen file or folder from the right to the left (Alt+Left)	തിരഞ്ഞെടുത്ത ഫയലോ ഫോൾഡറോ വലത്തുനിന്ന് ഇടത്തേക്ക് പകർത്തുക (Alt+Left)
 Copy to right	വലത്തേക്ക് പകർത്തുക
+Copy the chosen file or folder from the left to the right (Alt+Right)	തിരഞ്ഞെടുത്ത ഫയലോ ഫോൾഡറോ ഇടത്തുനിന്ന് വലത്തേക്ക് പകർത്തുക (Alt+Right)
+Previous	മുമ്പത്തേത്
+Go to the previous difference (Alt+Up)	മുമ്പത്തെ വ്യത്യാസത്തിലേക്ക് പോകുക (Alt+Up)
+Next	അടുത്തത്
+Go to the next difference (Alt+Down)	അടുത്ത വ്യത്യാസത്തിലേക്ക് പോകുക (Alt+Down)
+Swap sides	വശങ്ങൾ മാറ്റുക
+Put the left folder on the right and the right folder on the left	ഇടത് ഫോൾഡർ വലത്തും വലത് ഫോൾഡർ ഇടത്തും ആക്കുക
+Compare again	വീണ്ടും താരതമ്യം ചെയ്യുക
+Look at both folders again (F5)	രണ്ട് ഫോൾഡറുകളും വീണ്ടും നോക്കുക (F5)
+Save report	റിപ്പോർട്ട് സേവ് ചെയ്യുക
+Save the comparison as a web page, to read in a browser or send to someone	താരതമ്യം ഒരു വെബ് പേജായി സേവ് ചെയ്യുക, ബ്രൗസറിൽ വായിക്കാനോ ആർക്കെങ്കിലും അയയ്ക്കാനോ
+Hide what's the same	ഒരുപോലെയുള്ളവ മറയ്ക്കുക
+Show left-out files	ഒഴിവാക്കിയ ഫയലുകൾ കാണിക്കുക
+Also compare the files and folders that are usually left out (.git, node_modules, bin, obj… change the list in Settings)	സാധാരണ ഒഴിവാക്കുന്ന ഫയലുകളും ഫോൾഡറുകളും കൂടി താരതമ്യം ചെയ്യുക (.git, node_modules, bin, obj… പട്ടിക ക്രമീകരണങ്ങളിൽ മാറ്റാം)
+Files and folders	ഫയലുകളും ഫോൾഡറുകളും
+Drop two folders here	രണ്ട് ഫോൾഡറുകൾ ഇവിടെ ഇടുക
+or choose them one at a time	അല്ലെങ്കിൽ ഓരോന്നായി തിരഞ്ഞെടുക്കുക
+Choose the left folder…	ഇടത് ഫോൾഡർ തിരഞ്ഞെടുക്കുക…
+Choose the right folder…	വലത് ഫോൾഡർ തിരഞ്ഞെടുക്കുക…
+Files with the same name are compared by what's inside them. Nothing is changed unless you copy something across.	ഒരേ പേരുള്ള ഫയലുകൾ അവയുടെ ഉള്ളടക്കം നോക്കി താരതമ്യം ചെയ്യുന്നു. നിങ്ങൾ എന്തെങ്കിലും പകർത്തിയാലല്ലാതെ ഒന്നും മാറില്ല.
+Stop	നിർത്തുക
+Choose…	തിരഞ്ഞെടുക്കുക…
+Choose the left folder	ഇടത് ഫോൾഡർ തിരഞ്ഞെടുക്കുക
+Choose the right folder	വലത് ഫോൾഡർ തിരഞ്ഞെടുക്കുക
+Drop folders here. To compare two files, use Compare files.	ഫോൾഡറുകൾ ഇവിടെ ഇടുക. രണ്ട് ഫയലുകൾ താരതമ്യം ചെയ്യാൻ ഫയലുകൾ താരതമ്യം ചെയ്യുക ഉപയോഗിക്കുക.
+Comparing… {0}	താരതമ്യം ചെയ്യുന്നു… {0}
+Stopped. Use Compare again to look at the folders again.	നിർത്തി. ഫോൾഡറുകൾ വീണ്ടും നോക്കാൻ വീണ്ടും താരതമ്യം ചെയ്യുക ഉപയോഗിക്കുക.
+Couldn't compare the folders.\n\n{0}	ഫോൾഡറുകൾ താരതമ്യം ചെയ്യാനായില്ല.\n\n{0}
+Choose two folders to compare, or drop them here	താരതമ്യം ചെയ്യാൻ രണ്ട് ഫോൾഡറുകൾ തിരഞ്ഞെടുക്കുക, അല്ലെങ്കിൽ അവ ഇവിടെ ഇടുക
+Now choose the left folder	ഇനി ഇടത് ഫോൾഡർ തിരഞ്ഞെടുക്കുക
+Now choose the right folder	ഇനി വലത് ഫോൾഡർ തിരഞ്ഞെടുക്കുക
+Comparing…	താരതമ്യം ചെയ്യുന്നു…
+No more differences below.	താഴെ ഇനി വ്യത്യാസങ്ങളില്ല.
+No more differences above.	മുകളിൽ ഇനി വ്യത്യാസങ്ങളില്ല.
+"{0}" is only on one side. Copy it across, or open it from its folder.	"{0}" ഒരു വശത്ത് മാത്രമേയുള്ളൂ. അത് മറുവശത്തേക്ക് പകർത്തുക, അല്ലെങ്കിൽ അതിന്റെ ഫോൾഡറിൽ നിന്ന് തുറക്കുക.
+Nothing to copy: it's the same on the right already, or isn't on the left.	പകർത്താൻ ഒന്നുമില്ല: വലതുവശത്ത് ഇതിനകം ഒരുപോലെയാണ്, അല്ലെങ്കിൽ ഇടതുവശത്ത് ഇല്ല.
+Nothing to copy: it's the same on the left already, or isn't on the right.	പകർത്താൻ ഒന്നുമില്ല: ഇടതുവശത്ത് ഇതിനകം ഒരുപോലെയാണ്, അല്ലെങ്കിൽ വലതുവശത്ത് ഇല്ല.
+Nothing to copy.	പകർത്താൻ ഒന്നുമില്ല.
+the right	വലതുവശത്തേക്ക്
+the left	ഇടതുവശത്തേക്ക്
+Copy "{0}" to {1}?	"{0}" {1} പകർത്തണോ?
+Copy {0} files to {1}?	{0} ഫയലുകൾ {1} പകർത്തണോ?
+1 file there will be replaced.	അവിടെയുള്ള 1 ഫയൽ മാറ്റിവെക്കും.
+{0} files there will be replaced.	അവിടെയുള്ള {0} ഫയലുകൾ മാറ്റിവെക്കും.
+The old ones are kept as .bak files next to them.	പഴയവ അവയുടെ അരികിൽ .bak ഫയലുകളായി സൂക്ഷിക്കും.
+The old ones won't be kept (keeping .bak files is turned off in Settings).	പഴയവ സൂക്ഷിക്കില്ല (.bak ഫയലുകൾ സൂക്ഷിക്കുന്നത് ക്രമീകരണങ്ങളിൽ ഓഫാണ്).
+Nothing is deleted on either side.	ഒരു വശത്തും ഒന്നും ഇല്ലാതാക്കില്ല.
+…and {0} more	…കൂടാതെ {0} എണ്ണം കൂടി
+Some files couldn't be copied:\n\n{0}	ചില ഫയലുകൾ പകർത്താനായില്ല:\n\n{0}
+Copied "{0}" to {1}.	"{0}" {1} പകർത്തി.
+Copied {0} files to {1}.	{0} ഫയലുകൾ {1} പകർത്തി.
+Save the report	റിപ്പോർട്ട് സേവ് ചെയ്യുക
+{0} vs {1}.html	{0} vs {1}.html
+Web page	വെബ് പേജ്
+Saved {0}	{0} സേവ് ചെയ്തു
+Couldn't save "{0}".\n\n{1}	"{0}" സേവ് ചെയ്യാനായില്ല.\n\n{1}
+Count	Count
+file that differs	വ്യത്യാസമുള്ള ഫയൽ
+files that differ	വ്യത്യാസമുള്ള ഫയലുകൾ
+Choose two files to compare	താരതമ്യം ചെയ്യാൻ രണ്ട് ഫയലുകൾ തിരഞ്ഞെടുക്കുക
+Compare two folders: which files are the same, different, or on one side only	രണ്ട് ഫോൾഡറുകൾ താരതമ്യം ചെയ്യുക: ഏതൊക്കെ ഫയലുകൾ ഒരുപോലെ, വ്യത്യസ്തം, അല്ലെങ്കിൽ ഒരു വശത്ത് മാത്രം
+Go to the previous change (Alt+Up)	മുമ്പത്തെ മാറ്റത്തിലേക്ക് പോകുക (Alt+Up)
+Go to the next change (Alt+Down)	അടുത്ത മാറ്റത്തിലേക്ക് പോകുക (Alt+Down)
+Copy the current change from the right file to the left one (Alt+Left)	ഇപ്പോഴത്തെ മാറ്റം വലത്തെ ഫയലിൽ നിന്ന് ഇടത്തേതിലേക്ക് പകർത്തുക (Alt+Left)
 Copy the current change from the left file to the right one (Alt+Right)	ഇപ്പോഴത്തെ മാറ്റം ഇടത്തെ ഫയലിൽ നിന്ന് വലത്തേതിലേക്ക് പകർത്തുക (Alt+Right)
 Undo (Ctrl+Z) in the file you last edited	അവസാനം മാറ്റം വരുത്തിയ ഫയലിൽ പഴയപടിയാക്കുക (Ctrl+Z)
 Redo (Ctrl+Y) in the file you last edited	അവസാനം മാറ്റം വരുത്തിയ ഫയലിൽ വീണ്ടും ചെയ്യുക (Ctrl+Y)
 Options	ക്രമീകരണങ്ങൾ
 What to ignore, how to compare, and how changes are shown	എന്ത് ഒഴിവാക്കണം, എങ്ങനെ താരതമ്യം ചെയ്യണം, മാറ്റങ്ങൾ എങ്ങനെ കാണിക്കണം
-Swap sides	വശങ്ങൾ മാറ്റുക
 Put the left file on the right and the right file on the left	ഇടത്തെ ഫയൽ വലത്തും വലത്തെ ഫയൽ ഇടത്തും ആക്കുക
 Reload	വീണ്ടും വായിക്കുക
 Read both files from disk again (F5)	രണ്ട് ഫയലുകളും ഡിസ്കിൽ നിന്ന് വീണ്ടും വായിക്കുക (F5)
@@ -109,13 +205,10 @@ Removed	നീക്കിയത്
 Changed	മാറ്റിയത്
 Moved	സ്ഥാനം മാറ്റിയത്
 {0} {1} is available	{0} {1} ലഭ്യമാണ്
-"{0}" is a folder. {1} compares two files.	"{0}" ഒരു ഫോൾഡറാണ്. {1} രണ്ട് ഫയലുകളാണ് താരതമ്യം ചെയ്യുന്നത്.
 "{0}" has changes that aren't saved. Throw them away and open another file?	"{0}"-ൽ സേവ് ചെയ്യാത്ത മാറ്റങ്ങളുണ്ട്. അവ കളഞ്ഞ് മറ്റൊരു ഫയൽ തുറക്കണോ?
 "{0}" was changed by another program after it was opened here. Save over those changes?	"{0}" ഇവിടെ തുറന്നശേഷം മറ്റൊരു പ്രോഗ്രാം അതിൽ മാറ്റം വരുത്തി. ആ മാറ്റങ്ങൾക്ക് മുകളിൽ സേവ് ചെയ്യണോ?
 Some characters can't be saved in {0}, the encoding "{1}" uses. Save it as UTF-8 instead?	ചില അക്ഷരങ്ങൾ {0} ഉപയോഗിക്കുന്ന "{1}" എൻകോഡിങ്ങിൽ സേവ് ചെയ്യാനാവില്ല. പകരം UTF-8 ആയി സേവ് ചെയ്യണോ?
-Couldn't save "{0}".\n\n{1}	"{0}" സേവ് ചെയ്യാനായില്ല.\n\n{1}
 Saved {0} (the previous version is in {1}.bak)	{0} സേവ് ചെയ്തു (പഴയ പതിപ്പ് {1}.bak-ൽ ഉണ്ട്)
-Saved {0}	{0} സേവ് ചെയ്തു
 Save the changes to "{0}"?	"{0}"-ലെ മാറ്റങ്ങൾ സേവ് ചെയ്യണോ?
 Throw away the unsaved changes to "{0}" and read it from disk again?	"{0}"-ലെ സേവ് ചെയ്യാത്ത മാറ്റങ്ങൾ കളഞ്ഞ് ഡിസ്കിൽ നിന്ന് വീണ്ടും വായിക്കണോ?
 "{0}" was changed by another program and has been read again.	"{0}" മറ്റൊരു പ്രോഗ്രാം മാറ്റിയതിനാൽ വീണ്ടും വായിച്ചു.
@@ -124,7 +217,6 @@ unknown error	അറിയാത്ത പിശക്
 Choose two files to compare, or drop them on the two sides	താരതമ്യം ചെയ്യാൻ രണ്ട് ഫയലുകൾ തിരഞ്ഞെടുക്കുക, അല്ലെങ്കിൽ ഇരുവശത്തും ഇടുക
 Now choose the right file	ഇനി വലത്തെ ഫയൽ തിരഞ്ഞെടുക്കുക
 Now choose the left file	ഇനി ഇടത്തെ ഫയൽ തിരഞ്ഞെടുക്കുക
-Comparing…	താരതമ്യം ചെയ്യുന്നു…
 Change {0} of {1}	മാറ്റം {0} / {1}
 {0} to go through	{0} എണ്ണം നോക്കാനുണ്ട്
 Options ({0} on)	ക്രമീകരണങ്ങൾ ({0} ഓൺ)
@@ -141,8 +233,6 @@ Save as a patch file…	പാച്ച് ഫയലായി സേവ് ച�
 A unified diff that turns the left file into the right one (for patch or git apply)	ഇടത്തെ ഫയലിനെ വലത്തേതാക്കി മാറ്റുന്ന ഒരു unified diff (patch, git apply എന്നിവയ്ക്ക്)
 Save as a web page report…	വെബ് പേജ് റിപ്പോർട്ടായി സേവ് ചെയ്യുക…
 Both files side by side with the changes coloured, to read in a browser or send to someone	രണ്ട് ഫയലുകളും അടുത്തടുത്ത്, മാറ്റങ്ങൾ നിറത്തിൽ; ബ്രൗസറിൽ വായിക്കാനോ ആർക്കെങ്കിലും അയയ്ക്കാനോ
-Save the report	റിപ്പോർട്ട് സേവ് ചെയ്യുക
-Web page	വെബ് പേജ്
 The files are exactly the same, so there's nothing to put in a patch.	ഫയലുകൾ കൃത്യമായി ഒരുപോലെയാണ്, അതിനാൽ പാച്ചിൽ ചേർക്കാൻ ഒന്നുമില്ല.
 Save the patch	പാച്ച് സേവ് ചെയ്യുക
 {0}.patch	{0}.patch
@@ -159,9 +249,14 @@ Colour code by language (C#, Python, JSON, HTML and more)	ഭാഷയനുസ�
 Saving	സേവ് ചെയ്യൽ
 Keep the previous version as a .bak file when saving	സേവ് ചെയ്യുമ്പോൾ പഴയ പതിപ്പ് ഒരു .bak ഫയലായി സൂക്ഷിക്കുക
 Saving "app.cs" first copies the old one to "app.cs.bak" next to it, replacing an older .bak.	"app.cs" സേവ് ചെയ്യുമ്പോൾ ആദ്യം പഴയത് അതിനടുത്ത് "app.cs.bak" ആയി പകർത്തും; പഴയ .bak മാറ്റിയെഴുതും.
+Comparing folders	ഫോൾഡറുകൾ താരതമ്യം ചെയ്യുമ്പോൾ
+Files and folders with these names are left out (* stands for any letters, as in *.log). "Show left-out files" in the folder comparison shows them all.	ഈ പേരുകളുള്ള ഫയലുകളും ഫോൾഡറുകളും ഒഴിവാക്കുന്നു (* ഏത് അക്ഷരങ്ങൾക്കും പകരം, *.log പോലെ). ഫോൾഡർ താരതമ്യത്തിലെ "ഒഴിവാക്കിയ ഫയലുകൾ കാണിക്കുക" എല്ലാം കാണിക്കും.
+Names to leave out	ഒഴിവാക്കേണ്ട പേരുകൾ
+Back to the usual list	സാധാരണ പട്ടികയിലേക്ക് മടങ്ങുക
+Copying a file across keeps the one it replaces as a .bak file, as saving does, when that's turned on above.	ഒരു ഫയൽ മറുവശത്തേക്ക് പകർത്തുമ്പോൾ, മുകളിൽ അത് ഓണാണെങ്കിൽ, സേവ് ചെയ്യുമ്പോഴെന്നപോലെ മാറ്റിവെക്കുന്ന ഫയൽ .bak ആയി സൂക്ഷിക്കും.
 File Explorer	ഫയൽ എക്സ്പ്ലോറർ
-Add "Compare with KUDUDIFF" to files' right-click menu	ഫയലുകളുടെ റൈറ്റ്-ക്ലിക്ക് മെനുവിൽ "Compare with KUDUDIFF" ചേർക്കുക
-Select two files and right-click, or pick one file now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	രണ്ട് ഫയലുകൾ തിരഞ്ഞെടുത്ത് റൈറ്റ്-ക്ലിക്ക് ചെയ്യുക, അല്ലെങ്കിൽ ഇപ്പോൾ ഒന്നും പിന്നീട് മറ്റേതും തിരഞ്ഞെടുക്കുക. നിങ്ങളുടെ വിൻഡോസ് അക്കൗണ്ടിന് മാത്രം; വിൻഡോസ് 11-ൽ ഇത് "Show more options"-ന് കീഴിലാണ്.
+Add "Compare with KUDUDIFF" to the right-click menu of files and folders	ഫയലുകളുടെയും ഫോൾഡറുകളുടെയും റൈറ്റ്-ക്ലിക്ക് മെനുവിൽ "Compare with KUDUDIFF" ചേർക്കുക
+Select two files (or two folders) and right-click, or pick one now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	രണ്ട് ഫയലുകൾ (അല്ലെങ്കിൽ രണ്ട് ഫോൾഡറുകൾ) തിരഞ്ഞെടുത്ത് റൈറ്റ്-ക്ലിക്ക് ചെയ്യുക, അല്ലെങ്കിൽ ഒന്ന് ഇപ്പോഴും മറ്റേത് പിന്നീടും തിരഞ്ഞെടുക്കുക. നിങ്ങളുടെ Windows അക്കൗണ്ടിന് മാത്രം; Windows 11-ൽ "Show more options"-ന് കീഴിലാണ്.
 Updates	അപ്ഡേറ്റുകൾ
 Check for a new KUDUDIFF version when it starts	തുറക്കുമ്പോൾ KUDUDIFF-ന്റെ പുതിയ പതിപ്പുണ്ടോ എന്ന് നോക്കുക
 Only asks GitHub for the latest version number. Nothing is downloaded without asking.	ഏറ്റവും പുതിയ പതിപ്പിന്റെ നമ്പർ മാത്രമേ GitHub-നോട് ചോദിക്കൂ. ചോദിക്കാതെ ഒന്നും ഡൗൺലോഡ് ചെയ്യില്ല.
@@ -228,3 +323,7 @@ Patch	Patch
 Python	Python
 Batch	Batch
 Bash	Bash
+{0} file	{0} ഫയൽ
+{0} files	{0} ഫയലുകൾ
+{0} file that differs	വ്യത്യാസമുള്ള {0} ഫയൽ
+{0} files that differ	വ്യത്യാസമുള്ള {0} ഫയലുകൾ

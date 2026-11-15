@@ -101,6 +101,13 @@ namespace Kududiff.Views
             foreach (FrameworkElement child in drop.Children) child.HorizontalAlignment = HorizontalAlignment.Center;
             drop.HorizontalAlignment = HorizontalAlignment.Center;
             drop.VerticalAlignment = VerticalAlignment.Center;
+            if (side == Side.Left)
+            {
+                var folders = Ui.Link("Compare two folders instead", (s, e) => App.ShowFolderWindow());
+                folders.Margin = new Thickness(0, 14, 0, 0);
+                drop.Children.Add(folders);
+                folders.HorizontalAlignment = HorizontalAlignment.Center;
+            }
             var dropContent = new StackPanel();
             dropContent.Children.Add(drop);
             if (side == Side.Left) dropContent.Children.Add(owner.RecentPanel());
