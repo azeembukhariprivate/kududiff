@@ -204,12 +204,12 @@ namespace Kududiff.Tests
 
         private static void TestFolderReport()
         {
-            var left = MakeFolder("rep-left", ("a.txt", "1"), ("b <x>.txt", "2"), ("same.txt", "s"));
+            var left = MakeFolder("rep-left", ("a.txt", "1"), ("b & c.txt", "2"), ("same.txt", "s"));
             var right = MakeFolder("rep-right", ("a.txt", "3"), ("same.txt", "s"));
             var cmp = FolderComparison.Run(left, right, new FolderOptions());
             var html = FolderReport.Html(cmp, false, new DateTime(2026, 11, 15, 10, 0, 0));
             Check(html.StartsWith("<!DOCTYPE html>") && html.Contains("a.txt") && html.Contains("same.txt"), "every file is listed");
-            Check(html.Contains("b &lt;x&gt;.txt") && !html.Contains("b <x>.txt"), "names are written safely");
+            Check(html.Contains("b &amp; c.txt") && !html.Contains("b & c.txt"), "names are written safely");
             Check(html.Contains("Only on the left") && html.Contains("Different"), "what each is like");
             Check(html.Contains("15 November 2026"), "when it was made");
             var hidden = FolderReport.Html(cmp, true, DateTime.Now);
