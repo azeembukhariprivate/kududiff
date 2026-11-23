@@ -3,7 +3,7 @@ Only the first two files are compared.	ആദ്യത്തെ രണ്ട് 
 {0} files were chosen; the first two are compared.	{0} ഫയലുകൾ തിരഞ്ഞെടുത്തു; ആദ്യത്തെ രണ്ടെണ്ണം താരതമ്യം ചെയ്യുന്നു.
 Now choose the second file: right-click it → Compare with KUDUDIFF, drop it on the right, or use Open.	ഇനി രണ്ടാമത്തെ ഫയൽ തിരഞ്ഞെടുക്കുക: അതിൽ റൈറ്റ്-ക്ലിക്ക് ചെയ്ത് → Compare with KUDUDIFF, അല്ലെങ്കിൽ വലതുവശത്ത് ഇടുക, അല്ലെങ്കിൽ തുറക്കുക ഉപയോഗിക്കുക.
 {0} folders were chosen; the first two are compared.	{0} ഫോൾഡറുകൾ തിരഞ്ഞെടുത്തു; ആദ്യത്തെ രണ്ടെണ്ണം താരതമ്യം ചെയ്യുന്നു.
-Now choose the second folder: right-click it → Compare with KUDUDIFF, drop it here, or use Choose.	ഇനി രണ്ടാമത്തെ ഫോൾഡർ തിരഞ്ഞെടുക്കുക: അതിൽ റൈറ്റ്-ക്ലിക്ക് ചെയ്ത് → Compare with KUDUDIFF, ഇവിടെ ഇടുക, അല്ലെങ്കിൽ തിരഞ്ഞെടുക്കുക ഉപയോഗിക്കുക.
+Now choose the second folder: right-click it → Compare with KUDUDIFF, drop it here, or use Choose.	ഇനി രണ്ടാമത്തെ ഫോൾഡർ തിരഞ്ഞെടുക്കുക: അതിൽ റൈറ്റ്-ക്ലിക്ക് ചെയ്ത് → Compare with KUDUDIFF, അല്ലെങ്കിൽ ഇവിടെ ഇടുക, അല്ലെങ്കിൽ ‘തിരഞ്ഞെടുക്കുക’ ഉപയോഗിക്കുക.
 timeout	timeout
 Something went wrong:\n\n{0}	എന്തോ പിശക് സംഭവിച്ചു:\n\n{0}
 Azeem Bukhari	Azeem Bukhari
@@ -57,11 +57,11 @@ Couldn't be read	വായിക്കാനായില്ല
 {0} left out	{0} ഒഴിവാക്കി
 files that are the same aren't listed	ഒരുപോലെയുള്ള ഫയലുകൾ പട്ടികയിലില്ല
 Name	പേര്
-What	എന്ത്
+What	അവസ്ഥ
 Left size	ഇടത് വലിപ്പം
-Left changed	ഇടത് മാറ്റിയത്
+Left changed	ഇടത് മാറ്റിയ സമയം
 Right size	വലത് വലിപ്പം
-Right changed	വലത് മാറ്റിയത്
+Right changed	വലത് മാറ്റിയ സമയം
 dir	dir
 px" title="	px" title="
 Made with {0} on {1}	{1}-ന് {0} ഉപയോഗിച്ച് ഉണ്ടാക്കിയത്
@@ -150,9 +150,9 @@ Stop	നിർത്തുക
 Choose…	തിരഞ്ഞെടുക്കുക…
 Choose the left folder	ഇടത് ഫോൾഡർ തിരഞ്ഞെടുക്കുക
 Choose the right folder	വലത് ഫോൾഡർ തിരഞ്ഞെടുക്കുക
-Drop folders here. To compare two files, use Compare files.	ഫോൾഡറുകൾ ഇവിടെ ഇടുക. രണ്ട് ഫയലുകൾ താരതമ്യം ചെയ്യാൻ ഫയലുകൾ താരതമ്യം ചെയ്യുക ഉപയോഗിക്കുക.
+Drop folders here. To compare two files, use Compare files.	ഫോൾഡറുകൾ ഇവിടെ ഇടുക. രണ്ട് ഫയലുകൾ താരതമ്യം ചെയ്യാൻ ‘ഫയലുകൾ താരതമ്യം ചെയ്യുക’ ഉപയോഗിക്കുക.
 Comparing… {0}	താരതമ്യം ചെയ്യുന്നു… {0}
-Stopped. Use Compare again to look at the folders again.	നിർത്തി. ഫോൾഡറുകൾ വീണ്ടും നോക്കാൻ വീണ്ടും താരതമ്യം ചെയ്യുക ഉപയോഗിക്കുക.
+Stopped. Use Compare again to look at the folders again.	നിർത്തി. ഫോൾഡറുകൾ വീണ്ടും നോക്കാൻ ‘വീണ്ടും താരതമ്യം ചെയ്യുക’ ഉപയോഗിക്കുക.
 Couldn't compare the folders.\n\n{0}	ഫോൾഡറുകൾ താരതമ്യം ചെയ്യാനായില്ല.\n\n{0}
 Choose two folders to compare, or drop them here	താരതമ്യം ചെയ്യാൻ രണ്ട് ഫോൾഡറുകൾ തിരഞ്ഞെടുക്കുക, അല്ലെങ്കിൽ അവ ഇവിടെ ഇടുക
 Now choose the left folder	ഇനി ഇടത് ഫോൾഡർ തിരഞ്ഞെടുക്കുക
@@ -168,8 +168,8 @@ the right	വലതുവശത്തേക്ക്
 the left	ഇടതുവശത്തേക്ക്
 Copy "{0}" to {1}?	"{0}" {1} പകർത്തണോ?
 Copy {0} files to {1}?	{0} ഫയലുകൾ {1} പകർത്തണോ?
-1 file there will be replaced.	അവിടെയുള്ള 1 ഫയൽ മാറ്റിവെക്കും.
-{0} files there will be replaced.	അവിടെയുള്ള {0} ഫയലുകൾ മാറ്റിവെക്കും.
+1 file there will be replaced.	അവിടെയുള്ള 1 ഫയൽ മാറ്റിസ്ഥാപിക്കും.
+{0} files there will be replaced.	അവിടെയുള്ള {0} ഫയലുകൾ മാറ്റിസ്ഥാപിക്കും.
 The old ones are kept as .bak files next to them.	പഴയവ അവയുടെ അരികിൽ .bak ഫയലുകളായി സൂക്ഷിക്കും.
 The old ones won't be kept (keeping .bak files is turned off in Settings).	പഴയവ സൂക്ഷിക്കില്ല (.bak ഫയലുകൾ സൂക്ഷിക്കുന്നത് ക്രമീകരണങ്ങളിൽ ഓഫാണ്).
 Nothing is deleted on either side.	ഒരു വശത്തും ഒന്നും ഇല്ലാതാക്കില്ല.
@@ -253,7 +253,7 @@ Comparing folders	ഫോൾഡറുകൾ താരതമ്യം ചെയ്
 Files and folders with these names are left out (* stands for any letters, as in *.log). "Show left-out files" in the folder comparison shows them all.	ഈ പേരുകളുള്ള ഫയലുകളും ഫോൾഡറുകളും ഒഴിവാക്കുന്നു (* ഏത് അക്ഷരങ്ങൾക്കും പകരം, *.log പോലെ). ഫോൾഡർ താരതമ്യത്തിലെ "ഒഴിവാക്കിയ ഫയലുകൾ കാണിക്കുക" എല്ലാം കാണിക്കും.
 Names to leave out	ഒഴിവാക്കേണ്ട പേരുകൾ
 Back to the usual list	സാധാരണ പട്ടികയിലേക്ക് മടങ്ങുക
-Copying a file across keeps the one it replaces as a .bak file, as saving does, when that's turned on above.	ഒരു ഫയൽ മറുവശത്തേക്ക് പകർത്തുമ്പോൾ, മുകളിൽ അത് ഓണാണെങ്കിൽ, സേവ് ചെയ്യുമ്പോഴെന്നപോലെ മാറ്റിവെക്കുന്ന ഫയൽ .bak ആയി സൂക്ഷിക്കും.
+Copying a file across keeps the one it replaces as a .bak file, as saving does, when that's turned on above.	മുകളിൽ അത് ഓണാണെങ്കിൽ, ഒരു ഫയൽ മറുവശത്തേക്ക് പകർത്തുമ്പോൾ, സേവ് ചെയ്യുമ്പോഴെന്നപോലെ, മാറ്റിസ്ഥാപിക്കപ്പെടുന്ന ഫയൽ .bak ആയി സൂക്ഷിക്കും.
 File Explorer	ഫയൽ എക്സ്പ്ലോറർ
 Add "Compare with KUDUDIFF" to the right-click menu of files and folders	ഫയലുകളുടെയും ഫോൾഡറുകളുടെയും റൈറ്റ്-ക്ലിക്ക് മെനുവിൽ "Compare with KUDUDIFF" ചേർക്കുക
 Select two files (or two folders) and right-click, or pick one now and the other later. For your Windows account only; on Windows 11 it's under "Show more options".	രണ്ട് ഫയലുകൾ (അല്ലെങ്കിൽ രണ്ട് ഫോൾഡറുകൾ) തിരഞ്ഞെടുത്ത് റൈറ്റ്-ക്ലിക്ക് ചെയ്യുക, അല്ലെങ്കിൽ ഒന്ന് ഇപ്പോഴും മറ്റേത് പിന്നീടും തിരഞ്ഞെടുക്കുക. നിങ്ങളുടെ Windows അക്കൗണ്ടിന് മാത്രം; Windows 11-ൽ "Show more options"-ന് കീഴിലാണ്.
@@ -352,7 +352,7 @@ Page {0}	പേജ് {0}
 "{0}" is an older Word, Excel or PowerPoint file (from before 2007), which KUDUDIFF can't read. Open it in Office and save it in the newer kind (.docx, .xlsx or .pptx), then compare that.	"{0}" ഒരു പഴയ Word, Excel അല്ലെങ്കിൽ PowerPoint ഫയൽ ആണ് (2007-ന് മുമ്പുള്ളത്), KUDUDIFF-ന് അത് വായിക്കാനാവില്ല. അത് Office-ൽ തുറന്ന് പുതിയ തരത്തിൽ (.docx, .xlsx അല്ലെങ്കിൽ .pptx) സേവ് ചെയ്യുക, എന്നിട്ട് അത് താരതമ്യം ചെയ്യുക.
 A Word, Excel, PowerPoint or PDF file is only shown as text, never saved.	Word, Excel, PowerPoint അല്ലെങ്കിൽ PDF ഫയൽ ടെക്സ്റ്റായി കാണിക്കുക മാത്രമേ ചെയ്യൂ, ഒരിക്കലും സേവ് ചെയ്യില്ല.
 {0}, shown as text · look only	{0}, ടെക്സ്റ്റായി കാണിക്കുന്നു · കാണാൻ മാത്രം
-"{0}" is a {1} shown as text: it can be looked at, not changed.	"{0}" ടെക്സ്റ്റായി കാണിക്കുന്ന ഒരു {1} ആണ്: അത് കാണാം, മാറ്റാനാവില്ല.
+"{0}" is a {1} shown as text: it can be looked at, not changed.	"{0}" ടെക്സ്റ്റായി കാണിക്കുന്ന ഒരു {1} ആണ്: അത് നോക്കാം, മാറ്റാനാവില്ല.
 Word, Excel, PowerPoint and PDF files	Word, Excel, PowerPoint, PDF ഫയലുകൾ
-They're compared as text, and can be looked at but not changed.	അവ ടെക്സ്റ്റായി താരതമ്യം ചെയ്യുന്നു, കാണാം, പക്ഷേ മാറ്റാനാവില്ല.
+They're compared as text, and can be looked at but not changed.	അവ ടെക്സ്റ്റായാണ് താരതമ്യം ചെയ്യുന്നത്; നോക്കാം, പക്ഷേ മാറ്റാനാവില്ല.
 Excel: compare formulas too (each formula is shown after the cell's value)	Excel: ഫോർമുലകളും താരതമ്യം ചെയ്യുക (ഓരോ ഫോർമുലയും സെല്ലിന്റെ മൂല്യത്തിന് ശേഷം കാണിക്കും)
