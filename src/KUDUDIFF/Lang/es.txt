@@ -327,3 +327,32 @@ Bash	Bash
 {0} files	{0} archivos
 {0} file that differs	{0} archivo diferente
 {0} files that differ	{0} archivos diferentes
+Word document	Documento de Word
+Excel workbook	Libro de Excel
+PowerPoint presentation	Presentación de PowerPoint
+Text document	Documento de texto
+Spreadsheet	Hoja de cálculo
+Presentation	Presentación
+"{0}" couldn't be read: it isn't a whole {1} file (it may be damaged, or locked with a password).	No se pudo leer "{0}": no es un archivo {1} completo (puede estar dañado o protegido con contraseña).
+There's no text in this Word document.	Este documento de Word no tiene texto.
+Headers	Encabezados
+Footers	Pies de página
+Footnotes	Notas al pie
+Endnotes	Notas al final
+There are no sheets in this Excel workbook.	Este libro de Excel no tiene hojas.
+Sheet:	Hoja:
+There are no slides in this PowerPoint presentation.	Esta presentación de PowerPoint no tiene diapositivas.
+Slide {0}	Diapositiva {0}
+Notes:	Notas:
+There's no content in this file.	Este archivo no tiene contenido.
+Page {0}	Página {0}
+"{0}" has no text in it, probably a scan. (KUDUCK can turn a scan into a PDF with text, which can then be compared.)	"{0}" no tiene texto, probablemente es un escaneo. (KUDUCK puede convertir un escaneo en un PDF con texto, que luego se puede comparar.)
+"{0}" is locked with a password, so its text can't be read.	"{0}" está protegido con contraseña, así que no se puede leer su texto.
+"{0}" couldn't be read: it isn't a whole PDF file (it may be damaged).	No se pudo leer "{0}": no es un archivo PDF completo (puede estar dañado).
+"{0}" is an older Word, Excel or PowerPoint file (from before 2007), which KUDUDIFF can't read. Open it in Office and save it in the newer kind (.docx, .xlsx or .pptx), then compare that.	"{0}" es un archivo antiguo de Word, Excel o PowerPoint (de antes de 2007), que KUDUDIFF no puede leer. Ábrelo en Office, guárdalo en el tipo nuevo (.docx, .xlsx o .pptx) y compara ese.
+A Word, Excel, PowerPoint or PDF file is only shown as text, never saved.	Un archivo de Word, Excel, PowerPoint o PDF solo se muestra como texto, nunca se guarda.
+{0}, shown as text · look only	{0}, mostrado como texto · solo para ver
+"{0}" is a {1} shown as text: it can be looked at, not changed.	"{0}" es un {1} mostrado como texto: se puede ver, no cambiar.
+Word, Excel, PowerPoint and PDF files	Archivos de Word, Excel, PowerPoint y PDF
+They're compared as text, and can be looked at but not changed.	Se comparan como texto, y se pueden ver pero no cambiar.
+Excel: compare formulas too (each formula is shown after the cell's value)	Excel: comparar también las fórmulas (cada fórmula se muestra tras el valor de la celda)

@@ -9,7 +9,7 @@ using Kududiff.Core;
 
 namespace Kududiff.Tests
 {
-    public static class Program
+    public static partial class Program
     {
         private static int _failed;
         private static int _passed;

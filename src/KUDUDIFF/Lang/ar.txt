@@ -327,3 +327,32 @@ Bash	Bash
 {0} files	{0} ملفات
 {0} file that differs	{0} ملف مختلف
 {0} files that differ	{0} ملفات مختلفة
+Word document	مستند Word
+Excel workbook	مصنف Excel
+PowerPoint presentation	عرض PowerPoint
+Text document	مستند نصي
+Spreadsheet	جدول بيانات
+Presentation	عرض تقديمي
+"{0}" couldn't be read: it isn't a whole {1} file (it may be damaged, or locked with a password).	تعذّرت قراءة "{0}": ليس ملف {1} كاملًا (قد يكون تالفًا أو مقفلًا بكلمة مرور).
+There's no text in this Word document.	لا يوجد نص في مستند Word هذا.
+Headers	الرؤوس
+Footers	التذييلات
+Footnotes	الحواشي السفلية
+Endnotes	التعليقات الختامية
+There are no sheets in this Excel workbook.	لا توجد أوراق في مصنف Excel هذا.
+Sheet:	الورقة:
+There are no slides in this PowerPoint presentation.	لا توجد شرائح في عرض PowerPoint هذا.
+Slide {0}	الشريحة {0}
+Notes:	الملاحظات:
+There's no content in this file.	لا يوجد محتوى في هذا الملف.
+Page {0}	الصفحة {0}
+"{0}" has no text in it, probably a scan. (KUDUCK can turn a scan into a PDF with text, which can then be compared.)	لا يوجد نص في "{0}"، ربما هو مسح ضوئي. (يمكن لـ KUDUCK تحويل المسح إلى PDF فيه نص، ثم يمكن مقارنته.)
+"{0}" is locked with a password, so its text can't be read.	"{0}" مقفل بكلمة مرور، لذلك لا يمكن قراءة نصه.
+"{0}" couldn't be read: it isn't a whole PDF file (it may be damaged).	تعذّرت قراءة "{0}": ليس ملف PDF كاملًا (قد يكون تالفًا).
+"{0}" is an older Word, Excel or PowerPoint file (from before 2007), which KUDUDIFF can't read. Open it in Office and save it in the newer kind (.docx, .xlsx or .pptx), then compare that.	"{0}" ملف Word أو Excel أو PowerPoint قديم (من قبل 2007)، لا يستطيع KUDUDIFF قراءته. افتحه في Office واحفظه بالنوع الأحدث (.docx أو .xlsx أو .pptx)، ثم قارن ذلك.
+A Word, Excel, PowerPoint or PDF file is only shown as text, never saved.	ملف Word أو Excel أو PowerPoint أو PDF يُعرض كنص فقط، ولا يُحفظ أبدًا.
+{0}, shown as text · look only	{0}، معروض كنص · للعرض فقط
+"{0}" is a {1} shown as text: it can be looked at, not changed.	"{0}" هو {1} معروض كنص: يمكن النظر إليه، لا تغييره.
+Word, Excel, PowerPoint and PDF files	ملفات Word وExcel وPowerPoint وPDF
+They're compared as text, and can be looked at but not changed.	تُقارن كنص، ويمكن النظر إليها دون تغييرها.
+Excel: compare formulas too (each formula is shown after the cell's value)	Excel: قارن الصيغ أيضًا (تُعرض كل صيغة بعد قيمة الخلية)

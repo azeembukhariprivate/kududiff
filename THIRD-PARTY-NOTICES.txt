@@ -5,7 +5,7 @@ KUDUDIFF is released under the MIT License (see LICENSE.txt).
 Its comparison engine (the Myers and patience methods, changed words and
 characters, moved code, patches and reports) is its own code.
 
-It includes the following third-party component:
+It includes the following third-party components:
 
 1. AvalonEdit 6.3.1
 -------------------
@@ -36,6 +36,18 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 The syntax colouring definitions for C#, C++, CSS, HTML, Java, JavaScript,
 JSON, Markdown, PHP, PowerShell, Python, SQL, VB and XML come with AvalonEdit.
 Those for YAML, INI, batch files and Bash are KUDUDIFF's own.
+
+1b. PdfPig 0.1.16 (UglyToad.PdfPig*.dll)
+----------------------------------------
+Reads the text of PDF files, so they can be compared.
+Apache License 2.0. Copyright (c) 2017-2026 the PdfPig contributors (UglyToad).
+https://github.com/UglyToad/PdfPig
+https://www.apache.org/licenses/LICENSE-2.0
+
+PdfPig brings these small Microsoft libraries, under the MIT License
+(Copyright (c) .NET Foundation and Contributors, https://github.com/dotnet/runtime):
+Microsoft.Bcl.HashCode.dll, System.Buffers.dll, System.Memory.dll,
+System.Numerics.Vectors.dll, System.Runtime.CompilerServices.Unsafe.dll.
 
 It uses the following part of Windows, which is NOT included with KUDUDIFF:
 

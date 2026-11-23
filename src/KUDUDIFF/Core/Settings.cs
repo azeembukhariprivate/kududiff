@@ -107,6 +107,13 @@ namespace Kududiff.Core
             set => SetBool("SyntaxColours", value);
         }
 
+        /// <summary>Excel and spreadsheet files: compare each cell's formula too, not only what it shows.</summary>
+        public static bool CompareFormulas
+        {
+            get => GetBool("CompareFormulas", false);
+            set => SetBool("CompareFormulas", value);
+        }
+
         public static string LastFolder
         {
             get => Get("LastFolder", string.Empty);

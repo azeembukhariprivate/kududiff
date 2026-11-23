@@ -317,6 +317,57 @@ namespace Demo
                 Pump();
             });
 
+            Step("Word, Excel, PowerPoint and PDF files, shown as text", () =>
+            {
+                var docs = Path.Combine(_temp, "Documents");
+                Directory.CreateDirectory(docs);
+                string Put(string name, byte[] data) { var p = Path.Combine(docs, name); File.WriteAllBytes(p, data); return p; }
+                var a = Put("Letter old.docx", SampleDocuments.Word(new[] { "Dear Azeem,", "Name | Price", "The boat race is on Sunday.", "See you there." }));
+                var b = Put("Letter.docx", SampleDocuments.Word(new[] { "Dear Azeem,", "Name | Price | Seats", "The boat race is on Saturday.", "See you there." }, inserted: "new"));
+                var before = File.ReadAllBytes(b);
+                main.Open(a, b);
+                Idle(main);
+                Expect(main.LeftSide.File.IsDocument && main.RightSide.File.IsDocument, "both read as Word documents");
+                Expect(main.LeftSide.Editor.IsReadOnly && main.RightSide.Editor.IsReadOnly, "look only");
+                Expect(main.Changes.Count >= 2, "changes found, got " + main.Changes.Count);
+                var right = main.RightSide.Text;
+                main.CopyChange(0, false);
+                main.CopyChange(0, true);
+                Idle(main);
+                Expect(main.RightSide.Text == right && !main.LeftSide.IsDirty && !main.RightSide.IsDirty, "nothing copied into them");
+                Expect(!main.Save(main.RightSide, false), "never saved");
+                Expect(File.ReadAllBytes(b).SequenceEqual(before) && !File.Exists(b + ".bak"), "the file untouched");
+                Screenshots.One(main, "Two Word documents");
+
+                var x1 = Put("Prices old.xlsx", SampleDocuments.Excel(("Prices", new[] { new[] { "Item", "Price" }, new[] { "Rice", "3.5" }, new[] { "Total", "3.5=SUM(B2:B2)" } })));
+                var x2 = Put("Prices.xlsx", SampleDocuments.Excel(("Prices", new[] { new[] { "Item", "Price" }, new[] { "Rice", "3.75" }, new[] { "Total", "3.75=SUM(B2:B3)" } })));
+                main.Open(x1, x2);
+                Idle(main);
+                Expect(main.RightSide.Text.Contains("A2  Rice | 3.75"), "Excel rows: " + main.RightSide.Text);
+                DocumentText.ShowFormulas = true;
+                try
+                {
+                    main.ReloadForTest();
+                    Idle(main);
+                    Expect(main.RightSide.Text.Contains("(=SUM(B2:B3))"), "formulas when asked");
+                }
+                finally
+                {
+                    DocumentText.ShowFormulas = false;
+                    main.ReloadForTest();
+                    Idle(main);
+                }
+                Screenshots.One(main, "Two Excel workbooks");
+
+                var p1 = Put("Results old.pdf", SampleDocuments.Pdf(new[] { "Boat race results", "1. Kerala Blue", "2. River Queen" }));
+                var p2 = Put("Results.pdf", SampleDocuments.Pdf(new[] { "Boat race results", "1. River Queen", "2. Kerala Blue" }));
+                main.Open(p1, p2);
+                Idle(main);
+                Expect(main.LeftSide.File.DocumentKind == "PDF" && main.Changes.Count >= 1, "PDF text compared");
+                Expect(main.LeftSide.Text.StartsWith("Page 1\nBoat race results"), "page by page: " + main.LeftSide.Text);
+                Screenshots.One(main, "Two PDF files");
+            });
+
             Step("Back to the code files", () =>
             {
                 main.Open(left, right);

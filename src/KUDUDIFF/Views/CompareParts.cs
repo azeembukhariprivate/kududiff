@@ -176,7 +176,7 @@ namespace Kududiff.Views
             doc.UndoStack.ClearAll();
             doc.Changed += OnDocumentChanged;
             File = file;
-            Editor.IsReadOnly = false;
+            Editor.IsReadOnly = file.IsDocument; // shown as text, never changed
             Editor.ScrollToHome();
         }
 
@@ -188,7 +188,7 @@ namespace Kududiff.Views
             finally { Switching = other.Switching = false; }
             foreach (var p in new[] { this, other })
             {
-                p.Editor.IsReadOnly = p.File == null;
+                p.Editor.IsReadOnly = p.File == null || p.File.IsDocument;
                 p.ApplySyntax();
                 p.UpdateHeader();
             }
@@ -233,7 +233,9 @@ namespace Kududiff.Views
             }
             _name.Text = File.Path != null ? Path.GetFileName(File.Path) : "Untitled";
             _folder.Text = File.Path != null ? Path.GetDirectoryName(File.Path) : string.Empty;
-            _info.Text = File.EncodingName + " · " + TextFile.Describe(TextFile.DetectLineEndings(Text));
+            _info.Text = File.IsDocument
+                ? Lang.T("{0}, shown as text · look only", Lang.T(File.DocumentKind))
+                : File.EncodingName + " · " + TextFile.Describe(TextFile.DetectLineEndings(Text));
             Header.ToolTip = File.Path;
             _dirty.Visibility = IsDirty ? Visibility.Visible : Visibility.Collapsed;
             _dirty.ToolTip = IsDirty ? "Changed, not saved yet" : null;
@@ -242,7 +244,7 @@ namespace Kududiff.Views
 
         public void ApplySyntax()
         {
-            Editor.SyntaxHighlighting = Settings.SyntaxColours && File != null
+            Editor.SyntaxHighlighting = Settings.SyntaxColours && File != null && !File.IsDocument
                 ? Syntax.Get(Syntax.LanguageFor(File.Path), ThemeManager.IsDark)
                 : null;
         }
@@ -462,9 +464,10 @@ namespace Kududiff.Views
                 var pen = new Pen(Ui.Brush(line), ReferenceEquals(c, current) ? 1.6 : 0.8);
                 dc.DrawGeometry(Ui.Brush(fill), pen, geometry);
 
-                // Copy arrows: on the left edge (copy to the right) and the right edge (copy to the left).
-                Arrow(dc, new Point(9, (ly1 + ly2) / 2), true, i);
-                Arrow(dc, new Point(w - 9, (ry1 + ry2) / 2), false, i);
+                // Copy arrows: on the left edge (copy to the right) and the right edge (copy to the left); never into a
+                // Word, Excel, PowerPoint or PDF file, which is only shown as text.
+                if (r.File?.IsDocument != true) Arrow(dc, new Point(9, (ly1 + ly2) / 2), true, i);
+                if (l.File?.IsDocument != true) Arrow(dc, new Point(w - 9, (ry1 + ry2) / 2), false, i);
             }
         }
 

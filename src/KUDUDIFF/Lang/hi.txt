@@ -327,3 +327,32 @@ Bash	Bash
 {0} files	{0} फ़ाइलें
 {0} file that differs	{0} अलग फ़ाइल
 {0} files that differ	{0} अलग फ़ाइलें
+Word document	Word दस्तावेज़
+Excel workbook	Excel वर्कबुक
+PowerPoint presentation	PowerPoint प्रस्तुति
+Text document	टेक्स्ट दस्तावेज़
+Spreadsheet	स्प्रेडशीट
+Presentation	प्रस्तुति
+"{0}" couldn't be read: it isn't a whole {1} file (it may be damaged, or locked with a password).	"{0}" पढ़ा नहीं जा सका: यह पूरी {1} फ़ाइल नहीं है (शायद ख़राब है, या पासवर्ड से बंद है)।
+There's no text in this Word document.	इस Word दस्तावेज़ में कोई टेक्स्ट नहीं है।
+Headers	हेडर
+Footers	फ़ुटर
+Footnotes	फ़ुटनोट
+Endnotes	अंत के नोट
+There are no sheets in this Excel workbook.	इस Excel वर्कबुक में कोई शीट नहीं है।
+Sheet:	शीट:
+There are no slides in this PowerPoint presentation.	इस PowerPoint प्रस्तुति में कोई स्लाइड नहीं है।
+Slide {0}	स्लाइड {0}
+Notes:	नोट्स:
+There's no content in this file.	इस फ़ाइल में कुछ नहीं है।
+Page {0}	पेज {0}
+"{0}" has no text in it, probably a scan. (KUDUCK can turn a scan into a PDF with text, which can then be compared.)	"{0}" में कोई टेक्स्ट नहीं है, शायद यह स्कैन है। (KUDUCK स्कैन को टेक्स्ट वाली PDF बना सकता है, जिसकी फिर तुलना की जा सकती है।)
+"{0}" is locked with a password, so its text can't be read.	"{0}" पासवर्ड से बंद है, इसलिए इसका टेक्स्ट पढ़ा नहीं जा सकता।
+"{0}" couldn't be read: it isn't a whole PDF file (it may be damaged).	"{0}" पढ़ा नहीं जा सका: यह पूरी PDF फ़ाइल नहीं है (शायद ख़राब है)।
+"{0}" is an older Word, Excel or PowerPoint file (from before 2007), which KUDUDIFF can't read. Open it in Office and save it in the newer kind (.docx, .xlsx or .pptx), then compare that.	"{0}" पुरानी Word, Excel या PowerPoint फ़ाइल है (2007 से पहले की), जिसे KUDUDIFF नहीं पढ़ सकता। इसे Office में खोलें और नए प्रकार (.docx, .xlsx या .pptx) में सहेजें, फिर उसकी तुलना करें।
+A Word, Excel, PowerPoint or PDF file is only shown as text, never saved.	Word, Excel, PowerPoint या PDF फ़ाइल सिर्फ़ टेक्स्ट के रूप में दिखाई जाती है, कभी सहेजी नहीं जाती।
+{0}, shown as text · look only	{0}, टेक्स्ट के रूप में · सिर्फ़ देखने के लिए
+"{0}" is a {1} shown as text: it can be looked at, not changed.	"{0}" टेक्स्ट के रूप में दिखाई गई {1} है: इसे देखा जा सकता है, बदला नहीं जा सकता।
+Word, Excel, PowerPoint and PDF files	Word, Excel, PowerPoint और PDF फ़ाइलें
+They're compared as text, and can be looked at but not changed.	इनकी तुलना टेक्स्ट के रूप में होती है, इन्हें देखा जा सकता है पर बदला नहीं जा सकता।
+Excel: compare formulas too (each formula is shown after the cell's value)	Excel: फ़ॉर्मूले भी मिलाएँ (हर फ़ॉर्मूला सेल के मान के बाद दिखता है)

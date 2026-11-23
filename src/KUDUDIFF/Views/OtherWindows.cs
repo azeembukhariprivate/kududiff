@@ -124,6 +124,9 @@ namespace Kududiff.Views
     /// <summary>How to compare: the method, what to ignore, how changes inside lines are shown, and moved code.</summary>
     public static class OptionsWindow
     {
+        /// <summary>Raised when "compare formulas too" changes, so open spreadsheets are read again.</summary>
+        public static event Action FormulasChanged;
+
         public static Window Build(Window owner, CompareOptions current, Action<CompareOptions> done)
         {
             var o = current.Clone();
@@ -189,6 +192,11 @@ namespace Kududiff.Views
             moves.Click += (s, e) => o.DetectMoves = moves.IsChecked == true;
             content.Children.Add(moves);
 
+            Section("Word, Excel, PowerPoint and PDF files");
+            content.Children.Add(Ui.Subtle("They're compared as text, and can be looked at but not changed.", 12).Margin(0, 0, 0, 4));
+            var formulas = new CheckBox { Content = "Excel: compare formulas too (each formula is shown after the cell's value)", IsChecked = Settings.CompareFormulas };
+            content.Children.Add(formulas);
+
             Section("Method");
             content.Children.Add(Chips("alg", new[]
             {
@@ -223,6 +231,11 @@ namespace Kududiff.Views
                     return;
                 }
                 o.IgnorePatterns = list;
+                if (Settings.CompareFormulas != (formulas.IsChecked == true))
+                {
+                    Settings.CompareFormulas = DocumentText.ShowFormulas = formulas.IsChecked == true;
+                    FormulasChanged?.Invoke();
+                }
                 window.Close();
                 done(o);
             };

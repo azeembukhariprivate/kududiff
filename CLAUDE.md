@@ -57,7 +57,8 @@ The build fails when a copy differs from kudu-common. App-specific details go in
   definitions in `Highlighting/*.xshd`.
 - The comparison engine (`Core/Lcs.cs`, `Core/Comparison.cs`, `Core/Export.cs`) is the app's own code and is tested
   against brute force; keep it that way.
-- Scope agreed for v1: two files only, text and code only, no folder compare, no 3-way merge, no Git features.
+- Scope agreed for v1: two files only, text and code only, no folder compare, no 3-way merge, no Git features (folders came in
+  1.2, Word/Excel/PowerPoint/PDF as text in 1.3; still no 3-way merge or Git features).
 - Folders (1.2): `Core/FolderCompare.cs` (`FolderComparison.Run`: both trees matched by name, upper and lower case
   ignored; files of the same size read byte by byte; links to folders not followed; the usual names in
   `FolderOptions.UsualLeaveOut` left out unless `ShowLeftOut`; a folder and one inside it are refused) and `FolderCopy`
@@ -66,6 +67,12 @@ The build fails when a copy differs from kudu-common. App-specific details go in
   is the web page. `Views/FolderWindow.cs` is the window (rows from a template, `FolderRow`); `App.ShowFolderWindow` opens
   it, and two folders on the command line, dropped on the file window or picked from the right-click menu (also on
   folders, `Directory\shell`) go there.
+- Word, Excel, PowerPoint and PDF as text (1.3): `Core/DocumentText.cs` reads .docx/.xlsx/.pptx and .odt/.ods/.odp from
+  their XML (only .xml/.rels parts, each up to 64 MB and 256 MB in all; no DTDs), `Core/PdfText.cs` uses PdfPig
+  (Apache-2.0). `TextFile.Read` gives them as a `TextFile` with `IsDocument`: look only (read-only editors, no copy
+  arrows into them, never saved; `TextFile.Save` refuses). `Settings.CompareFormulas` (`DocumentText.ShowFormulas`)
+  adds formulas. `Core/SampleDocuments.cs` makes real files for the tests and the self-test. Both reader files carry
+  "lang.py: only Lang.T texts", so kudu-common's `tools/lang.py` lists only their `Lang.T`/`Shown` texts.
 - Other languages (1.1): the shared `Lang`/`LangUi` (kudu-common) put each window into the chosen language as it's shown;
   the texts are in `src/KUDUDIFF/Lang/<code>.txt` (made and checked with kudu-common's `tools/lang.py`). Texts put
   together from pieces (the summary line, the options tooltip) call `Lang.T` on each piece. When adding or changing a

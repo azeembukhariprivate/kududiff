@@ -23,6 +23,12 @@ namespace Kududiff.Core
         public DateTime StampUtc { get; private set; }
         public long StampLength { get; private set; }
 
+        /// <summary>A Word, Excel, PowerPoint or PDF file shown as text: only looked at, never changed or saved.</summary>
+        public bool IsDocument { get; private set; }
+
+        /// <summary>"Word document", "PDF"... for a document; null for a text file.</summary>
+        public string DocumentKind => IsDocument ? DocumentText.KindOf(Path) : null;
+
         public string EncodingName =>
             Encoding is UTF8Encoding ? (HasBom ? "UTF-8 with BOM" : "UTF-8")
             : Encoding is UnicodeEncoding ? (Encoding.CodePage == 1201 ? "UTF-16 BE" : "UTF-16 LE")
@@ -36,6 +42,14 @@ namespace Kududiff.Core
             var info = new FileInfo(path);
             if (!info.Exists) throw new FileNotFoundException("The file wasn't found: " + path, path);
             if (info.Length > MaxBytes) throw new IOException($"\"{info.Name}\" is too big to compare ({info.Length / 1048576} MB; the limit is {MaxBytes / 1048576} MB).");
+            if (DocumentText.IsOlderOffice(path))
+                throw new InvalidDataException(Lang.T("\"{0}\" is an older Word, Excel or PowerPoint file (from before 2007), which KUDUDIFF can't read. Open it in Office and save it in the newer kind (.docx, .xlsx or .pptx), then compare that.", info.Name));
+            if (DocumentText.CanRead(path))
+                return new TextFile
+                {
+                    Path = path, Text = DocumentText.Read(path), Encoding = new UTF8Encoding(false), IsDocument = true,
+                    StampUtc = info.LastWriteTimeUtc, StampLength = info.Length
+                };
             var bytes = File.ReadAllBytes(path);
             var file = Decode(bytes);
             file.Path = path;
@@ -144,6 +158,7 @@ namespace Kududiff.Core
         public void Save(string text, bool backup)
         {
             if (string.IsNullOrEmpty(Path)) throw new InvalidOperationException("The file has no name yet.");
+            if (IsDocument) throw new InvalidOperationException("A Word, Excel, PowerPoint or PDF file is only shown as text, never saved.");
             var preamble = HasBom ? Encoding.GetPreamble() : new byte[0];
             var body = Encoding.GetBytes(text);
             var temp = Path + ".kududiff-tmp";

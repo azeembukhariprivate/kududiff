@@ -316,7 +316,7 @@ namespace Kududiff.Views
         /// <summary>Saves one side. Returns true when it was saved.</summary>
         public bool Save(SidePanel side, bool ask)
         {
-            if (!side.HasFile || side.File.Path == null) return false;
+            if (!side.HasFile || side.File.Path == null || side.File.IsDocument) return false;
             var name = side.DisplayName;
             if (ask && side.File.ChangedOnDisk() && File.Exists(side.File.Path) &&
                 !Dialogs.Confirm(this, $"\"{name}\" was changed by another program after it was opened here. Save over those changes?"))
@@ -553,6 +553,18 @@ namespace Kududiff.Views
 
         private void ShowOptions()
         {
+            void Reread()
+            {
+                foreach (var side in new[] { LeftSide, RightSide }.Where(s => s.HasFile && s.File.IsDocument)) ReloadSide(side);
+                StartCompare();
+            }
+            OptionsWindow.FormulasChanged += Reread;
+            try { PickOptions(); }
+            finally { OptionsWindow.FormulasChanged -= Reread; }
+        }
+
+        private void PickOptions()
+        {
             var chosen = OptionsWindow.Show(this, _compareOptions);
             if (chosen != null) CompareOptions = chosen;
         }
@@ -638,6 +650,11 @@ namespace Kududiff.Views
             var c = _changes[index];
             var source = toRight ? LeftSide : RightSide;
             var target = toRight ? RightSide : LeftSide;
+            if (target.File.IsDocument)
+            {
+                ShowMessage(Lang.T("\"{0}\" is a {1} shown as text: it can be looked at, not changed.", target.DisplayName, Lang.T(target.File.DocumentKind)));
+                return;
+            }
             var edit = toRight
                 ? TextOps.CopyLines(source.Text, c.A, c.ACount, target.Text, c.B, c.BCount)
                 : TextOps.CopyLines(source.Text, c.B, c.BCount, target.Text, c.A, c.ACount);

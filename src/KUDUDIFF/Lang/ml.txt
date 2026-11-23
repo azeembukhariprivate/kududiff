@@ -327,3 +327,32 @@ Bash	Bash
 {0} files	{0} ഫയലുകൾ
 {0} file that differs	വ്യത്യാസമുള്ള {0} ഫയൽ
 {0} files that differ	വ്യത്യാസമുള്ള {0} ഫയലുകൾ
+Word document	Word ഡോക്യുമെന്റ്
+Excel workbook	Excel വർക്ക്ബുക്ക്
+PowerPoint presentation	PowerPoint അവതരണം
+Text document	ടെക്സ്റ്റ് ഡോക്യുമെന്റ്
+Spreadsheet	സ്പ്രെഡ്ഷീറ്റ്
+Presentation	അവതരണം
+"{0}" couldn't be read: it isn't a whole {1} file (it may be damaged, or locked with a password).	"{0}" വായിക്കാനായില്ല: ഇത് പൂർണ്ണമായ ഒരു {1} ഫയൽ അല്ല (കേടായിരിക്കാം, അല്ലെങ്കിൽ പാസ്‌വേഡ് കൊണ്ട് പൂട്ടിയിരിക്കാം).
+There's no text in this Word document.	ഈ Word ഡോക്യുമെന്റിൽ ടെക്സ്റ്റ് ഇല്ല.
+Headers	ഹെഡറുകൾ
+Footers	ഫൂട്ടറുകൾ
+Footnotes	അടിക്കുറിപ്പുകൾ
+Endnotes	അവസാനക്കുറിപ്പുകൾ
+There are no sheets in this Excel workbook.	ഈ Excel വർക്ക്ബുക്കിൽ ഷീറ്റുകളൊന്നുമില്ല.
+Sheet:	ഷീറ്റ്:
+There are no slides in this PowerPoint presentation.	ഈ PowerPoint അവതരണത്തിൽ സ്ലൈഡുകളൊന്നുമില്ല.
+Slide {0}	സ്ലൈഡ് {0}
+Notes:	കുറിപ്പുകൾ:
+There's no content in this file.	ഈ ഫയലിൽ ഉള്ളടക്കമൊന്നുമില്ല.
+Page {0}	പേജ് {0}
+"{0}" has no text in it, probably a scan. (KUDUCK can turn a scan into a PDF with text, which can then be compared.)	"{0}"-ൽ ടെക്സ്റ്റ് ഇല്ല, ഇത് ഒരു സ്കാൻ ആയിരിക്കാം. (KUDUCK-ന് ഒരു സ്കാനിനെ ടെക്സ്റ്റുള്ള PDF ആക്കാം, അത് പിന്നെ താരതമ്യം ചെയ്യാം.)
+"{0}" is locked with a password, so its text can't be read.	"{0}" പാസ്‌വേഡ് കൊണ്ട് പൂട്ടിയിരിക്കുന്നു, അതിനാൽ അതിലെ ടെക്സ്റ്റ് വായിക്കാനാവില്ല.
+"{0}" couldn't be read: it isn't a whole PDF file (it may be damaged).	"{0}" വായിക്കാനായില്ല: ഇത് പൂർണ്ണമായ ഒരു PDF ഫയൽ അല്ല (കേടായിരിക്കാം).
+"{0}" is an older Word, Excel or PowerPoint file (from before 2007), which KUDUDIFF can't read. Open it in Office and save it in the newer kind (.docx, .xlsx or .pptx), then compare that.	"{0}" ഒരു പഴയ Word, Excel അല്ലെങ്കിൽ PowerPoint ഫയൽ ആണ് (2007-ന് മുമ്പുള്ളത്), KUDUDIFF-ന് അത് വായിക്കാനാവില്ല. അത് Office-ൽ തുറന്ന് പുതിയ തരത്തിൽ (.docx, .xlsx അല്ലെങ്കിൽ .pptx) സേവ് ചെയ്യുക, എന്നിട്ട് അത് താരതമ്യം ചെയ്യുക.
+A Word, Excel, PowerPoint or PDF file is only shown as text, never saved.	Word, Excel, PowerPoint അല്ലെങ്കിൽ PDF ഫയൽ ടെക്സ്റ്റായി കാണിക്കുക മാത്രമേ ചെയ്യൂ, ഒരിക്കലും സേവ് ചെയ്യില്ല.
+{0}, shown as text · look only	{0}, ടെക്സ്റ്റായി കാണിക്കുന്നു · കാണാൻ മാത്രം
+"{0}" is a {1} shown as text: it can be looked at, not changed.	"{0}" ടെക്സ്റ്റായി കാണിക്കുന്ന ഒരു {1} ആണ്: അത് കാണാം, മാറ്റാനാവില്ല.
+Word, Excel, PowerPoint and PDF files	Word, Excel, PowerPoint, PDF ഫയലുകൾ
+They're compared as text, and can be looked at but not changed.	അവ ടെക്സ്റ്റായി താരതമ്യം ചെയ്യുന്നു, കാണാം, പക്ഷേ മാറ്റാനാവില്ല.
+Excel: compare formulas too (each formula is shown after the cell's value)	Excel: ഫോർമുലകളും താരതമ്യം ചെയ്യുക (ഓരോ ഫോർമുലയും സെല്ലിന്റെ മൂല്യത്തിന് ശേഷം കാണിക്കും)
