@@ -21,6 +21,10 @@ namespace Kududiff.Core
         /// <summary>How long one comparison may take before the rest of a region is simply shown as changed.</summary>
         public static TimeSpan Deadline = TimeSpan.FromSeconds(8);
 
+        /// <summary>
+        /// The pairs of positions (a, b) where the two sequences match, in order, by the way chosen (a time limit stops
+        /// very slow cases).
+        /// </summary>
         public static List<(int A, int B)> Match(int[] a, int[] b, DiffAlgorithm algorithm)
         {
             var result = new List<(int, int)>();
@@ -32,6 +36,10 @@ namespace Kududiff.Core
 
         // ------------------------------------------------------------------ Myers
 
+        /// <summary>
+        /// The standard way (Myers'): the fewest lines added and removed, found from both ends towards the middle and
+        /// split there; when it takes too long the rest is called one change.
+        /// </summary>
         private static void Myers(int[] a, int aLo, int aHi, int[] b, int bLo, int bHi, List<(int, int)> result, Stopwatch watch)
         {
             // Common start and end first: cheap, and most files share most of their lines.
@@ -119,6 +127,7 @@ namespace Kududiff.Core
             return null;
         }
 
+        /// <summary>Where to split a region in two, or null when the split would be at one end (no progress).</summary>
         private static (int X, int Y)? Split(int aLo, int aHi, int bLo, int bHi, int x, int y)
         {
             // A split at either end would make no progress; treat the region as one change instead.
@@ -128,6 +137,10 @@ namespace Kududiff.Core
 
         // ------------------------------------------------------------------ patience
 
+        /// <summary>
+        /// The patience way: lines found once on each side are matched first, which keeps functions and blocks
+        /// together, then the gaps between them are compared the standard way.
+        /// </summary>
         private static void Patience(int[] a, int aLo, int aHi, int[] b, int bLo, int bHi, List<(int, int)> result, Stopwatch watch)
         {
             while (aLo < aHi && bLo < bHi && a[aLo] == b[bLo]) result.Add((aLo++, bLo++));

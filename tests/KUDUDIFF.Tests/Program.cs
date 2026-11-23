@@ -1,3 +1,5 @@
+// The tests for the parts that don't need Windows: the comparison engine, patches and reports, encodings, folders and
+// the language files. Run with "dotnet run".
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,10 +13,14 @@ namespace Kududiff.Tests
 {
     public static partial class Program
     {
+        /// <summary>How many checks failed.</summary>
         private static int _failed;
+        /// <summary>How many checks passed.</summary>
         private static int _passed;
+        /// <summary>A folder for the test files, removed at the end.</summary>
         private static string _root;
 
+        /// <summary>Runs every test and returns 1 when any check failed.</summary>
         public static int Main()
         {
             _root = Path.Combine(Path.GetTempPath(), "kududiff-tests-" + Guid.NewGuid().ToString("N").Substring(0, 8));
@@ -62,9 +68,11 @@ namespace Kududiff.Tests
             return dir;
         }
 
+        /// <summary>The item at this path in a folder comparison.</summary>
         private static FolderItem Find(FolderComparison cmp, string relative) =>
             cmp.Root.Below().FirstOrDefault(i => i.RelativePath == relative.Replace('/', Path.DirectorySeparatorChar));
 
+        /// <summary>Folders are matched by name and their files compared, with the counts right.</summary>
         private static void TestFoldersAreComparedFileByFile()
         {
             var left = MakeFolder("left", ("same.txt", "hello"), ("changed.txt", "one"), ("longer.txt", "short"), ("only-left.txt", "x"),
@@ -99,6 +107,7 @@ namespace Kududiff.Tests
             Check(same.Summary().Contains("2 files"), same.Summary());
         }
 
+        /// <summary>Files of the same size are read to the end, so a change in the last byte is found.</summary>
         private static void TestFoldersSameSizeAreReadToTheEnd()
         {
             var a = new byte[200_000];
@@ -116,6 +125,7 @@ namespace Kududiff.Tests
             Equal(FolderState.Same, Find(cmp, "copy.bin").State, "a true copy is the same");
         }
 
+        /// <summary>The usual names (like .git and node_modules) are left out unless asked for.</summary>
         private static void TestFoldersLeaveOutTheUsualNames()
         {
             var left = MakeFolder("lo-left", ("app.cs", "a"), (".git/HEAD", "ref"), ("bin/app.exe", "1"), ("obj/x.o", "1"), ("node_modules/p/index.js", "1"),
@@ -142,6 +152,7 @@ namespace Kududiff.Tests
             Equal("bin, *.log", FolderOptions.Join(new[] { "bin", "*.log" }), "and as shown");
         }
 
+        /// <summary>A missing folder, the same folder twice, or a folder inside the other are refused.</summary>
         private static void TestFoldersThatCantBeCompared()
         {
             var outer = MakeFolder("outer", ("inner/a.txt", "a"));
@@ -163,6 +174,7 @@ namespace Kududiff.Tests
             Check(FolderComparison.Run(outer, sibling, new FolderOptions()).Identical, "two folders side by side can be compared");
         }
 
+        /// <summary>Copying between folders never deletes anything and keeps the old file as .bak.</summary>
         private static void TestFolderCopyNeverDeletesAndKeepsBak()
         {
             var left = MakeFolder("cp-left", ("changed.txt", "new text"), ("same.txt", "s"), ("only-left.txt", "l"), ("pack/a.txt", "a"), ("pack/sub/b.txt", "b"), ("pack/empty/", null));
@@ -202,6 +214,7 @@ namespace Kududiff.Tests
             Equal(new DateTime(2020, 5, 6, 7, 8, 9), File.GetLastWriteTime(ro), "the time of the file copied");
         }
 
+        /// <summary>The folder report is a whole web page with every item.</summary>
         private static void TestFolderReport()
         {
             var left = MakeFolder("rep-left", ("a.txt", "1"), ("b & c.txt", "2"), ("same.txt", "s"));
@@ -230,9 +243,11 @@ namespace Kududiff.Tests
             }
         }
 
+        /// <summary>Switches the texts to a language for the tests.</summary>
         private static void UseLang(string code) =>
             Lang.Load(code, code == "en" ? null : new[] { File.ReadAllText(Path.Combine(LangDir, code + ".txt")) });
 
+        /// <summary>Every language file has every text, with the same {0} places.</summary>
         private static void TestEveryLanguageFileIsWhole()
         {
             foreach (var (code, _) in Lang.All.Where(l => l.Code != "en"))
@@ -249,6 +264,7 @@ namespace Kududiff.Tests
             }
         }
 
+        /// <summary>Texts come out in the language chosen.</summary>
         private static void TestTextsInAnotherLanguage()
         {
             try
@@ -278,6 +294,7 @@ namespace Kududiff.Tests
             Equal("1 change · 2 added, 1 removed", Comparison.Run("a\nb\n", "a\nc\nd\n", new CompareOptions()).Summary(), "English summary unchanged");
         }
 
+        /// <summary>The person's choice of language is used, and an unknown one counts as no choice.</summary>
         private static void TestTheLanguageIsChosenSensibly()
         {
             Equal("ml", Lang.Choose("ml"), "the person's choice");
@@ -285,18 +302,22 @@ namespace Kududiff.Tests
             Check(Lang.Has(Lang.Choose("")), "always a language on offer");
         }
 
+        /// <summary>Counts a check, writing what failed.</summary>
         private static void Check(bool condition, string what)
         {
             if (!condition) throw new Exception("Check failed: " + what);
         }
 
+        /// <summary>Checks two values are equal, writing both when they aren't.</summary>
         private static void Equal<T>(T expected, T actual, string what)
         {
             if (!EqualityComparer<T>.Default.Equals(expected, actual)) throw new Exception($"{what}: expected {expected}, got {actual}");
         }
 
+        /// <summary>Lines joined into a text, each ending in a line break.</summary>
         private static string Lines(params string[] lines) => string.Join("\n", lines) + "\n";
 
+        /// <summary>The changes of a comparison as a short text, to compare with what's expected.</summary>
         private static string Describe(Comparison c) => string.Join(" ", c.Chunks.Where(x => x.IsChange).Select(x => x.ToString()));
 
         /// <summary>The length of the longest common subsequence, the slow sure way.</summary>
@@ -309,6 +330,10 @@ namespace Kududiff.Tests
             return t[0, 0];
         }
 
+        /// <summary>
+        /// Checks matched pairs are in order, really equal, and as many as the longest common part found by brute
+        /// force.
+        /// </summary>
         private static void CheckMatches(int[] a, int[] b, List<(int A, int B)> m, string what)
         {
             for (var k = 0; k < m.Count; k++)
@@ -320,6 +345,9 @@ namespace Kududiff.Tests
 
         // ================================================================== the comparison methods
 
+        /// <summary>
+        /// The standard way finds the longest common part, checked against brute force on many random cases.
+        /// </summary>
         private static void TestMyersFindsTheLongestCommonPart()
         {
             var rnd = new Random(7);
@@ -333,6 +361,7 @@ namespace Kududiff.Tests
             }
         }
 
+        /// <summary>The patience way gives valid matches too.</summary>
         private static void TestPatienceIsValid()
         {
             var rnd = new Random(11);
@@ -346,6 +375,7 @@ namespace Kududiff.Tests
             }
         }
 
+        /// <summary>The patience way keeps functions together where the standard way may mix them.</summary>
         private static void TestPatienceKeepsFunctionsTogether()
         {
             // Moving a function: patience anchors on the unique lines and shows one block moving, not interleaved lines.
@@ -358,6 +388,7 @@ namespace Kududiff.Tests
 
         // ================================================================== chunks and ignore rules
 
+        /// <summary>Added, removed and changed lines become the right chunks.</summary>
         private static void TestChunks()
         {
             var cmp = Comparison.Run(Lines("one", "two", "three", "four"), Lines("one", "2", "three", "four", "five"), new CompareOptions());
@@ -372,6 +403,7 @@ namespace Kududiff.Tests
             Equal("1 change · 2 added, 0 removed", all.Summary(), "summary");
         }
 
+        /// <summary>Each way of counting spaces and tabs works.</summary>
         private static void TestWhitespaceModes()
         {
             var left = Lines("int x = 1;", "    call(a, b);", "end");
@@ -384,6 +416,7 @@ namespace Kududiff.Tests
             Check(Comparison.Run(left, right, new CompareOptions { Whitespace = WhitespaceMode.All }).Identical, "all spaces ignored");
         }
 
+        /// <summary>Ignoring case, blank lines and patterns, and comparing line endings, work.</summary>
         private static void TestCaseBlankLinesPatternsAndLineEndings()
         {
             Check(Comparison.Run(Lines("Hello World"), Lines("hello world"), new CompareOptions { IgnoreCase = true }).Identical, "case ignored");
@@ -406,6 +439,7 @@ namespace Kududiff.Tests
 
         // ================================================================== changes inside lines
 
+        /// <summary>The words (and characters) changed inside lines are found.</summary>
         private static void TestChangedWords()
         {
             var cmp = Comparison.Run(Lines("var total = price * count;"), Lines("var total = cost * count + tax;"), new CompareOptions { Inline = InlineMode.Words });
@@ -430,6 +464,7 @@ namespace Kududiff.Tests
 
         // ================================================================== moved code
 
+        /// <summary>Blocks moved from one place to another are found.</summary>
         private static void TestMovedBlocks()
         {
             var block = new[] { "void Helper()", "{", "    DoThis();", "    DoThat();", "}" };
@@ -447,6 +482,7 @@ namespace Kududiff.Tests
 
         // ================================================================== scrolling together
 
+        /// <summary>A line on one side is matched to the right line on the other.</summary>
         private static void TestMapLine()
         {
             var cmp = Comparison.Run(Lines("a", "b", "c", "d"), Lines("a", "x", "y", "z", "b", "c", "d"), new CompareOptions());
@@ -459,6 +495,7 @@ namespace Kududiff.Tests
 
         // ================================================================== patches and reports
 
+        /// <summary>The patch made is applied by GNU patch (when it's there) and gives the right file.</summary>
         private static void TestPatchAppliesWithGnuPatch()
         {
             var cases = new List<(string Name, string Left, string Right)>
@@ -493,6 +530,7 @@ namespace Kududiff.Tests
             Equal(string.Empty, Export.Patch("same\n", "same\n", "a", "b", DiffAlgorithm.Standard), "no differences, empty patch");
         }
 
+        /// <summary>The patch's parts (hunks) have the right line numbers and context.</summary>
         private static void TestPatchHunks()
         {
             var left = Lines(Enumerable.Range(1, 40).Select(i => "l" + i).ToArray());
@@ -504,6 +542,7 @@ namespace Kududiff.Tests
             Equal("@@ -27,7 +27,7 @@", hunks[1], "second hunk header");
         }
 
+        /// <summary>The web page report has both files and their changes, safely escaped.</summary>
         private static void TestHtmlReport()
         {
             var cmp = Comparison.Run(Lines("<b>bold</b> & co", "same", "gone"), Lines("<b>BOLD</b> & co", "same", "new"), new CompareOptions());
@@ -519,6 +558,7 @@ namespace Kududiff.Tests
 
         // ================================================================== files
 
+        /// <summary>Files in UTF-8, UTF-16 and the Windows code page are read right.</summary>
         private static void TestEncodings()
         {
             Equal("UTF-8", TextFile.Decode(Encoding.UTF8.GetBytes("héllo")).EncodingName, "UTF-8 without a BOM");
@@ -535,6 +575,9 @@ namespace Kududiff.Tests
             Check(binary, "binary files are refused");
         }
 
+        /// <summary>
+        /// Saving keeps the encoding and byte order mark, keeps a .bak copy, and notices changes made on disk.
+        /// </summary>
         private static void TestSavingKeepsEncodingAndBackup()
         {
             var path = Path.Combine(_root, "save.txt");
@@ -561,6 +604,7 @@ namespace Kududiff.Tests
             Equal("UTF-8 with BOM", latin.EncodingName, "switched to UTF-8");
         }
 
+        /// <summary>Line endings are found and kept.</summary>
         private static void TestLineEndings()
         {
             Equal(LineEndings.CrLf, TextFile.DetectLineEndings("a\r\nb\r\n"), "CRLF");
@@ -573,6 +617,7 @@ namespace Kududiff.Tests
 
         // ================================================================== copying a change across
 
+        /// <summary>Copying lines across puts them in the right place, with the right line breaks.</summary>
         private static void TestCopyLines()
         {
             string Copy(string source, int sl, int sc, string target, int tl, int tc) => TextOps.Apply(target, TextOps.CopyLines(source, sl, sc, target, tl, tc));
@@ -591,6 +636,7 @@ namespace Kududiff.Tests
 
         // ================================================================== big files
 
+        /// <summary>A file of 20,000 lines with 200 changes is compared quickly.</summary>
         private static void TestBigFilesAreQuick()
         {
             var rnd = new Random(3);

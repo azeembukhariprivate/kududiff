@@ -1,3 +1,4 @@
+// The smaller windows: Settings, the comparison options and About.
 using System;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,10 @@ namespace Kududiff.Views
 {
     public sealed class SettingsWindow : Window
     {
+        /// <summary>
+        /// Makes the Settings window: the look, language, the editor, saving, comparing folders, the right-click menu
+        /// and updates.
+        /// </summary>
         public SettingsWindow(Window owner)
         {
             Width = 580;
@@ -109,6 +114,9 @@ namespace Kududiff.Views
             Content = new ScrollViewer { Content = root, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
         }
 
+        /// <summary>
+        /// A checkbox for a setting: shows it and keeps it when clicked, and the open windows use it at once.
+        /// </summary>
         private static CheckBox Check(string text, Func<bool> get, Action<bool> set)
         {
             var box = new CheckBox { Content = text, IsChecked = get(), Margin = new Thickness(0, 2, 0, 2) };
@@ -127,6 +135,7 @@ namespace Kududiff.Views
         /// <summary>Raised when "compare formulas too" changes, so open spreadsheets are read again.</summary>
         public static event Action FormulasChanged;
 
+        /// <summary>Makes the options window; done is given the options chosen when OK is clicked.</summary>
         public static Window Build(Window owner, CompareOptions current, Action<CompareOptions> done)
         {
             var o = current.Clone();
@@ -251,8 +260,10 @@ namespace Kududiff.Views
         }
     }
 
+    /// <summary>The About window: the version, the credit, the licence and the files that came with the app.</summary>
     public static class About
     {
+        /// <summary>Makes the About window.</summary>
         public static Window Build(Window owner)
         {
             var header = Ui.Row(LogoTile.Create(64), Ui.Column(Ui.Text("KUDUDIFF", 20, bold: true), Ui.Subtle("Version " + AppInfo.VersionText + " · Compare two files, see what changed", 12.5))
@@ -315,8 +326,12 @@ namespace Kududiff.Views
             return window;
         }
 
+        /// <summary>Shows the About window.</summary>
         public static void Show(Window owner) => Build(owner).ShowDialog();
 
+        /// <summary>
+        /// Opens a file that came with the app (the licence...), or the app's page online when it isn't there.
+        /// </summary>
         private static void OpenLocal(string name)
         {
             var path = Path.Combine(Path.GetDirectoryName(AppInfo.ExePath) ?? string.Empty, name);

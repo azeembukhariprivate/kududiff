@@ -13,14 +13,21 @@ namespace Kududiff.Core
     /// </summary>
     public sealed class Hub : IDisposable
     {
+        /// <summary>The Windows user name with only letters and digits, so each user gets their own hub.</summary>
         private static string UserKey => Regex.Replace(Environment.UserName ?? "user", "[^A-Za-z0-9]", "_");
+        /// <summary>The name of the pipe later starts send their files through.</summary>
         private static string PipeName => "KUDUDIFF.Hub." + UserKey;
+        /// <summary>The name of the lock held by the copy that's running.</summary>
         private static string MutexName => @"Local\KUDUDIFF.Hub." + UserKey;
 
+        /// <summary>Held while this copy runs, so later starts know to hand over.</summary>
         private readonly Mutex _mutex;
+        /// <summary>The background thread waiting for files from later starts.</summary>
         private readonly Thread _thread;
+        /// <summary>Set when closing, so the thread stops waiting.</summary>
         private volatile bool _stopping;
 
+        /// <summary>Starts listening for later starts (made by the static method that takes the lock).</summary>
         private Hub(Mutex mutex, Action<string[]> received)
         {
             _mutex = mutex;
@@ -66,6 +73,7 @@ namespace Kududiff.Core
             return new Hub(null, received); // the running copy didn't answer: open our own window
         }
 
+        /// <summary>Waits for each later start, reads the files it sends and passes them on, until closing.</summary>
         private void Listen(Action<string[]> received)
         {
             while (!_stopping)
@@ -90,6 +98,7 @@ namespace Kududiff.Core
             }
         }
 
+        /// <summary>Stops listening and lets go of the lock.</summary>
         public void Dispose()
         {
             _stopping = true;

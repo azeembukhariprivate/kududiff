@@ -26,22 +26,40 @@ namespace Kududiff.Views
     /// </summary>
     public sealed class FolderWindow : Window
     {
+        /// <summary>The rows shown: the items of the folders that are open.</summary>
         private readonly RowList<FolderRow> _rows = new RowList<FolderRow>();
+        /// <summary>The list of files and folders.</summary>
         private readonly ListBox _list;
+        /// <summary>The left folder's path, above the list.</summary>
         private readonly TextBlock _leftPath = Ui.Text(string.Empty, 13.5, bold: true);
+        /// <summary>The right folder's path.</summary>
         private readonly TextBlock _rightPath = Ui.Text(string.Empty, 13.5, bold: true);
+        /// <summary>The counts under the list ("3 different, 1 only on the left...").</summary>
         private readonly TextBlock _summary = Ui.Text(string.Empty, 12.5);
+        /// <summary>A message that goes away by itself (what was copied, problems).</summary>
         private readonly TextBlock _message = Ui.Subtle(string.Empty, 12.5, false);
+        /// <summary>Stops a comparison going on.</summary>
         private readonly Button _stop;
+        /// <summary>What's shown before both folders are chosen.</summary>
         private readonly Border _placeholder;
+        /// <summary>Hide files and folders that are the same.</summary>
         private readonly CheckBox _hideSame;
+        /// <summary>Show the files and folders usually left out (like .git and node_modules).</summary>
         private readonly CheckBox _showLeftOut;
+        /// <summary>Buttons that work only once there's a result.</summary>
         private readonly List<Button> _needResult = new List<Button>();
+        /// <summary>Folders the person opened (kept open when comparing again).</summary>
         private readonly HashSet<string> _expanded = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        /// <summary>Folders the person closed (kept closed when comparing again).</summary>
         private readonly HashSet<string> _collapsed = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        /// <summary>Stops the comparison going on (null when none is).</summary>
         private CancellationTokenSource _cancel;
+        /// <summary>Counts comparisons started, so an older one that finishes late is ignored.</summary>
         private int _version;
 
+        /// <summary>
+        /// Makes the folder comparison window: the two folders, the buttons, the list and the counts.
+        /// </summary>
         public FolderWindow()
         {
             Width = 1180;
@@ -214,12 +232,19 @@ namespace Kududiff.Views
             UpdateState();
         }
 
+        /// <summary>The left folder (null before one is chosen).</summary>
         public string LeftFolder { get; private set; }
+        /// <summary>The right folder.</summary>
         public string RightFolder { get; private set; }
+        /// <summary>The last result (null before the first one).</summary>
         public FolderComparison Comparison { get; private set; }
+        /// <summary>True while a comparison is going on.</summary>
         public bool IsComparing => _cancel != null;
+        /// <summary>The rows shown now (for the self-test).</summary>
         public IReadOnlyList<FolderRow> Rows => _rows;
+        /// <summary>The row chosen in the list.</summary>
         public FolderRow Chosen => _list.SelectedItem as FolderRow;
+        /// <summary>True once both folders are chosen.</summary>
         public bool HasBoth => LeftFolder != null && RightFolder != null;
 
         /// <summary>For the self-test: copy without asking.</summary>
@@ -247,6 +272,7 @@ namespace Kududiff.Views
             return true;
         }
 
+        /// <summary>The header above one side: the folder's path and a button to choose it.</summary>
         private UIElement FolderHeader(TextBlock path, bool left)
         {
             var grid = Ui.Columns(Ui.Auto, Ui.Star(), Ui.Auto);
@@ -260,12 +286,14 @@ namespace Kududiff.Views
             return grid;
         }
 
+        /// <summary>A small coloured square with its meaning, for the key under the list.</summary>
         private static UIElement Swatch(string brush, string text)
         {
             var box = new Border { Width = 10, Height = 10, CornerRadius = new CornerRadius(2), Margin = new Thickness(14, 0, 5, 0) }.Res(Border.BackgroundProperty, brush);
             return Ui.Row(box, Ui.Subtle(text, 12, false));
         }
 
+        /// <summary>Shows a message that goes away by itself.</summary>
         public void ShowMessage(string text)
         {
             _message.Text = text;
@@ -274,6 +302,7 @@ namespace Kududiff.Views
 
         // ================================================================== choosing the folders
 
+        /// <summary>Asks for a folder for one side.</summary>
         private void Pick(bool left)
         {
             var start = left ? LeftFolder : RightFolder;
@@ -303,6 +332,7 @@ namespace Kududiff.Views
             Activate();
         }
 
+        /// <summary>Compares these two folders (either may be null, to choose it later).</summary>
         public void Open(string left, string right)
         {
             LeftFolder = left;
@@ -320,6 +350,9 @@ namespace Kududiff.Views
             Changed();
         }
 
+        /// <summary>
+        /// After a folder changed: the title, the recent list, and a new comparison when both are chosen.
+        /// </summary>
         private void Changed()
         {
             _leftPath.Text = LeftFolder ?? Lang.T("Choose the left folder");
@@ -341,12 +374,14 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>A folder's own name from its path (or the drive, like "D:\").</summary>
         private static string FolderName(string path)
         {
             var name = Path.GetFileName(path.TrimEnd('\\', '/'));
             return string.IsNullOrEmpty(name) ? path : name;
         }
 
+        /// <summary>Swaps the two folders.</summary>
         private void Swap()
         {
             (LeftFolder, RightFolder) = (RightFolder, LeftFolder);
@@ -427,6 +462,7 @@ namespace Kududiff.Views
         private bool IsOpen(FolderItem folder) =>
             _expanded.Contains(folder.RelativePath) || (!_collapsed.Contains(folder.RelativePath) && folder.State != FolderState.Same);
 
+        /// <summary>Opens or closes a folder's row, and remembers that for next time.</summary>
         private void Toggle(FolderRow row)
         {
             var path = row.Item.RelativePath;
@@ -444,6 +480,7 @@ namespace Kududiff.Views
             Fill();
         }
 
+        /// <summary>Turns the buttons on or off for what's chosen and whether there's a result.</summary>
         private void UpdateState()
         {
             _placeholder.Visibility = HasBoth ? Visibility.Collapsed : Visibility.Visible;
@@ -463,6 +500,7 @@ namespace Kududiff.Views
 
         // ================================================================== going through the differences
 
+        /// <summary>Goes to the next (1) or previous (-1) file that differs.</summary>
         private void Step(int direction)
         {
             if (_rows.Count == 0) return;
@@ -574,6 +612,10 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>
+        /// The keys: F5 compares again, F7 and Alt+Down/Up go through the differences, Alt+Right/Left copy, Enter opens
+        /// a file, Right and Left open and close a folder.
+        /// </summary>
         private void OnKey(object sender, KeyEventArgs e)
         {
             var key = e.Key == Key.System ? e.SystemKey : e.Key;
@@ -603,6 +645,7 @@ namespace Kududiff.Views
     /// <summary>A list that can be refilled in one go (one "reset" instead of a change per row), for big folders.</summary>
     public sealed class RowList<T> : ObservableCollection<T>
     {
+        /// <summary>Puts these items in place of the old ones, in one go.</summary>
         public void Replace(IEnumerable<T> items)
         {
             Items.Clear();
@@ -616,30 +659,44 @@ namespace Kududiff.Views
     /// <summary>One row of the folder list.</summary>
     public sealed class FolderRow
     {
+        /// <summary>A row for this item, open or closed.</summary>
         public FolderRow(FolderItem item, bool expanded)
         {
             Item = item;
             Expanded = expanded;
         }
 
+        /// <summary>The file or folder on this row.</summary>
         public FolderItem Item { get; }
+        /// <summary>True when it's an open folder.</summary>
         public bool Expanded { get; }
 
+        /// <summary>Moves the row in by its depth.</summary>
         public Thickness Indent => new Thickness(Item.Depth * 18, 0, 0, 0);
+        /// <summary>The little arrow for opening a folder (none for files and empty folders).</summary>
         public string Expander => Item.IsFolder && Item.Children.Count > 0 ? (Expanded ? "▾" : "▸") : string.Empty;
+        /// <summary>The folder or file picture.</summary>
         public Geometry Icon => Application.Current.TryFindResource(Item.IsFolder ? "IconFolder" : "IconFile") as Geometry;
+        /// <summary>The file or folder's name.</summary>
         public string Name => Item.Name;
+        /// <summary>"Same", "Different"... in the language in use.</summary>
         public string StateText => FolderComparison.StateText(Item.State);
+        /// <summary>Folders in bold.</summary>
         public FontWeight Weight => Item.IsFolder ? FontWeights.SemiBold : FontWeights.Normal;
 
         /// <summary>What it's like, in the subtle colour when it's the same and the text colour when it isn't.</summary>
         public Brush StateBrush => Brush(Item.State == FolderState.Same ? "SubtleText" : "Text");
+        /// <summary>The colour of the mark at the row's start: changed, only on the left, only on the right.</summary>
         public Brush Mark => Brush(Item.State == FolderState.Different ? "DiffChangeLine" : Item.State == FolderState.OnlyLeft ? "DiffDeleteLine"
             : Item.State == FolderState.OnlyRight ? "DiffInsertLine" : Item.State == FolderState.Unreadable ? "DiffMoveLine" : null);
 
+        /// <summary>The size on the left (files only).</summary>
         public string LeftSize => Item.OnLeft && !Item.IsFolder ? Format.Size(Item.LeftSize) : string.Empty;
+        /// <summary>The size on the right.</summary>
         public string RightSize => Item.OnRight && !Item.IsFolder ? Format.Size(Item.RightSize) : string.Empty;
+        /// <summary>When it was last changed on the left.</summary>
         public string LeftTime => Item.OnLeft ? When(Item.LeftTime) : string.Empty;
+        /// <summary>When it was last changed on the right.</summary>
         public string RightTime => Item.OnRight ? When(Item.RightTime) : string.Empty;
 
         public string Tip
@@ -658,14 +715,25 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>A date and time as shown in the list.</summary>
         private static string When(DateTime t) => t == default ? string.Empty : t.ToString("yyyy-MM-dd HH:mm");
 
+        /// <summary>A colour from the theme, or none.</summary>
         private static Brush Brush(string key) => key == null ? Brushes.Transparent : Application.Current.TryFindResource(key) as Brush ?? Brushes.Transparent;
     }
 
+    /// <summary>
+    /// The look of the folder list's rows, made from XAML text (the list's rows are made from it as needed, so big
+    /// folders stay quick).
+    /// </summary>
     public static class FolderTemplates
     {
+        /// <summary>The XAML namespaces the template needs.</summary>
         private const string Ns = "xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\" xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"";
+        /// <summary>
+        /// The widths of the columns: name (the rest of the width), then size and time on the left, state, size and
+        /// time on the right.
+        /// </summary>
         private static readonly double[] Widths = { -1, 130, 90, 130, 90, 130 };
 
         /// <summary>The columns of a row, also used for the headings above the list.</summary>
@@ -676,8 +744,10 @@ namespace Kududiff.Views
             return g;
         }
 
+        /// <summary>The same columns as XAML.</summary>
         private static string ColumnXaml => "<Grid.ColumnDefinitions>" + string.Concat(Widths.Select(w => "<ColumnDefinition Width=\"" + (w < 0 ? "*" : w.ToString(System.Globalization.CultureInfo.InvariantCulture)) + "\"/>")) + "</Grid.ColumnDefinitions>";
 
+        /// <summary>The template of a row.</summary>
         public static DataTemplate Row => (DataTemplate)XamlReader.Parse(
             "<DataTemplate " + Ns + "><Grid Height=\"26\" ToolTip=\"{Binding Tip}\" Background=\"Transparent\">" + ColumnXaml +
             "<Border Width=\"4\" Margin=\"-6,2,0,2\" CornerRadius=\"2\" HorizontalAlignment=\"Left\" Background=\"{Binding Mark}\"/>" +

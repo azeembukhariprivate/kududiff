@@ -23,6 +23,7 @@ namespace Kududiff.Core
         /// <summary>Excel: add each cell's formula after its value.</summary>
         public static bool ShowFormulas { get; set; }
 
+        /// <summary>The kinds of document read, by file ending, with the name shown for each.</summary>
         private static readonly Dictionary<string, string> Kinds = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
             [".docx"] = Shown("Word document"), [".docm"] = Shown("Word document"), [".xlsx"] = Shown("Excel workbook"), [".xlsm"] = Shown("Excel workbook"),
@@ -33,6 +34,10 @@ namespace Kududiff.Core
         /// <summary>Marks a text that is shown later (through Lang.T), so the language files have it.</summary>
         private static string Shown(string text) => text;
 
+        /// <summary>
+        /// Older Office files (one big binary file, not XML): they can't be read, and the person is told to save them
+        /// in the newer kind.
+        /// </summary>
         private static readonly HashSet<string> Older = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ".doc", ".xls", ".ppt" };
 
         /// <summary>The most one part is unpacked to, and all of them together, so a file made to swell can't fill the memory.</summary>
@@ -59,6 +64,7 @@ namespace Kududiff.Core
             }
         }
 
+        /// <summary>Reads the file's parts and turns them into text, by its kind (PDFs go to PdfText).</summary>
         private static string ReadText(string path)
         {
             var ext = Path.GetExtension(path).ToLowerInvariant();
@@ -140,6 +146,10 @@ namespace Kududiff.Core
             return result;
         }
 
+        /// <summary>
+        /// The full name of a part a link points to, from the folder of the part that links to it ("../media/x" and
+        /// "/x" too).
+        /// </summary>
         private static string Resolve(string folder, string target)
         {
             var parts = new List<string>(target.StartsWith("/") ? new string[0] : folder.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries));
@@ -151,12 +161,17 @@ namespace Kududiff.Core
             return string.Join("/", parts);
         }
 
+        /// <summary>The elements below x with this name, whatever their namespace.</summary>
         private static IEnumerable<XElement> Named(XContainer x, string local) => x.Descendants().Where(e => e.Name.LocalName == local);
 
         // ================================================================== Word
 
+        /// <summary>Word's XML namespace.</summary>
         private static readonly XNamespace W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
 
+        /// <summary>
+        /// A Word document's text: the body (paragraphs and tables), then headers, footers and footnotes.
+        /// </summary>
         private static string Word(Dictionary<string, byte[]> parts)
         {
             var main = MainPart(parts, "word/document.xml");
@@ -220,6 +235,10 @@ namespace Kududiff.Core
             }
         }
 
+        /// <summary>
+        /// One Word paragraph's text: its runs, tabs and line breaks; deleted text left out (tracked changes as if
+        /// accepted).
+        /// </summary>
         private static string WordParagraph(XElement p)
         {
             var sb = new StringBuilder();
@@ -239,9 +258,12 @@ namespace Kududiff.Core
 
         // ================================================================== Excel
 
+        /// <summary>Excel's XML namespace.</summary>
         private static readonly XNamespace S = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+        /// <summary>The namespace of links between parts.</summary>
         private static readonly XNamespace R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
 
+        /// <summary>An Excel workbook's text: each sheet's name, then a line per row of its filled cells.</summary>
         private static string Excel(Dictionary<string, byte[]> parts)
         {
             var main = MainPart(parts, "xl/workbook.xml");
@@ -295,6 +317,7 @@ namespace Kududiff.Core
             return ColumnName(first) + row.ToString(CultureInfo.InvariantCulture) + "  " + string.Join(" | ", values);
         }
 
+        /// <summary>A column's letters from its number (0 is "A", 26 is "AA").</summary>
         public static string ColumnName(int index)
         {
             var name = string.Empty;
@@ -302,6 +325,7 @@ namespace Kududiff.Core
             return name;
         }
 
+        /// <summary>A cell address such as "C12" as its column (from 0) and row.</summary>
         private static (int Column, int Row) Address(string r)
         {
             if (string.IsNullOrEmpty(r)) return (-1, 0);
@@ -311,6 +335,10 @@ namespace Kududiff.Core
             return (i == 0 ? -1 : col - 1, row);
         }
 
+        /// <summary>
+        /// A cell's value as shown: shared text, true or false, a date when its style is a date, or the number (and the
+        /// formula when asked).
+        /// </summary>
         private static string CellValue(XElement c, List<string> shared, HashSet<int> dates, bool date1904)
         {
             var type = (string)c.Attribute("t");
@@ -356,9 +384,12 @@ namespace Kududiff.Core
 
         // ================================================================== PowerPoint
 
+        /// <summary>PowerPoint's XML namespace.</summary>
         private static readonly XNamespace P = "http://schemas.openxmlformats.org/presentationml/2006/main";
+        /// <summary>The namespace of drawings (where slide text is kept).</summary>
         private static readonly XNamespace A = "http://schemas.openxmlformats.org/drawingml/2006/main";
 
+        /// <summary>A PowerPoint presentation's text: "Slide n", the slide's text, then its speaker notes.</summary>
         private static string PowerPoint(Dictionary<string, byte[]> parts)
         {
             var main = MainPart(parts, "ppt/presentation.xml");
@@ -410,6 +441,9 @@ namespace Kududiff.Core
 
         // ================================================================== the free office suites (OpenDocument)
 
+        /// <summary>
+        /// The OpenDocument namespaces (.odt, .ods, .odp): text, tables, the document, drawings, slides and styles.
+        /// </summary>
         private static readonly XNamespace Text = "urn:oasis:names:tc:opendocument:xmlns:text:1.0";
         private static readonly XNamespace Table = "urn:oasis:names:tc:opendocument:xmlns:table:1.0";
         private static readonly XNamespace Office = "urn:oasis:names:tc:opendocument:xmlns:office:1.0";
@@ -417,9 +451,11 @@ namespace Kududiff.Core
         private static readonly XNamespace Presentation = "urn:oasis:names:tc:opendocument:xmlns:presentation:1.0";
         private static readonly XNamespace Style = "urn:oasis:names:tc:opendocument:xmlns:style:1.0";
 
+        /// <summary>The OpenDocument file's content.xml, where its text is.</summary>
         private static XDocument Content(Dictionary<string, byte[]> parts) =>
             Xml(parts, "content.xml") ?? throw new InvalidDataException(Lang.T("There's no content in this file."));
 
+        /// <summary>An .odt document's text: its paragraphs, headings, lists and tables.</summary>
         private static string OpenText(Dictionary<string, byte[]> parts)
         {
             var sb = new StringBuilder();
@@ -437,6 +473,9 @@ namespace Kududiff.Core
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Writes the paragraphs, headings, lists and tables inside an OpenDocument element, a line each.
+        /// </summary>
         private static void OpenBlocks(XElement container, StringBuilder sb)
         {
             foreach (var e in container.Elements())
@@ -451,6 +490,7 @@ namespace Kududiff.Core
             }
         }
 
+        /// <summary>One OpenDocument paragraph's text, with its spaces, tabs and line breaks.</summary>
         private static string OpenParagraph(XElement p)
         {
             var sb = new StringBuilder();
@@ -473,6 +513,10 @@ namespace Kududiff.Core
             return sb.ToString().TrimEnd();
         }
 
+        /// <summary>
+        /// An .ods spreadsheet's text: each sheet's name, then a line per filled row (a row marked as repeated is
+        /// written as many times, up to 1,000).
+        /// </summary>
         private static string OpenSheets(Dictionary<string, byte[]> parts)
         {
             var sb = new StringBuilder();
@@ -505,6 +549,7 @@ namespace Kududiff.Core
             return sb.ToString();
         }
 
+        /// <summary>An .odp presentation's text: "Slide n", the slide's text, then its notes.</summary>
         private static string OpenSlides(Dictionary<string, byte[]> parts)
         {
             var sb = new StringBuilder();

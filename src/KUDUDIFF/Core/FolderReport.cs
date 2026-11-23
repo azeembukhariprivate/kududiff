@@ -9,6 +9,10 @@ namespace Kududiff.Core
     /// <summary>A folder comparison as a web page: every file and folder with what it's like on each side, to read in a browser or send.</summary>
     public static class FolderReport
     {
+        /// <summary>
+        /// The whole web page: the two folders, the counts, and a table of every item (the same ones left out when
+        /// hideSame).
+        /// </summary>
         public static string Html(FolderComparison cmp, bool hideSame, DateTime when)
         {
             string E(string s) => WebUtility.HtmlEncode(s ?? string.Empty);
@@ -74,6 +78,7 @@ footer{padding:0 24px 20px;color:var(--sub);font-size:12px}
             }
         }
 
+        /// <summary>A folder's own name from its path.</summary>
         private static string Name(string path)
         {
             var trimmed = (path ?? string.Empty).TrimEnd('\\', '/');

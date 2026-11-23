@@ -1,3 +1,5 @@
+// Compares two texts line by line: the options (what to ignore, how finely to show changes), the chunks of equal and
+// changed lines, words changed inside lines, and blocks that were moved.
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,23 +20,37 @@ namespace Kududiff.Core
         All
     }
 
+    /// <summary>
+    /// How changes inside a changed line are shown: not at all, word by word, or character by character.
+    /// </summary>
     public enum InlineMode { Off, Words, Characters }
 
     public sealed class CompareOptions
     {
+        /// <summary>
+        /// How the common lines are found: the standard way, or "patience", which keeps functions together better.
+        /// </summary>
         public DiffAlgorithm Algorithm { get; set; } = DiffAlgorithm.Standard;
+        /// <summary>How much spaces and tabs count (see WhitespaceMode).</summary>
         public WhitespaceMode Whitespace { get; set; } = WhitespaceMode.Compare;
+        /// <summary>Upper and lower case count the same.</summary>
         public bool IgnoreCase { get; set; }
+        /// <summary>Blank lines added or removed don't count as changes.</summary>
         public bool IgnoreBlankLines { get; set; }
         /// <summary>Count a line ending in "\r\n" on one side and "\n" on the other as a change.</summary>
         public bool CompareLineEndings { get; set; }
         /// <summary>Regular expressions: what they match is left out of the comparison (for example timestamps).</summary>
         public List<string> IgnorePatterns { get; set; } = new List<string>();
+        /// <summary>Whether, and how finely, changes inside changed lines are marked.</summary>
         public InlineMode Inline { get; set; } = InlineMode.Words;
+        /// <summary>Look for blocks of lines moved from one place to another.</summary>
         public bool DetectMoves { get; set; } = true;
         /// <summary>The fewest non-blank lines a block needs to be shown as moved.</summary>
         public int MinMoveLines { get; set; } = 3;
 
+        /// <summary>
+        /// A copy of these options (with its own list of patterns), so changing it leaves these alone.
+        /// </summary>
         public CompareOptions Clone()
         {
             var copy = (CompareOptions)MemberwiseClone();
@@ -67,15 +83,22 @@ namespace Kududiff.Core
         }
     }
 
+    /// <summary>
+    /// What a chunk is: lines the same on both sides, added on the right, removed from the left, or changed.
+    /// </summary>
     public enum ChunkKind { Equal, Insert, Delete, Replace }
 
     /// <summary>A part changed inside a line: from Start, Length characters.</summary>
     public struct Span
     {
+        /// <summary>The line the span is on (from 0).</summary>
         public int Line;
+        /// <summary>Where the changed part starts in the line, in characters.</summary>
         public int Start;
+        /// <summary>How many characters are changed.</summary>
         public int Length;
 
+        /// <summary>A changed part of a line.</summary>
         public Span(int line, int start, int length)
         {
             Line = line;
@@ -90,41 +113,64 @@ namespace Kududiff.Core
     /// </summary>
     public sealed class Chunk
     {
+        /// <summary>Whether these lines are equal, added, removed or changed.</summary>
         public ChunkKind Kind;
+        /// <summary>
+        /// A: the first line on the left, ACount: how many lines there; B and BCount the same on the right.
+        /// </summary>
         public int A, ACount, B, BCount;
         /// <summary>Changed words or characters inside the lines of a Replace chunk.</summary>
         public List<Span> ASpans = new List<Span>(), BSpans = new List<Span>();
 
+        /// <summary>The line just after the chunk on the left.</summary>
         public int AEnd => A + ACount;
+        /// <summary>The line just after the chunk on the right.</summary>
         public int BEnd => B + BCount;
+        /// <summary>True for anything but equal lines.</summary>
         public bool IsChange => Kind != ChunkKind.Equal;
 
+        /// <summary>A short description for the tests, such as "Replace L4+2 R4+3".</summary>
         public override string ToString() => $"{Kind} L{A}+{ACount} R{B}+{BCount}";
     }
 
     /// <summary>A block removed in one place on the left and added in another on the right, unchanged.</summary>
     public sealed class Move
     {
+        /// <summary>
+        /// A: where the block was on the left, B: where it is on the right, Count: how many lines it has.
+        /// </summary>
         public int A, B, Count;
 
+        /// <summary>A short description for the tests, such as "Move L10 -&gt; R30 (4)".</summary>
         public override string ToString() => $"Move L{A} -> R{B} ({Count})";
     }
 
     public sealed class Comparison
     {
+        /// <summary>The left file's lines, without their line breaks.</summary>
         public List<string> Left { get; private set; }
+        /// <summary>The right file's lines, without their line breaks.</summary>
         public List<string> Right { get; private set; }
+        /// <summary>Every chunk from top to bottom, equal and changed, covering both files completely.</summary>
         public List<Chunk> Chunks { get; private set; }
+        /// <summary>Blocks moved from one place to another, unchanged.</summary>
         public List<Move> Moves { get; private set; } = new List<Move>();
+        /// <summary>The options the comparison was made with.</summary>
         public CompareOptions Options { get; private set; }
         /// <summary>Lines on the left (and right) that are part of a moved block, by line number.</summary>
         public HashSet<int> MovedLeft { get; } = new HashSet<int>();
+        /// <summary>The right side's lines that are part of a moved block.</summary>
         public HashSet<int> MovedRight { get; } = new HashSet<int>();
 
+        /// <summary>Only the chunks that are changes.</summary>
         public IEnumerable<Chunk> Changes => Chunks.Where(c => c.IsChange);
+        /// <summary>How many changes there are.</summary>
         public int ChangeCount => Chunks.Count(c => c.IsChange);
+        /// <summary>Lines added on the right (in added and changed chunks).</summary>
         public int LinesAdded => Chunks.Where(c => c.Kind == ChunkKind.Insert || c.Kind == ChunkKind.Replace).Sum(c => c.BCount);
+        /// <summary>Lines removed from the left (in removed and changed chunks).</summary>
         public int LinesRemoved => Chunks.Where(c => c.Kind == ChunkKind.Delete || c.Kind == ChunkKind.Replace).Sum(c => c.ACount);
+        /// <summary>True when there are no changes at all.</summary>
         public bool Identical => Chunks.All(c => !c.IsChange);
 
         /// <summary>Compares two texts. Safe to run on a background thread.</summary>
@@ -240,6 +286,9 @@ namespace Kududiff.Core
         /// <summary>Above this many characters a changed block isn't compared word by word (it would only be slow and noisy).</summary>
         public const int MaxInlineChars = 40000;
 
+        /// <summary>
+        /// Marks the words (or characters) that differ inside a changed chunk, by comparing its pieces like lines.
+        /// </summary>
         private static void InlineDiff(List<string> a, List<string> b, Chunk chunk, CompareOptions options)
         {
             var aTokens = Tokens(a, chunk.A, chunk.ACount, options.Inline);
@@ -262,11 +311,19 @@ namespace Kududiff.Core
 
         private struct Token
         {
+            /// <summary>The line the piece is on.</summary>
             public int Line;
+            /// <summary>Where the piece starts in its line.</summary>
             public int Start;
+            /// <summary>
+            /// The piece itself (a word, a run of spaces, one character, or "\n" for the line's end).
+            /// </summary>
             public string Text;
         }
 
+        /// <summary>
+        /// Cuts lines into pieces: words, runs of spaces and single other characters, or every character on its own.
+        /// </summary>
         private static List<Token> Tokens(List<string> lines, int start, int count, InlineMode mode)
         {
             var tokens = new List<Token>();
@@ -290,6 +347,10 @@ namespace Kududiff.Core
             return tokens;
         }
 
+        /// <summary>
+        /// What a piece is compared by: spaces count as one space when spaces are ignored, and case is dropped when
+        /// case is ignored.
+        /// </summary>
         private static string TokenKey(string text, CompareOptions options)
         {
             if (options.Whitespace != WhitespaceMode.Compare && text.Trim(' ', '\t').Length == 0 && text != "\n") return " ";
@@ -413,6 +474,9 @@ namespace Kududiff.Core
             return -1;
         }
 
+        /// <summary>
+        /// A short line about the result, such as "3 changes · 5 added, 2 removed", in the language in use.
+        /// </summary>
         public string Summary()
         {
             if (Identical) return Options.IgnoreCase || Options.Whitespace != WhitespaceMode.Compare || Options.IgnoreBlankLines || Options.IgnorePatterns.Count > 0

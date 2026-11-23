@@ -20,13 +20,19 @@ namespace Kududiff.Views
     /// </summary>
     public static class SelfTest
     {
+        /// <summary>True while the self-test runs (errors are kept instead of shown).</summary>
         public static bool Running { get; private set; }
+        /// <summary>Errors that weren't expected during the self-test.</summary>
         public static List<string> Errors { get; } = new List<string>();
 
+        /// <summary>The self-test's log, written to a file at the end.</summary>
         private static StringBuilder _log;
+        /// <summary>The folder for the test's files.</summary>
         private static string _temp;
+        /// <summary>The person's options, put back after the test.</summary>
         private static CompareOptions _savedOptions;
 
+        /// <summary>The left test file: a little C# program.</summary>
         private const string LeftCode = @"using System;
 
 namespace Demo
@@ -58,6 +64,7 @@ namespace Demo
 }
 ";
 
+        /// <summary>The right test file: the same program with changes, a removed method and an added one.</summary>
         private const string RightCode = @"using System;
 using System.Linq;
 
@@ -87,6 +94,7 @@ namespace Demo
 }
 ";
 
+        /// <summary>Runs every step, writes the log, and returns 0 when all passed.</summary>
         public static int Run()
         {
             Running = true;
@@ -143,6 +151,7 @@ namespace Demo
 
         // ================================================================== steps
 
+        /// <summary>Checks the comparison engine on the test files.</summary>
         private static void Engine()
         {
             var cmp = Comparison.Run(LeftCode, RightCode, new CompareOptions());
@@ -158,6 +167,10 @@ namespace Demo
             Expect(!patience.Identical, "the patience method");
         }
 
+        /// <summary>
+        /// Opens real windows and drives them: changes, copying, undo, saving, options, documents, folders, settings
+        /// and About.
+        /// </summary>
         private static void UiRound()
         {
             var left = Write("Greeter old.cs", LeftCode, new UTF8Encoding(false));
@@ -662,9 +675,11 @@ namespace Demo
 
         // ================================================================== helpers
 
+        /// <summary>Starts another copy of KUDUDIFF with these arguments.</summary>
         private static Process Start(string args) =>
             Process.Start(new ProcessStartInfo(AppInfo.ExePath, args) { UseShellExecute = false });
 
+        /// <summary>Writes a test file in this encoding and returns its path.</summary>
         private static string Write(string name, string text, Encoding encoding)
         {
             var path = Path.Combine(_temp, name);
@@ -672,6 +687,7 @@ namespace Demo
             return path;
         }
 
+        /// <summary>Runs one step, writing to the log whether it passed.</summary>
         private static void Step(string name, Action action)
         {
             var before = Errors.Count;
@@ -691,13 +707,16 @@ namespace Demo
             }
         }
 
+        /// <summary>Adds a note to the log under the step.</summary>
         private static void Note(string text) => _log.AppendLine("      " + text);
 
+        /// <summary>Fails the step when the condition isn't true.</summary>
         private static void Expect(bool condition, string what)
         {
             if (!condition) throw new Exception("expected " + what);
         }
 
+        /// <summary>Lets the window finish its work (up to some seconds).</summary>
         private static void Idle(MainWindow w, int seconds = 20)
         {
             var until = DateTime.UtcNow.AddSeconds(seconds);
@@ -711,6 +730,7 @@ namespace Demo
             Pump();
         }
 
+        /// <summary>Makes a test folder with these files.</summary>
         private static string MakeFolder(string name, params (string Path, string Text)[] files)
         {
             var dir = Path.Combine(_temp, name);
@@ -724,6 +744,7 @@ namespace Demo
             return dir;
         }
 
+        /// <summary>Lets the folder window finish comparing.</summary>
         private static void IdleFolders(FolderWindow w, int seconds = 30)
         {
             var until = DateTime.UtcNow.AddSeconds(seconds);
@@ -737,6 +758,7 @@ namespace Demo
             Pump();
         }
 
+        /// <summary>Waits for a task while the window keeps working.</summary>
         private static void Wait(System.Threading.Tasks.Task task, int seconds = 30)
         {
             var until = DateTime.UtcNow.AddSeconds(seconds);
@@ -749,6 +771,7 @@ namespace Demo
             if (task.IsFaulted) throw task.Exception.InnerException;
         }
 
+        /// <summary>Lets the window handle what's waiting (drawing, clicks).</summary>
         private static void Pump()
         {
             foreach (Window w in Application.Current.Windows) w.UpdateLayout();
@@ -757,6 +780,7 @@ namespace Demo
             Application.Current.Dispatcher.Invoke(() => { }, DispatcherPriority.ContextIdle);
         }
 
+        /// <summary>Puts a window where it can't be seen, so the test doesn't get in the way.</summary>
         private static void OffScreen(Window w)
         {
             w.WindowStartupLocation = WindowStartupLocation.Manual;
@@ -782,6 +806,7 @@ namespace Demo
             return list;
         }
 
+        /// <summary>Shows a window (off screen) and lets it draw.</summary>
         private static void Show(Window w)
         {
             OffScreen(w);

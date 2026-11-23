@@ -172,6 +172,10 @@ footer{padding:0 24px 20px;color:var(--sub);font-size:12px}
             return sb.ToString();
         }
 
+        /// <summary>
+        /// One row of the report's table: the left line and the right line side by side, coloured by what happened to
+        /// them.
+        /// </summary>
         private static void Row(StringBuilder sb, Comparison cmp, int al, int bl, string leftClass, string rightClass, List<Span> aSpans, List<Span> bSpans)
         {
             if (al >= 0 && cmp.MovedLeft.Contains(al)) leftClass = "mv";
@@ -182,6 +186,10 @@ footer{padding:0 24px 20px;color:var(--sub);font-size:12px}
             sb.Append("</tr>\n");
         }
 
+        /// <summary>
+        /// One side's cell of a row: the line number and the text, with its changed words marked (an empty cell when
+        /// line is -1).
+        /// </summary>
         private static void Cell(StringBuilder sb, int line, string text, string cls, List<Span> spans, bool right)
         {
             var mid = right ? " mid" : string.Empty;
@@ -213,6 +221,7 @@ footer{padding:0 24px 20px;color:var(--sub);font-size:12px}
             sb.Append("</td>");
         }
 
+        /// <summary>The file name from a path, for the report's heading.</summary>
         private static string Name(string path)
         {
             if (string.IsNullOrEmpty(path)) return "untitled";

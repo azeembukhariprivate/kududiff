@@ -1,3 +1,5 @@
+// The comparison window: two files side by side with their changes, the strip between them, the toolbar, going through
+// changes, copying them across, saving, and the recent list.
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,28 +22,52 @@ namespace Kududiff.Views
     /// </summary>
     public sealed class MainWindow : Window
     {
+        /// <summary>"A new version is out", shown when there is one.</summary>
         private readonly Button _update = Ui.Link(string.Empty, (s, e) => AppInfo.OpenUrl(AppInfo.ReleasesUrl + "/latest"));
+        /// <summary>The summary of the comparison, at the bottom.</summary>
         private readonly TextBlock _summary = Ui.Text("Choose two files to compare", 12.5);
+        /// <summary>Which change is chosen ("Change 2 of 5").</summary>
         private readonly TextBlock _position = Ui.Subtle(string.Empty, 12.5, false);
+        /// <summary>A message that goes away by itself.</summary>
         private readonly TextBlock _message = Ui.Subtle(string.Empty, 12.5, false);
+        /// <summary>The recent pairs of files, shown before files are chosen.</summary>
         private readonly StackPanel _recent = new StackPanel { Margin = new Thickness(0, 26, 0, 0), HorizontalAlignment = HorizontalAlignment.Center };
+        /// <summary>Waits a moment after typing before comparing again.</summary>
         private readonly DispatcherTimer _debounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
+        /// <summary>Hides the message after 8 seconds.</summary>
         private readonly DispatcherTimer _messageTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(8) };
+        /// <summary>The strip between the sides.</summary>
         private readonly LinkPane _link;
+        /// <summary>The map beside the scrollbar.</summary>
         private readonly Overview _overview;
+        /// <summary>The comparison options button (shows when some are changed from the usual).</summary>
         private readonly Button _options;
+        /// <summary>Buttons that work only with two files.</summary>
         private readonly List<Button> _needBoth = new List<Button>();
+        /// <summary>The options used for comparing.</summary>
         private CompareOptions _compareOptions = Settings.Options;
+        /// <summary>The changes, top to bottom.</summary>
         private List<Chunk> _changes = new List<Chunk>();
+        /// <summary>The change chosen (-1 for none).</summary>
         private int _current = -1;
+        /// <summary>Counts comparisons started, so an older one that finishes late is ignored.</summary>
         private int _version;
+        /// <summary>True while comparing in the background.</summary>
         private bool _running;
+        /// <summary>The texts last compared (to know when they changed).</summary>
         private string _comparedLeft, _comparedRight;
+        /// <summary>The side the app scrolled itself, so that scrolling isn't copied back.</summary>
         private SidePanel _drivenSide;
+        /// <summary>Until when the app's own scrolling is ignored.</summary>
         private DateTime _drivenUntil;
+        /// <summary>True while a file is read again from disk (its edits don't start a comparison).</summary>
         private bool _reloading;
+        /// <summary>Go to the first change once the next comparison is done (after files are opened).</summary>
         private bool _showFirst;
 
+        /// <summary>
+        /// Makes the window: the toolbar, the two sides and the strip between them, the map, and the bar at the bottom.
+        /// </summary>
         public MainWindow()
         {
             Width = 1320;
@@ -164,12 +190,19 @@ namespace Kududiff.Views
             UpdateState();
         }
 
+        /// <summary>The left side.</summary>
         public SidePanel LeftSide { get; }
+        /// <summary>The right side.</summary>
         public SidePanel RightSide { get; }
+        /// <summary>The side last clicked into (for saving and copying).</summary>
         public SidePanel LastFocused { get; set; }
+        /// <summary>The last comparison (null before the first one).</summary>
         public Comparison Comparison { get; private set; }
+        /// <summary>The change chosen, or null.</summary>
         public Chunk CurrentChunk => _current >= 0 && _current < _changes.Count ? _changes[_current] : null;
+        /// <summary>Its number among the changes (-1 for none).</summary>
         public int CurrentIndex => _current;
+        /// <summary>The changes, top to bottom.</summary>
         public IReadOnlyList<Chunk> Changes => _changes;
 
         /// <summary>True while a comparison is waiting or running.</summary>
@@ -178,6 +211,7 @@ namespace Kududiff.Views
         /// <summary>For the self-test: close without asking about unsaved changes.</summary>
         public bool SkipClosePrompt { get; set; }
 
+        /// <summary>True once both sides have a file.</summary>
         public bool HasBoth => LeftSide.HasFile && RightSide.HasFile;
 
         public CompareOptions CompareOptions
@@ -192,12 +226,14 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>A small coloured square with its meaning, for the key at the bottom.</summary>
         private static UIElement Swatch(string brush, string text)
         {
             var box = new Border { Width = 10, Height = 10, CornerRadius = new CornerRadius(2), Margin = new Thickness(14, 0, 5, 0) }.Res(Border.BackgroundProperty, brush);
             return Ui.Row(box, Ui.Subtle(text, 12, false));
         }
 
+        /// <summary>Looks for a new version once (unless switched off) and shows the link when there is one.</summary>
         private async Task CheckForUpdates()
         {
             if (!Settings.CheckForUpdates || SelfTest.Running) return;
@@ -214,6 +250,7 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>Draws the changes again when the theme changes.</summary>
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
@@ -226,6 +263,7 @@ namespace Kududiff.Views
             foreach (var w in Application.Current.Windows.OfType<MainWindow>()) w.ApplySettings();
         }
 
+        /// <summary>Uses changed settings: the editors, the colours and the options.</summary>
         public void ApplySettings()
         {
             foreach (var side in new[] { LeftSide, RightSide })
@@ -237,6 +275,7 @@ namespace Kududiff.Views
             RedrawLinks();
         }
 
+        /// <summary>Shows a message that goes away by itself.</summary>
         public void ShowMessage(string text)
         {
             _message.Text = text;
@@ -247,6 +286,7 @@ namespace Kududiff.Views
 
         // ================================================================== files
 
+        /// <summary>Asks for a file for one side and opens it.</summary>
         public void PickFile(SidePanel side)
         {
             var path = Dialogs.PickFile(this, side.Side == Side.Left ? "Choose the left file" : "Choose the right file", "All files|*.*");
@@ -288,6 +328,7 @@ namespace Kududiff.Views
             return true;
         }
 
+        /// <summary>Opens two files (either may be null, to choose it later).</summary>
         public void Open(string left, string right)
         {
             if (Directory.Exists(left) && Directory.Exists(right))
@@ -298,6 +339,10 @@ namespace Kududiff.Views
             if (LoadSide(LeftSide, left)) LoadSide(RightSide, right);
         }
 
+        /// <summary>
+        /// Opens files dropped on a side: two files fill both sides, one fills the side it was dropped on; folders go
+        /// to the folder window.
+        /// </summary>
         public void Dropped(SidePanel side, string[] files)
         {
             if (files.Length >= 2) Open(files[0], files[1]);
@@ -305,6 +350,7 @@ namespace Kududiff.Views
             Activate();
         }
 
+        /// <summary>A side's text was edited: compare again after a short pause.</summary>
         public void TextEdited(SidePanel side)
         {
             if (_reloading) return;
@@ -343,6 +389,7 @@ namespace Kududiff.Views
             return true;
         }
 
+        /// <summary>Saves the side last clicked into (Ctrl+S).</summary>
         private void SaveFocused()
         {
             var side = LastFocused != null && LastFocused.IsDirty ? LastFocused : new[] { LeftSide, RightSide }.FirstOrDefault(s => s.IsDirty);
@@ -379,6 +426,9 @@ namespace Kududiff.Views
             StartCompare();
         }
 
+        /// <summary>
+        /// Reads a side's file again from disk (when it was changed elsewhere), keeping the place shown.
+        /// </summary>
         private void ReloadSide(SidePanel side)
         {
             TextFile file;
@@ -412,6 +462,7 @@ namespace Kududiff.Views
             if (any) StartCompare();
         }
 
+        /// <summary>Swaps the two sides.</summary>
         public void Swap()
         {
             LeftSide.SwapWith(RightSide);
@@ -465,6 +516,10 @@ namespace Kududiff.Views
             Apply(Comparison.Run(left, right, _compareOptions.Clone()), left, right);
         }
 
+        /// <summary>
+        /// Shows a new comparison: each line's look, the changes, the summary, and the change chosen kept as near as it
+        /// can be.
+        /// </summary>
         private void Apply(Comparison result, string left, string right)
         {
             var previous = CurrentChunk;
@@ -518,6 +573,7 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>Turns the buttons on or off for whether there are two files and changes.</summary>
         private void UpdateState()
         {
             UpdateTitle();
@@ -532,12 +588,14 @@ namespace Kududiff.Views
             RedrawLinks();
         }
 
+        /// <summary>The title: both files' names, with a star when not saved.</summary>
         private void UpdateTitle()
         {
             string Name(SidePanel s) => (s.IsDirty ? "• " : string.Empty) + s.DisplayName;
             Title = LeftSide.HasFile || RightSide.HasFile ? $"{Name(LeftSide)} ↔ {Name(RightSide)} - {AppInfo.Name}" : AppInfo.Name;
         }
 
+        /// <summary>Marks the options button when some options aren't the usual ones.</summary>
         private void UpdateOptionsButton()
         {
             var o = _compareOptions;
@@ -551,6 +609,7 @@ namespace Kududiff.Views
             _options.ToolTip = Lang.T("What to ignore, how to compare, and how changes are shown") + "\n\n" + Lang.T("Now: {0}", now);
         }
 
+        /// <summary>Opens the options window and compares again with what was chosen.</summary>
         private void ShowOptions()
         {
             void Reread()
@@ -563,6 +622,7 @@ namespace Kududiff.Views
             finally { OptionsWindow.FormulasChanged -= Reread; }
         }
 
+        /// <summary>Opens the options (for the toolbar button and the self-test).</summary>
         private void PickOptions()
         {
             var chosen = OptionsWindow.Show(this, _compareOptions);
@@ -571,6 +631,7 @@ namespace Kududiff.Views
 
         // ================================================================== going through changes
 
+        /// <summary>Goes to the next change (F7, or Alt+Down).</summary>
         public void Next()
         {
             if (_changes.Count == 0) return;
@@ -583,6 +644,7 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>Goes to the previous change.</summary>
         public void Previous()
         {
             if (_changes.Count == 0) return;
@@ -629,6 +691,7 @@ namespace Kududiff.Views
             UpdateState();
         }
 
+        /// <summary>Copies the change chosen across to the other side (an edit that can be undone).</summary>
         public void CopyCurrent(bool toRight)
         {
             if (_current < 0) Next();
@@ -666,6 +729,7 @@ namespace Kududiff.Views
 
         // ================================================================== scrolling together
 
+        /// <summary>Notes which sides the app is scrolling itself, so their scrolling isn't copied back.</summary>
         private void Drive(params SidePanel[] sides)
         {
             // Scrolling set by the app shouldn't be mirrored back.
@@ -674,8 +738,10 @@ namespace Kududiff.Views
             _drivenBoth = sides.Length > 1;
         }
 
+        /// <summary>True when the app is scrolling both sides itself.</summary>
         private bool _drivenBoth;
 
+        /// <summary>A side was scrolled: the other side follows, unless the app did the scrolling.</summary>
         private void Scrolled(SidePanel side)
         {
             RedrawLinks();
@@ -704,6 +770,7 @@ namespace Kududiff.Views
             if (Math.Abs(to.Editor.HorizontalOffset - from.Editor.HorizontalOffset) > 0.5) to.Editor.ScrollToHorizontalOffset(from.Editor.HorizontalOffset);
         }
 
+        /// <summary>Draws the strip and the map again.</summary>
         private void RedrawLinks()
         {
             _link?.InvalidateVisual();
@@ -712,6 +779,10 @@ namespace Kududiff.Views
 
         // ================================================================== keys
 
+        /// <summary>
+        /// The keys: Alt+Down and Alt+Up go through the changes, Alt+Right and Alt+Left copy one across, F7 and
+        /// Shift+F7 too, Ctrl+S saves, F5 reads the files again.
+        /// </summary>
         private void OnKey(object sender, KeyEventArgs e)
         {
             var key = e.Key == Key.System ? e.SystemKey : e.Key;
@@ -750,8 +821,10 @@ namespace Kududiff.Views
 
         // ================================================================== recent and export
 
+        /// <summary>The recent list (for the starting view).</summary>
         public UIElement RecentPanel() => _recent;
 
+        /// <summary>Fills the recent list from the settings.</summary>
         private void RefreshRecent()
         {
             _recent.Children.Clear();
@@ -772,6 +845,7 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>The menu of recent pairs, under the button.</summary>
         private void ShowRecentMenu(FrameworkElement at)
         {
             var menu = new ContextMenu { PlacementTarget = at, Placement = PlacementMode.Bottom };
@@ -798,6 +872,7 @@ namespace Kududiff.Views
             menu.IsOpen = true;
         }
 
+        /// <summary>The menu for saving the differences: as a patch or as a web page.</summary>
         private void ShowExportMenu(FrameworkElement at)
         {
             var menu = new ContextMenu { PlacementTarget = at, Placement = PlacementMode.Bottom };
@@ -810,9 +885,11 @@ namespace Kududiff.Views
             menu.IsOpen = true;
         }
 
+        /// <summary>The differences as a patch (compared exactly, whatever the options).</summary>
         public string PatchText() =>
             Export.Patch(LeftSide.Text, RightSide.Text, "a/" + LeftSide.DisplayName, "b/" + RightSide.DisplayName, _compareOptions.Algorithm);
 
+        /// <summary>The comparison as a web page.</summary>
         public string ReportText()
         {
             EnsureFresh();

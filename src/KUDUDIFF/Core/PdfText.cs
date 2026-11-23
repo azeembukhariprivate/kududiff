@@ -13,6 +13,9 @@ namespace Kududiff.Core
     /// <summary>A PDF's text, page by page ("Page 2" before each page), read with PdfPig (Apache-2.0).</summary>
     public static class PdfText
     {
+        /// <summary>
+        /// Every page's text; throws with a plain message when the PDF is locked, damaged or only pictures of pages.
+        /// </summary>
         public static string Read(string path)
         {
             var name = Path.GetFileName(path);

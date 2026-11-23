@@ -1,3 +1,4 @@
+// The tests for Word, Excel, PowerPoint, OpenDocument and PDF files read as text, made from real sample files.
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,7 @@ namespace Kududiff.Tests
     /// <summary>Word, Excel, PowerPoint, OpenDocument and PDF files read as text (1.3).</summary>
     public static partial class Program
     {
+        /// <summary>Writes a sample document into the test folder and returns its path.</summary>
         private static string Doc(string name, byte[] data)
         {
             var path = Path.Combine(_root, "docs-" + Guid.NewGuid().ToString("N").Substring(0, 6), name);
@@ -19,6 +21,10 @@ namespace Kududiff.Tests
             return path;
         }
 
+        /// <summary>
+        /// A Word document's paragraphs, tables, headers and footnotes come out as text, tracked changes as if
+        /// accepted.
+        /// </summary>
         private static void TestWordAsText()
         {
             var path = Doc("letter.docx", SampleDocuments.Word(new[] { "Dear Azeem,", "Name | Price", "The boat race is on Sunday." }, inserted: "new", deleted: "old"));
@@ -37,6 +43,9 @@ namespace Kududiff.Tests
             Check(!cmp.Identical && cmp.Summary().StartsWith("1 change "), "the two changed lines next to each other are one change: " + cmp.Summary());
         }
 
+        /// <summary>
+        /// An Excel workbook comes out a sheet at a time, a line per row, with dates and (when asked) formulas.
+        /// </summary>
         private static void TestExcelAsText()
         {
             var data = SampleDocuments.Excel(
@@ -52,6 +61,7 @@ namespace Kududiff.Tests
             Equal("AA", DocumentText.ColumnName(26), "column names past Z");
         }
 
+        /// <summary>A PowerPoint presentation comes out slide by slide, with its notes.</summary>
         private static void TestPowerPointAsText()
         {
             var path = Doc("talk.pptx", SampleDocuments.PowerPoint((new[] { "Welcome", "To the boat race" }, "Smile and say hello"), (new[] { "Thank you" }, null)));
@@ -59,6 +69,7 @@ namespace Kududiff.Tests
             Equal("Slide 1\nWelcome\nTo the boat race\nNotes:\nSmile and say hello\n\nSlide 2\nThank you\n", t, "slides in the order shown, with their notes only");
         }
 
+        /// <summary>The free office suites' .odt, .ods and .odp files come out like the Office ones.</summary>
         private static void TestOpenDocumentsAsText()
         {
             var odt = TextFile.Read(Doc("a.odt", SampleDocuments.OpenText(new[] { "First  line", "A | B" }))).Text;
@@ -69,6 +80,7 @@ namespace Kududiff.Tests
             Equal("Slide 1\nHello\nNotes:\nSay it slowly\n", odp, "slides and notes");
         }
 
+        /// <summary>A PDF's pages come out as text; a PDF with no text says so plainly.</summary>
         private static void TestPdfAsText()
         {
             var path = Doc("report.pdf", SampleDocuments.Pdf(new[] { "Boat race results", "1. Kerala Blue" }, new[] { "Second page" }));
@@ -84,6 +96,10 @@ namespace Kududiff.Tests
             catch (InvalidDataException ex) { Check(ex.Message.Contains("isn't a whole PDF"), "a broken PDF said so: " + ex.Message); }
         }
 
+        /// <summary>
+        /// Documents are only looked at: saving one is refused and the file stays untouched; older Office files are
+        /// told to save in the newer kind.
+        /// </summary>
         private static void TestDocumentsAreOnlyLookedAt()
         {
             var path = Doc("letter.docx", SampleDocuments.Word(new[] { "Hello" }));
@@ -103,6 +119,10 @@ namespace Kududiff.Tests
             Check(!TextFile.Read(Doc("notes.txt", Encoding.UTF8.GetBytes("plain"))).IsDocument, "text files stay text files");
         }
 
+        /// <summary>
+        /// Each part unpacked has a limit, and all of them together; pictures aren't unpacked, and no other file is
+        /// read in through the XML.
+        /// </summary>
         private static void TestDocumentsCantSwellOrFetch()
         {
             // A part made to swell when unpacked is read only up to a limit; pictures are never unpacked.

@@ -31,8 +31,10 @@ namespace Kududiff.Core
             return (start, end - start);
         }
 
+        /// <summary>True when the text ends with a line break.</summary>
         private static bool EndsWithBreak(string s) => s.Length > 0 && (s[s.Length - 1] == '\n' || s[s.Length - 1] == '\r');
 
+        /// <summary>The text without its last line break.</summary>
         private static string TrimBreak(string s)
         {
             if (s.EndsWith("\r\n")) return s.Substring(0, s.Length - 2);
@@ -83,6 +85,7 @@ namespace Kududiff.Core
             return (start, length, insert);
         }
 
+        /// <summary>The text with an edit made: Length characters from Start replaced by Insert.</summary>
         public static string Apply(string text, (int Start, int Length, string Insert) edit) =>
             text.Substring(0, edit.Start) + edit.Insert + text.Substring(edit.Start + edit.Length);
     }

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Kududiff.Core
 {
+    /// <summary>How a text's lines end: no line breaks, Windows (CR LF), Unix (LF), old Mac (CR), or a mix.</summary>
     public enum LineEndings { None, CrLf, Lf, Cr, Mixed }
 
     /// <summary>
@@ -16,11 +17,19 @@ namespace Kududiff.Core
         /// <summary>Files bigger than this aren't opened (a comparison holds both files in memory, twice).</summary>
         public const long MaxBytes = 200L * 1024 * 1024;
 
+        /// <summary>Where the file is.</summary>
         public string Path { get; private set; }
+        /// <summary>The file's text.</summary>
         public string Text { get; private set; }
+        /// <summary>The encoding it was read with, and will be saved with.</summary>
         public Encoding Encoding { get; private set; }
+        /// <summary>It started with a byte order mark (kept when saving).</summary>
         public bool HasBom { get; private set; }
+        /// <summary>
+        /// When the file was last changed on disk when read or saved (to notice changes from elsewhere).
+        /// </summary>
         public DateTime StampUtc { get; private set; }
+        /// <summary>Its size on disk when read or saved (for the same reason).</summary>
         public long StampLength { get; private set; }
 
         /// <summary>A Word, Excel, PowerPoint or PDF file shown as text: only looked at, never changed or saved.</summary>
@@ -29,6 +38,7 @@ namespace Kududiff.Core
         /// <summary>"Word document", "PDF"... for a document; null for a text file.</summary>
         public string DocumentKind => IsDocument ? DocumentText.KindOf(Path) : null;
 
+        /// <summary>The encoding's name as shown under the file ("UTF-8", "UTF-16 LE"...).</summary>
         public string EncodingName =>
             Encoding is UTF8Encoding ? (HasBom ? "UTF-8 with BOM" : "UTF-8")
             : Encoding is UnicodeEncoding ? (Encoding.CodePage == 1201 ? "UTF-16 BE" : "UTF-16 LE")
@@ -37,6 +47,10 @@ namespace Kududiff.Core
             : Encoding.CodePage == 28591 ? "Latin-1"
             : Encoding.WebName;
 
+        /// <summary>
+        /// Reads a file: documents as text through DocumentText, other files with their encoding worked out (refused
+        /// when they look like binary files).
+        /// </summary>
         public static TextFile Read(string path)
         {
             var info = new FileInfo(path);
@@ -91,6 +105,7 @@ namespace Kududiff.Core
             }
         }
 
+        /// <summary>True when the start of the file has a zero byte, which text files don't have.</summary>
         private static bool LooksBinary(byte[] bytes)
         {
             var n = Math.Min(bytes.Length, 8000);
@@ -99,6 +114,9 @@ namespace Kududiff.Core
             return false;
         }
 
+        /// <summary>
+        /// True when the bytes are valid UTF-8 (then it's read as UTF-8, else as the Windows code page).
+        /// </summary>
         private static bool IsValidUtf8(byte[] bytes)
         {
             try
@@ -233,6 +251,7 @@ namespace Kududiff.Core
             return lines;
         }
 
+        /// <summary>Which line endings a text uses (Mixed when it has more than one kind).</summary>
         public static LineEndings DetectLineEndings(string text)
         {
             var breaks = new List<string>();
@@ -248,6 +267,7 @@ namespace Kududiff.Core
             return found;
         }
 
+        /// <summary>The words shown for line endings ("Windows (CRLF)"...).</summary>
         public static string Describe(LineEndings endings)
         {
             switch (endings)

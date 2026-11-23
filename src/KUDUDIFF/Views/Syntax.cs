@@ -17,7 +17,9 @@ namespace Kududiff.Views
     /// </summary>
     public static class Syntax
     {
+        /// <summary>Where AvalonEdit's own colour definitions are inside it.</summary>
         private const string Builtin = "ICSharpCode.AvalonEdit.Highlighting.Resources.";
+        /// <summary>Where KUDUDIFF's own colour definitions are inside the app.</summary>
         private const string Own = "Kududiff.Highlighting.";
 
         // Language name -> where its definition is.
@@ -45,6 +47,7 @@ namespace Kududiff.Views
             ["Bash"] = Own + "Bash.xshd"
         };
 
+        /// <summary>The language for each file ending.</summary>
         private static readonly Dictionary<string, string> ByExtension = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
             [".cs"] = "C#", [".csx"] = "C#",
@@ -73,6 +76,7 @@ namespace Kududiff.Views
             [".sh"] = "Bash", [".bash"] = "Bash", [".zsh"] = "Bash"
         };
 
+        /// <summary>Every language that can be chosen, by name.</summary>
         public static IEnumerable<string> Languages => Resources.Keys.OrderBy(k => k);
 
         /// <summary>The language for a file name, or null for plain text.</summary>
@@ -85,7 +89,9 @@ namespace Kududiff.Views
             return ByExtension.TryGetValue(Path.GetExtension(path), out var language) ? language : null;
         }
 
+        /// <summary>Colour definitions for the light theme, made once each.</summary>
         private static readonly Dictionary<string, IHighlightingDefinition> Light = new Dictionary<string, IHighlightingDefinition>(StringComparer.OrdinalIgnoreCase);
+        /// <summary>Colour definitions for the dark theme (lighter colours), made once each.</summary>
         private static readonly Dictionary<string, IHighlightingDefinition> Dark = new Dictionary<string, IHighlightingDefinition>(StringComparer.OrdinalIgnoreCase);
 
         /// <summary>The colouring for a language and theme (cached), or null.</summary>
@@ -113,6 +119,9 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>
+        /// Reads a colour definition kept inside the app (without its own backgrounds, so the changes show).
+        /// </summary>
         private static string ReadResource(string name)
         {
             var assembly = name.StartsWith(Own) ? Assembly.GetExecutingAssembly() : typeof(HighlightingManager).Assembly;
@@ -141,15 +150,19 @@ namespace Kududiff.Views
             return Regex.Replace(xml, "\\s+background=\"[^\"]+\"", string.Empty);
         }
 
+        /// <summary>A colour part made lighter (for the dark theme).</summary>
         private static byte Up(byte v) => (byte)(v + (255 - v) * 0.55);
 
         /// <summary>Definitions that use another language (HTML uses JavaScript and CSS) get it in the same theme.</summary>
         private sealed class Resolver : IHighlightingDefinitionReferenceResolver
         {
+            /// <summary>True for the dark theme.</summary>
             private readonly bool _dark;
 
+            /// <summary>A resolver for one theme.</summary>
             public Resolver(bool dark) => _dark = dark;
 
+            /// <summary>The other language's definition, in this theme.</summary>
             public IHighlightingDefinition GetDefinition(string name) => Get(name, _dark) ?? HighlightingManager.Instance.GetDefinition(name);
         }
     }

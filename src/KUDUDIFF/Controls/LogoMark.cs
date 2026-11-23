@@ -1,3 +1,4 @@
+// The KUDUDIFF logo, drawn in code: the mark on its own, and the app tile.
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,6 +11,7 @@ namespace Kududiff.Controls
     /// <summary>The KUDUDIFF mark: two pages side by side whose lines differ. Uses the text colour.</summary>
     public class LogoMark : Viewbox
     {
+        /// <summary>The mark, size pixels wide.</summary>
         public LogoMark(double size = 40)
         {
             Width = size;
@@ -42,6 +44,7 @@ namespace Kududiff.Controls
             Child = canvas;
         }
 
+        /// <summary>Gives the shape the theme's text colour, following theme changes.</summary>
         private void Bind(Shape shape, DependencyProperty property) =>
             shape.SetBinding(property, new Binding { Path = new PropertyPath(TextElement.ForegroundProperty), Source = this });
     }
@@ -49,6 +52,7 @@ namespace Kududiff.Controls
     /// <summary>The app tile: the mark in white on a purple rounded square.</summary>
     public static class LogoTile
     {
+        /// <summary>The tile, size pixels wide.</summary>
         public static Border Create(double size)
         {
             var mark = new LogoMark(size);

@@ -1,3 +1,5 @@
+// Where KUDUDIFF starts: one copy per user (later starts hand their files over), the command line, and which window
+// opens for the files or folders given.
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -45,12 +47,21 @@ namespace Kududiff
 
     public sealed class App : Application
     {
+        /// <summary>
+        /// Files picked from the right-click menu, gathered for a moment (each file starts a copy of its own).
+        /// </summary>
         private readonly List<string> _picks = new List<string>();
+        /// <summary>Files handed over before the app had finished starting, opened once it has.</summary>
         private readonly List<string[]> _early = new List<string[]>();
+        /// <summary>Waits a little after a picked file, in case its partner is on the way.</summary>
         private readonly DispatcherTimer _pickTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(700) };
+        /// <summary>Keeps this the only copy running and receives files from later starts.</summary>
         private Hub _hub;
+        /// <summary>True once the app has started and can open windows.</summary>
         private bool _started;
+        /// <summary>For the self-test: where to write what was opened (--report).</summary>
         private string _report;
+        /// <summary>True once the report is being watched for.</summary>
         private bool _watchingReport;
 
         /// <summary>Makes file names full paths, so the running copy (which may have another current folder) finds them.</summary>
@@ -67,6 +78,9 @@ namespace Kududiff
             return result;
         }
 
+        /// <summary>
+        /// Starts the app normally: hands the files to a running copy if there is one, else opens them here.
+        /// </summary>
         public int Run(string[] args)
         {
             // The copy that gets the files may bring its window to the front.
@@ -92,6 +106,7 @@ namespace Kududiff
             return Run();
         }
 
+        /// <summary>Runs the self-test instead of the app, and returns its result as the exit code.</summary>
         public int RunSelfTest()
         {
             var code = 1;
@@ -106,6 +121,10 @@ namespace Kududiff
             return code;
         }
 
+        /// <summary>
+        /// What both ways of starting need: closing with the last window, the theme, the language and the error
+        /// handler.
+        /// </summary>
         internal void Init()
         {
             ShutdownMode = ShutdownMode.OnLastWindowClose;
@@ -165,6 +184,10 @@ namespace Kududiff
             }
         }
 
+        /// <summary>
+        /// Opens the files picked from the right-click menu: two folders or two files as a comparison, one alone
+        /// waiting for its partner.
+        /// </summary>
         private void FlushPicks()
         {
             var all = _picks.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
@@ -260,6 +283,7 @@ namespace Kududiff
             return window;
         }
 
+        /// <summary>Brings a window to the front (restored when it was minimised).</summary>
         private static void Bring(Window window)
         {
             if (window.WindowState == WindowState.Minimized) window.WindowState = WindowState.Normal;
@@ -287,6 +311,9 @@ namespace Kududiff
             timer.Start();
         }
 
+        /// <summary>
+        /// Shows an error that wasn't expected, instead of closing the app (the self-test keeps it as a failure).
+        /// </summary>
         private void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             if (SelfTest.Running)
@@ -299,6 +326,9 @@ namespace Kududiff
             e.Handled = true;
         }
 
+        /// <summary>
+        /// Lets another program's window come to the front (so the copy that gets the files can show its window).
+        /// </summary>
         [DllImport("user32.dll")]
         private static extern bool AllowSetForegroundWindow(int processId);
     }

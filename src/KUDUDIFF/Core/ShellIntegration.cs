@@ -11,9 +11,14 @@ namespace Kududiff.Core
     /// </summary>
     public static class ShellIntegration
     {
+        /// <summary>Where the right-click menu entry for files is kept.</summary>
         private const string KeyPath = @"Software\Classes\*\shell\KUDUDIFF";
+        /// <summary>Where the right-click menu entry for folders is kept.</summary>
         private const string FolderKeyPath = @"Software\Classes\Directory\shell\KUDUDIFF";
 
+        /// <summary>
+        /// Adds "Compare with KUDUDIFF" to the right-click menu of files and folders, for this user only.
+        /// </summary>
         public static void Register()
         {
             foreach (var path in new[] { KeyPath, FolderKeyPath })
@@ -33,6 +38,7 @@ namespace Kududiff.Core
             }
         }
 
+        /// <summary>Takes the right-click menu entries away again.</summary>
         public static void Remove()
         {
             foreach (var path in new[] { KeyPath, FolderKeyPath })
@@ -60,6 +66,7 @@ namespace Kududiff.Core
             }
         }
 
+        /// <summary>The command the menu entry runs, or null when there's none.</summary>
         public static string Command()
         {
             try { using (var key = Registry.CurrentUser.OpenSubKey(KeyPath + @"\command")) return key?.GetValue(string.Empty) as string; }

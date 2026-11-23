@@ -1,3 +1,5 @@
+// Compares two folders: every file and folder matched by name on both sides, files read byte by byte when their sizes
+// are the same; and FolderCopy, which copies the differences from one side to the other.
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,26 +25,41 @@ namespace Kududiff.Core
     /// <summary>One file or folder in a folder comparison, with what it is like on each side.</summary>
     public sealed class FolderItem
     {
+        /// <summary>The file or folder's name.</summary>
         public string Name { get; set; }
         /// <summary>The path below the two folders compared, such as "src\App.cs" (empty for the folders themselves).</summary>
         public string RelativePath { get; set; }
+        /// <summary>True for a folder.</summary>
         public bool IsFolder { get; set; }
+        /// <summary>Same, different, only on one side, or couldn't be read.</summary>
         public FolderState State { get; set; }
+        /// <summary>It's in the left folder.</summary>
         public bool OnLeft { get; set; }
+        /// <summary>It's in the right folder.</summary>
         public bool OnRight { get; set; }
+        /// <summary>Its size on the left, in bytes.</summary>
         public long LeftSize { get; set; }
+        /// <summary>Its size on the right, in bytes.</summary>
         public long RightSize { get; set; }
+        /// <summary>When it was last changed on the left.</summary>
         public DateTime LeftTime { get; set; }
+        /// <summary>When it was last changed on the right.</summary>
         public DateTime RightTime { get; set; }
         /// <summary>Why a side couldn't be read, when it couldn't.</summary>
         public string Problem { get; set; }
+        /// <summary>The folder it's in (null for the two folders compared).</summary>
         public FolderItem Parent { get; set; }
+        /// <summary>The files and folders inside it.</summary>
         public List<FolderItem> Children { get; } = new List<FolderItem>();
+        /// <summary>How deep it is below the folders compared (0 for what's directly inside them).</summary>
         public int Depth => Parent == null ? -1 : Parent.Depth + 1;
 
+        /// <summary>It's on both sides.</summary>
         public bool OnBoth => OnLeft && OnRight;
+        /// <summary>It isn't the same on both sides.</summary>
         public bool IsChange => State != FolderState.Same;
 
+        /// <summary>Everything below it, folder by folder.</summary>
         public IEnumerable<FolderItem> Below()
         {
             foreach (var c in Children)
@@ -64,6 +81,7 @@ namespace Kududiff.Core
         /// <summary>Compare everything, the left-out names too.</summary>
         public bool ShowLeftOut { get; set; }
 
+        /// <summary>A copy of these options with its own list of names.</summary>
         public FolderOptions Clone() => new FolderOptions { LeaveOut = LeaveOut.ToList(), ShowLeftOut = ShowLeftOut };
 
         /// <summary>Whether a file or folder with this name is left out.</summary>
@@ -87,6 +105,7 @@ namespace Kududiff.Core
         /// <summary>The list as it's shown and typed in Settings: names separated by commas.</summary>
         public static string Join(IEnumerable<string> names) => string.Join(", ", names.Where(n => !string.IsNullOrWhiteSpace(n)));
 
+        /// <summary>Names typed in a box (separated by commas, semicolons or lines) as a list, each once.</summary>
         public static List<string> Split(string text) =>
             (text ?? string.Empty).Split(new[] { ',', ';', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(n => n.Trim()).Where(n => n.Length > 0).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
@@ -100,23 +119,35 @@ namespace Kududiff.Core
     /// </summary>
     public sealed class FolderComparison
     {
+        /// <summary>How much of each file is read at a time when comparing them byte by byte (64 KB).</summary>
         private const int Buffer = 1 << 16;
 
+        /// <summary>The left folder.</summary>
         public string Left { get; private set; }
+        /// <summary>The right folder.</summary>
         public string Right { get; private set; }
+        /// <summary>The options it was compared with.</summary>
         public FolderOptions Options { get; private set; }
+        /// <summary>The top of the tree: the two folders themselves.</summary>
         public FolderItem Root { get; private set; }
+        /// <summary>How many files are the same on both sides.</summary>
         public int Same { get; private set; }
+        /// <summary>How many files differ.</summary>
         public int Different { get; private set; }
+        /// <summary>How many files are only on the left.</summary>
         public int OnlyLeft { get; private set; }
+        /// <summary>How many files are only on the right.</summary>
         public int OnlyRight { get; private set; }
+        /// <summary>How many files couldn't be read on one side or both.</summary>
         public int Unreadable { get; private set; }
         /// <summary>Files and folders left out by name, and links that weren't followed.</summary>
         public int LeftOut { get; private set; }
+        /// <summary>How many links to other folders were found (and not followed).</summary>
         public int Links { get; private set; }
 
         /// <summary>The files compared (folders aren't counted).</summary>
         public int Files => Same + Different + OnlyLeft + OnlyRight + Unreadable;
+        /// <summary>True when every file is the same on both sides.</summary>
         public bool Identical => Different + OnlyLeft + OnlyRight + Unreadable == 0;
 
         /// <summary>
@@ -164,15 +195,22 @@ namespace Kududiff.Core
             return inner.StartsWith(o, StringComparison.OrdinalIgnoreCase);
         }
 
+        /// <summary>The full path of an item on the left.</summary>
         public string LeftPath(FolderItem item) => item.RelativePath.Length == 0 ? Left : Path.Combine(Left, item.RelativePath);
+        /// <summary>The full path of an item on the right.</summary>
         public string RightPath(FolderItem item) => item.RelativePath.Length == 0 ? Right : Path.Combine(Right, item.RelativePath);
 
         private sealed class Entry
         {
+            /// <summary>Its name.</summary>
             public string Name;
+            /// <summary>True for a folder.</summary>
             public bool IsFolder;
+            /// <summary>True for a link to somewhere else (not followed).</summary>
             public bool IsLink;
+            /// <summary>Its size in bytes.</summary>
             public long Size;
+            /// <summary>When it was last changed.</summary>
             public DateTime Time;
         }
 
@@ -210,6 +248,10 @@ namespace Kududiff.Core
             return list;
         }
 
+        /// <summary>
+        /// Lists one folder on both sides, matches what's inside by name (upper and lower case the same) and goes on
+        /// into the folders below.
+        /// </summary>
         private void Fill(FolderItem folder, CancellationToken cancel, Action<string> progress)
         {
             cancel.ThrowIfCancellationRequested();
@@ -260,6 +302,9 @@ namespace Kududiff.Core
             }
         }
 
+        /// <summary>
+        /// Decides whether a file is the same on both sides: different sizes differ, the same size is read to the end.
+        /// </summary>
         private void CompareFile(FolderItem item, CancellationToken cancel)
         {
             if (!item.OnBoth)
@@ -305,6 +350,7 @@ namespace Kududiff.Core
             }
         }
 
+        /// <summary>Reads into the buffer until it's full or the file ends; returns how much was read.</summary>
         private static int Fill(Stream s, byte[] buffer)
         {
             var total = 0;
@@ -359,6 +405,7 @@ namespace Kududiff.Core
             return Lang.T("Files: {0}", string.Join(", ", parts));
         }
 
+        /// <summary>The words shown for a state ("Same", "Different"...), in the language in use.</summary>
         public static string StateText(FolderState state)
         {
             switch (state)
@@ -375,7 +422,9 @@ namespace Kududiff.Core
     /// <summary>A file to be copied from one side to the other.</summary>
     public sealed class CopyStep
     {
+        /// <summary>The file copied from (null when only a folder is made).</summary>
         public string From { get; set; }
+        /// <summary>Where it's copied to.</summary>
         public string To { get; set; }
         /// <summary>A folder to make (empty on the side copied from); From is null.</summary>
         public bool MakeFolder { get; set; }

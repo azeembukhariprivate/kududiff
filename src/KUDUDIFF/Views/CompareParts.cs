@@ -1,3 +1,5 @@
+// The parts of the comparison window: each side's panel (its header and text editor), the painting of changes under the
+// text, the strip between the sides with the copy arrows, and the map beside the scrollbar.
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +16,7 @@ using Kududiff.Core;
 
 namespace Kududiff.Views
 {
+    /// <summary>Which side of the comparison: left or right.</summary>
     public enum Side { Left, Right }
 
     /// <summary>What a line looks like in the comparison.</summary>
@@ -25,22 +28,39 @@ namespace Kududiff.Views
     /// </summary>
     public sealed class SidePanel
     {
+        /// <summary>The comparison window this panel belongs to.</summary>
         private readonly MainWindow _owner;
+        /// <summary>The file's name, above the text.</summary>
         private readonly TextBlock _name = Ui.Text(string.Empty, 13.5, bold: true);
+        /// <summary>The folder the file is in.</summary>
         private readonly TextBlock _folder = Ui.Subtle(string.Empty, 11.5, false);
+        /// <summary>The encoding and line endings (or the kind of document).</summary>
         private readonly TextBlock _info = Ui.Subtle(string.Empty, 11.5, false);
+        /// <summary>The dot shown when the text has changes not saved yet.</summary>
         private readonly System.Windows.Shapes.Ellipse _dirty = Ui.Dot("Accent", 8);
+        /// <summary>The save button in the header.</summary>
         private readonly Button _save;
+        /// <summary>What's shown before a file is chosen ("Open a file or drop one here").</summary>
         private readonly Border _placeholder;
+        /// <summary>Paints the changes under this side's text.</summary>
         private readonly DiffRenderer _renderer;
 
+        /// <summary>Which side this is.</summary>
         public Side Side { get; }
+        /// <summary>The text editor (AvalonEdit) showing the file.</summary>
         public TextEditor Editor { get; }
+        /// <summary>The file shown, as it was read or last saved (null before one is chosen).</summary>
         public TextFile File { get; private set; }
+        /// <summary>The header above the text (name, folder, details, save button).</summary>
         public FrameworkElement Header { get; }
+        /// <summary>The text editor with the placeholder over it.</summary>
         public Grid Body { get; }
+        /// <summary>
+        /// How each line looks in the comparison (same, removed, added, changed, moved), by line number.
+        /// </summary>
         public LineLook[] Looks { get; set; } = new LineLook[0];
 
+        /// <summary>Makes one side's panel.</summary>
         public SidePanel(MainWindow owner, Side side)
         {
             _owner = owner;
@@ -136,13 +156,18 @@ namespace Kududiff.Views
             UpdateHeader();
         }
 
+        /// <summary>True once a file is shown.</summary>
         public bool HasFile => File != null;
 
         /// <summary>True when the editor's view can answer questions about line positions.</summary>
         public bool Ready => !Switching && View.Document != null && ReferenceEquals(View.Document, Editor.Document);
+        /// <summary>True when the text has changes not saved yet.</summary>
         public bool IsDirty => File != null && !Editor.Document.UndoStack.IsOriginalFile;
+        /// <summary>The text as it is now in the editor.</summary>
         public string Text => Editor.Document.Text;
+        /// <summary>The file's name, or "(none)".</summary>
         public string DisplayName => File?.Path != null ? Path.GetFileName(File.Path) : "(none)";
+        /// <summary>The editor's view (for scrolling and drawing).</summary>
         public TextView View => Editor.TextArea.TextView;
 
         /// <summary>Lines as the comparison counts them (a final line break doesn't start another line).</summary>
@@ -159,6 +184,7 @@ namespace Kududiff.Views
         /// <summary>True while the editor is being given another document (its view has none for a moment).</summary>
         public bool Switching { get; private set; }
 
+        /// <summary>Shows a file in this panel.</summary>
         public void Load(TextFile file)
         {
             Switching = true;
@@ -168,6 +194,10 @@ namespace Kududiff.Views
             UpdateHeader();
         }
 
+        /// <summary>
+        /// Gives the editor a new document with the file's text (look-only for Word, Excel, PowerPoint and PDF files),
+        /// its colours and settings.
+        /// </summary>
         private void LoadDocument(TextFile file)
         {
             Editor.Document.Changed -= OnDocumentChanged;
@@ -194,6 +224,9 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>
+        /// Trades documents and files with the other side (for "Swap sides"), keeping each one's undo history.
+        /// </summary>
         private void SwapDocuments(SidePanel other)
         {
             var (myDoc, myFile) = (Editor.Document, File);
@@ -207,18 +240,23 @@ namespace Kududiff.Views
             other.Editor.Document.Changed += other.OnDocumentChanged;
         }
 
+        /// <summary>Marks the text as saved (no dot, undo history as it is) after saving.</summary>
         public void MarkSaved()
         {
             Editor.Document.UndoStack.MarkAsOriginalFile();
             UpdateHeader();
         }
 
+        /// <summary>Tells the window the text was edited, so it compares again shortly.</summary>
         private void OnDocumentChanged(object sender, DocumentChangeEventArgs e)
         {
             UpdateHeader();
             _owner.TextEdited(this);
         }
 
+        /// <summary>
+        /// Fills the header from the file: its name, folder, encoding and line endings, and the dot when not saved.
+        /// </summary>
         public void UpdateHeader()
         {
             _placeholder.Visibility = File == null ? Visibility.Visible : Visibility.Collapsed;
@@ -242,6 +280,7 @@ namespace Kududiff.Views
             _save.IsEnabled = IsDirty;
         }
 
+        /// <summary>Colours the text for its language (C#, XML...), in the theme's colours.</summary>
         public void ApplySyntax()
         {
             Editor.SyntaxHighlighting = Settings.SyntaxColours && File != null && !File.IsDocument
@@ -249,6 +288,9 @@ namespace Kududiff.Views
                 : null;
         }
 
+        /// <summary>
+        /// Uses the settings for the editor: the font size, line numbers, wrapping, spaces shown and tab width.
+        /// </summary>
         public void ApplyViewSettings()
         {
             Editor.FontSize = Settings.FontSize;
@@ -259,6 +301,7 @@ namespace Kududiff.Views
             Editor.TextArea.TextView.SetResourceReference(TextView.NonPrintableCharacterBrushProperty, "GutterText");
         }
 
+        /// <summary>Paints the changes again.</summary>
         public void Redraw()
         {
             View.InvalidateLayer(KnownLayer.Background);
@@ -314,17 +357,25 @@ namespace Kududiff.Views
     /// <summary>Paints the comparison under the text: changed lines, the changed words in them, moved code, and where lines were added on the other side.</summary>
     internal sealed class DiffRenderer : IBackgroundRenderer
     {
+        /// <summary>The panel whose text is painted.</summary>
         private readonly SidePanel _side;
+        /// <summary>The comparison window (for the comparison and the change chosen).</summary>
         private readonly MainWindow _owner;
 
+        /// <summary>Makes the painter for one side.</summary>
         public DiffRenderer(SidePanel side, MainWindow owner)
         {
             _side = side;
             _owner = owner;
         }
 
+        /// <summary>Painted under the text, with the selection.</summary>
         public KnownLayer Layer => KnownLayer.Background;
 
+        /// <summary>
+        /// Paints the visible lines: a colour per line's look, the changed words stronger, a line where lines were
+        /// added on the other side, and a frame round the change chosen.
+        /// </summary>
         public void Draw(TextView textView, DrawingContext dc)
         {
             var cmp = _owner.Comparison;
@@ -396,6 +447,7 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>The colour for a line's look, from the theme.</summary>
         private static Brush Background(LineLook look)
         {
             switch (look)
@@ -415,9 +467,12 @@ namespace Kududiff.Views
     /// </summary>
     public sealed class LinkPane : FrameworkElement
     {
+        /// <summary>The comparison window.</summary>
         private readonly MainWindow _owner;
+        /// <summary>Where each copy arrow was drawn, which change it copies and which way, for clicks.</summary>
         private readonly List<(Rect Area, int Change, bool ToRight)> _arrows = new List<(Rect, int, bool)>();
 
+        /// <summary>Makes the strip between the two sides.</summary>
         public LinkPane(MainWindow owner)
         {
             _owner = owner;
@@ -427,6 +482,9 @@ namespace Kududiff.Views
             ToolTipService.SetInitialShowDelay(this, 300);
         }
 
+        /// <summary>
+        /// Draws a band from each change on the left to where it is on the right, and the copy arrows.
+        /// </summary>
         protected override void OnRender(DrawingContext dc)
         {
             dc.DrawRectangle(Ui.Brush("SurfaceAltBg"), null, new Rect(0, 0, ActualWidth, ActualHeight));
@@ -471,6 +529,7 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>Draws one copy arrow, pointing right or left.</summary>
         private void Arrow(DrawingContext dc, Point centre, bool toRight, int change)
         {
             var area = new Rect(centre.X - 8, centre.Y - 8, 16, 16);
@@ -483,6 +542,7 @@ namespace Kududiff.Views
             dc.DrawLine(pen, new Point(centre.X + 0.5 * d, centre.Y + 3), new Point(centre.X + 3.5 * d, centre.Y));
         }
 
+        /// <summary>The arrow under the mouse, if any.</summary>
         private (Rect Area, int Change, bool ToRight)? HitArrow(Point p)
         {
             foreach (var a in _arrows)
@@ -494,6 +554,7 @@ namespace Kududiff.Views
             return null;
         }
 
+        /// <summary>Shows a hand over an arrow.</summary>
         protected override void OnMouseMove(MouseEventArgs e)
         {
             var hit = HitArrow(e.GetPosition(this));
@@ -501,6 +562,7 @@ namespace Kududiff.Views
             ToolTip = hit == null ? null : hit.Value.ToRight ? "Copy this change to the right (Alt+Right)" : "Copy this change to the left (Alt+Left)";
         }
 
+        /// <summary>Copies the change whose arrow was clicked.</summary>
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             var hit = HitArrow(e.GetPosition(this));
@@ -509,6 +571,7 @@ namespace Kududiff.Views
             _owner.CopyChange(hit.Value.Change, hit.Value.ToRight);
         }
 
+        /// <summary>Scrolls the text when the mouse wheel is turned over the strip.</summary>
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             // Scrolling over the strip scrolls the files.
@@ -520,8 +583,10 @@ namespace Kududiff.Views
     /// <summary>A map of the whole comparison beside the scrollbar: every change, and the visible part. Click to jump.</summary>
     public sealed class Overview : FrameworkElement
     {
+        /// <summary>The comparison window.</summary>
         private readonly MainWindow _owner;
 
+        /// <summary>Makes the map beside the scrollbar.</summary>
         public Overview(MainWindow owner)
         {
             _owner = owner;
@@ -530,6 +595,7 @@ namespace Kududiff.Views
             ToolTip = "All the changes. Click to go there.";
         }
 
+        /// <summary>Draws a mark for every change at its place in the file, and a box for the part on screen.</summary>
         protected override void OnRender(DrawingContext dc)
         {
             dc.DrawRectangle(Ui.Brush("SurfaceAltBg"), new Pen(Ui.Brush("BorderBrush"), 1), new Rect(0, 0, ActualWidth, ActualHeight));
@@ -558,19 +624,23 @@ namespace Kududiff.Views
             }
         }
 
+        /// <summary>Starts following the mouse and jumps to where it was clicked.</summary>
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             CaptureMouse();
             Jump(e.GetPosition(this).Y);
         }
 
+        /// <summary>Jumps while the mouse is dragged.</summary>
         protected override void OnMouseMove(MouseEventArgs e)
         {
             if (IsMouseCaptured) Jump(e.GetPosition(this).Y);
         }
 
+        /// <summary>Stops following the mouse.</summary>
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e) => ReleaseMouseCapture();
 
+        /// <summary>Scrolls so the place at this height of the map is on screen.</summary>
         private void Jump(double y)
         {
             var editor = _owner.RightSide.HasFile ? _owner.RightSide.Editor : _owner.LeftSide.Editor;

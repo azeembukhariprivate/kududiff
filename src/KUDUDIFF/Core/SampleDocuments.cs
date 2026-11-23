@@ -15,11 +15,15 @@ namespace Kududiff.Core
     /// </summary>
     public static class SampleDocuments
     {
+        /// <summary>The namespace of links between Office parts.</summary>
         private const string Rels = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
+        /// <summary>The namespace of the package's own list of links.</summary>
         private const string Pkg = "http://schemas.openxmlformats.org/package/2006/relationships";
 
+        /// <summary>Text made safe to put inside XML.</summary>
         private static string E(string s) => SecurityElement.Escape(s ?? string.Empty);
 
+        /// <summary>A zip file holding the parts given (name and text).</summary>
         public static byte[] Zip(params (string Name, string Text)[] parts)
         {
             var output = new MemoryStream();
@@ -33,6 +37,7 @@ namespace Kududiff.Core
             return output.ToArray();
         }
 
+        /// <summary>A list of links between parts, as XML.</summary>
         private static string RelsXml(params (string Id, string Type, string Target)[] links) =>
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Relationships xmlns=\"" + Pkg + "\">" +
             string.Concat(links.Select(l => $"<Relationship Id=\"{l.Id}\" Type=\"{Rels}/{l.Type}\" Target=\"{l.Target}\"/>")) + "</Relationships>";
@@ -165,21 +170,27 @@ namespace Kududiff.Core
 
         // ================================================================== OpenDocument (the free office suites)
 
+        /// <summary>The OpenDocument namespaces every sample's content uses.</summary>
         private const string OdfNs = "xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" " +
                                      "xmlns:table=\"urn:oasis:names:tc:opendocument:xmlns:table:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\" " +
                                      "xmlns:presentation=\"urn:oasis:names:tc:opendocument:xmlns:presentation:1.0\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"";
 
+        /// <summary>
+        /// An OpenDocument file: the "mimetype" part first, the content, the styles and the list of parts.
+        /// </summary>
         private static byte[] Odf(string mime, string body, string styles = "") => Zip(
             ("mimetype", mime),
             ("content.xml", $"<?xml version=\"1.0\"?><office:document-content {OdfNs}><office:body>{body}</office:body></office:document-content>"),
             ("styles.xml", $"<?xml version=\"1.0\"?><office:document-styles {OdfNs}><office:master-styles>{styles}</office:master-styles></office:document-styles>"));
 
+        /// <summary>An .odt text document with these paragraphs, and a header line.</summary>
         public static byte[] OpenText(IEnumerable<string> lines, string header = "Kerala Boats Ltd") => Odf("application/vnd.oasis.opendocument.text",
             "<office:text>" + string.Concat(lines.Select(l => l.Contains("|")
                 ? "<table:table><table:table-row>" + string.Concat(l.Split('|').Select(c => $"<table:table-cell><text:p>{E(c.Trim())}</text:p></table:table-cell>")) + "</table:table-row></table:table>"
                 : $"<text:p>{E(l).Replace("  ", " <text:s/>")}</text:p>")) + "</office:text>",
             $"<style:master-page style:name=\"Standard\"><style:header><text:p>{E(header)}</text:p></style:header></style:master-page>");
 
+        /// <summary>An .ods spreadsheet with one sheet of these rows.</summary>
         public static byte[] OpenSheets(string name, string[][] rows) => Odf("application/vnd.oasis.opendocument.spreadsheet",
             $"<office:spreadsheet><table:table table:name=\"{E(name)}\">" + string.Concat(rows.Select(r => "<table:table-row>" + string.Concat(r.Select(c =>
             {
@@ -189,6 +200,7 @@ namespace Kududiff.Core
                 return v.Length == 0 ? "<table:table-cell/>" : $"<table:table-cell{formula}><text:p>{E(v)}</text:p></table:table-cell>";
             })) + "</table:table-row>")) + "<table:table-row table:number-rows-repeated=\"1048000\"><table:table-cell table:number-columns-repeated=\"1024\"/></table:table-row></table:table></office:spreadsheet>");
 
+        /// <summary>An .odp presentation with these slides, each with its lines and notes.</summary>
         public static byte[] OpenSlides(params (string[] Lines, string Notes)[] slides) => Odf("application/vnd.oasis.opendocument.presentation",
             "<office:presentation>" + string.Concat(slides.Select((s, i) =>
                 $"<draw:page draw:name=\"page{i + 1}\"><draw:frame><draw:text-box>" + string.Concat(s.Lines.Select(l => $"<text:p>{E(l)}</text:p>")) + "</draw:text-box></draw:frame>" +
